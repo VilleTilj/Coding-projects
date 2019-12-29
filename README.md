@@ -1,2 +1,2 @@
 # CV
-Hi! Here  my projects.
+Hi! Here are my projects.
