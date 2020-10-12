@@ -1,5 +1,6 @@
 # Programming 3 Exercise project template
 
+
 1. Make sure you have setup ssh-key for your GitLab account. https://course-gitlab.tuni.fi/profile/keys
 2. Clone and add template repo as remote.
 Address: git@course-gitlab.tuni.fi:tie-0240x-ohjelmointi-3-programming-3-2020-2021/group_template_project.git
