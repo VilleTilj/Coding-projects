@@ -56,7 +56,12 @@ const generateId = () => {
  */
 const emailInUse = email => {
   // TODO: 8.3 Check if there already exists a user with a given email
-  throw new Error('Not Implemented');
+	for(i=0; i < data.users.length; i++){
+		if(data.users[i].email === email){
+			return true;
+		}
+	}
+  return false;
 };
 
 /**
@@ -71,7 +76,13 @@ const emailInUse = email => {
  */
 const getUser = (email, password) => {
   // TODO: 8.3 Get user whose email and password match the provided values
-  throw new Error('Not Implemented');
+	for(i=0; i < data.users.length; i++){
+		if(data.users[i].email === email && data.users[i].password === password){
+			copy = Object.assign({},data.users[i]);
+			return copy;
+		}
+	}
+	return undefined;
 };
 
 /**
