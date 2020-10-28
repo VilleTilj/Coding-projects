@@ -6,6 +6,8 @@ QT += core gui widgets network multimedia
 CONFIG += c++14
 
 SOURCES += \
+    city.cpp \
+    creategame.cpp \
     dialoggamesettings.cpp \
     initgameengine.cpp \
     main.cc
@@ -38,5 +40,6 @@ FORMS += \
     dialoggamesettings.ui
 
 HEADERS += \
+    city.h \
     dialoggamesettings.hh \
     initgameengine.hh
