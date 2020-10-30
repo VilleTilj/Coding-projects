@@ -96,7 +96,13 @@ const getUser = (email, password) => {
  */
 const getUserById = userId => {
   // TODO: 8.3 Find user by user id
-  throw new Error('Not Implemented');
+ 	for(i=0; i < data.users.length; i++){
+		if(data.users[i]._id === userId){
+			copy = Object.assign({},data.users[i]);
+			return copy;
+		}
+	}
+	return undefined;
 };
 
 /**
@@ -107,7 +113,14 @@ const getUserById = userId => {
  */
 const deleteUserById = userId => {
   // TODO: 8.3 Delete user with a given id
-  throw new Error('Not Implemented');
+ 	for(i=0; i < data.users.length; i++){
+		if(data.users[i]._id === userId){
+			copy = Object.assign({},data.users[i]);
+			data.users.splice(i,1);
+			return copy;
+		}
+	}
+	return undefined;
 };
 
 /**
@@ -120,7 +133,12 @@ const deleteUserById = userId => {
  */
 const getAllUsers = () => {
   // TODO: 8.3 Retrieve all users
-  throw new Error('Not Implemented');
+	AllUsers = []
+ 	for(i=0; i < data.users.length; i++){
+		copy = Object.assign({},data.users[i]);
+		AllUsers.push(copy);
+	}
+	return AllUsers;
 };
 
 /**
@@ -138,7 +156,13 @@ const getAllUsers = () => {
 const saveNewUser = user => {
   // TODO: 8.3 Save new user
   // Use generateId() to assign a unique id to the newly created user.
-  throw new Error('Not Implemented');
+	user._id = generateId();
+	if(user.hasOwnProperty("role") != true){
+		user.role = "customer";
+	}
+	copy = Object.assign({},user);
+	data.users.push(copy);
+	return copy;
 };
 
 /**
@@ -156,7 +180,17 @@ const saveNewUser = user => {
  */
 const updateUserRole = (userId, role) => {
   // TODO: 8.3 Update user's role
-  throw new Error('Not Implemented');
+	if(role != "admin" && role != "customer"){
+		throw new Error("Unknown role");
+	}
+ 	for(i=0; i < data.users.length; i++){
+		if(data.users[i]._id === userId){
+			data.users[i].role = role;
+			copy = Object.assign({},data.users[i]);
+			return copy;
+		}
+	}
+	return undefined;
 };
 
 /**
@@ -170,7 +204,22 @@ const updateUserRole = (userId, role) => {
  */
 const validateUser = user => {
   // TODO: 8.3 Validate user before saving
-  throw new Error('Not Implemented');
+	problems = [];
+	if(user.hasOwnProperty("name") != true){
+		problems.push("Missing name");
+	}
+	if(user.hasOwnProperty("email") != true){
+		problems.push("Missing email");
+	}
+	if(user.hasOwnProperty("password") != true){
+		problems.push("Missing password");
+	}
+	if(user.hasOwnProperty("role")){
+		if(user.role != "admin" && user.role != "customer"){
+			problems.push("Unknown role");
+		}
+	}
+	return problems;
 };
 
 module.exports = {
