@@ -2,6 +2,7 @@
 #define DIALOGGAMESETTINGS_HH
 
 #include <QDialog>
+#include "mainwindow.hh"
 
 namespace Ui {
 class DialogGameSettings;

@@ -10,7 +10,8 @@ SOURCES += \
     creategame.cpp \
     dialoggamesettings.cpp \
     initgameengine.cpp \
-    main.cc
+    main.cc \
+    mainwindow.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -37,9 +38,11 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 FORMS += \
-    dialoggamesettings.ui
+    dialoggamesettings.ui \
+    mainwindow.ui
 
 HEADERS += \
-    city.h \
+    city.hh \
     dialoggamesettings.hh \
-    initgameengine.hh
+    initgameengine.hh \
+    mainwindow.hh

@@ -1,11 +1,13 @@
 #include "initgameengine.hh"
-#include "creategame.hh"
+
 
 
 namespace StudentSide {
 
 InitGameEngine::InitGameEngine() :
-    ui_(new CourseSide::SimpleMainWindow)
+    ui_(new StudentSide::mainwindow),
+    logic_(new CourseSide::Logic),
+    iCityPtr(nullptr)
 {
 
     gameSetting();
@@ -22,7 +24,10 @@ void InitGameEngine::gameSetting()
 
 void InitGameEngine::gameWindow()
 {
+    //logic_->takeCity(iCityPtr);
+    //logic_->fileConfig();
     ui_->show();
+    
 
 }
 
