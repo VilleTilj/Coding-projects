@@ -21,12 +21,18 @@ class mainwindow : public QMainWindow
 
 public:
     explicit mainwindow(QWidget *parent = nullptr);
+    ~mainwindow();
 
 signals:
 
 
 private:
     Ui::MainWindow *ui_;
+    QGraphicsScene *map;
+
+    const int width_ = 500;
+    const int height_ = 500;
+
 };
 } //namespace
 #endif // MAINWINDOW_HH

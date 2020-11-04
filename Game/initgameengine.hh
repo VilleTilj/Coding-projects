@@ -6,6 +6,7 @@
 #include "creategame.hh"
 #include "city.hh"
 #include "../Course/CourseLib/core/logic.hh"
+#include <QImage>
 
 const QString bigMap = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
 const QString smallMap = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";

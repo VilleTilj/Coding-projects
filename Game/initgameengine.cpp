@@ -1,5 +1,6 @@
 #include "initgameengine.hh"
-
+#include "memory"
+#include <QImage>
 
 
 namespace StudentSide {
@@ -27,7 +28,12 @@ void InitGameEngine::gameWindow()
     //logic_->takeCity(iCityPtr);
     //logic_->fileConfig();
     ui_->show();
-    
+    std::shared_ptr<Interface::ICity> iCityPtr = Interface::createGame();
+    QImage big;
+    big.load(bigMap);
+    QImage small;
+    small.load(smallMap);
+    iCityPtr->setBackground(small, big);
 
 }
 
