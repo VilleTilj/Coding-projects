@@ -15,11 +15,19 @@ class MainWindow;
 
 namespace StudentSide {
 
+/*!
+ * \brief The mainwindow class
+ */
 class mainwindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
+
+    /*!
+     * \brief mainwindow
+     * \param parent
+     */
     explicit mainwindow(QWidget *parent = nullptr);
     ~mainwindow();
 

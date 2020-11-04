@@ -13,12 +13,30 @@ const QString smallMap = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
 
 namespace StudentSide {
 
+
+/*!
+ * \brief The InitGameEngine class is for setting the game up. It launches
+ * dialog window for settings and initializes gamewindow.
+ */
+
 class InitGameEngine
 {
 public:
+
+    /*!
+     * \brief Constructor that initializes game settings and runs mainwindow.
+     */
+
     InitGameEngine();
 
+    /*!
+     * \brief
+     */
     void gameSetting();
+
+    /*!
+     * \brief
+     */
     void gameWindow();
 
 private:
