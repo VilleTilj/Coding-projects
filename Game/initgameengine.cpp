@@ -10,16 +10,12 @@ InitGameEngine::InitGameEngine() :
     logic_(new CourseSide::Logic),
     iCityPtr(nullptr)
 {
-
     gameSetting();
     gameWindow();
-
 }
 
 void InitGameEngine::gameSetting()
 {
-    DialogGameSettings *myDialog = new DialogGameSettings();
-    myDialog->exec();
     //std::shared_ptr<Interface::ICity> city = Interface::createGame();
 }
 
@@ -34,7 +30,6 @@ void InitGameEngine::gameWindow()
     QImage small;
     small.load(smallMap);
     iCityPtr->setBackground(small, big);
-
 }
 
 

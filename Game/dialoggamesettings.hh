@@ -36,18 +36,25 @@ public:
 public slots:
 
     /*!
-     * \brief showMainwindow methods makes mainwindow to pop up
+     * \brief custom
      */
+    void custom();
 
-    void showMainwindow();
-
+    /*!
+     * \brief defaults
+     */
+    void defaults();
 signals:
 
     /*!
-     * \brief sendUserInputs emits user setting inputs to the game usage
+     * \brief customSettings
      */
+    void customSettings(); // TODO implement user input fields
 
-    void sendUserInputs(); // TODO implement user input fields
+    /*!
+     * \brief defaultSettings
+     */
+    void defaultSettings();
 
 private:
     Ui::DialogGameSettings *ui;

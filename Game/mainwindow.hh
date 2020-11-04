@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_HH
 #define MAINWINDOW_HH
 
+#include "dialoggamesettings.hh"
+
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QTimer>
@@ -31,8 +33,14 @@ public:
     explicit mainwindow(QWidget *parent = nullptr);
     ~mainwindow();
 
-signals:
+public slots:
 
+    /*!
+     * \brief adjustGameSettings
+     */
+    void adjustGameSettings();
+
+    void defaultSettings();
 
 private:
     Ui::MainWindow *ui_;
