@@ -30,9 +30,9 @@ mainwindow::~mainwindow()
     delete ui_;
 }
 
-void mainwindow::adjustGameSettings()
+void mainwindow::adjustGameSettings(std::string name)
 {
-
+    playerName = name;
 }
 
 void mainwindow::defaultSettings()
