@@ -3,6 +3,7 @@
 
 
 #include "interfaces/icity.hh"
+#include <QTime>
 
 namespace StudentSide
 {
@@ -13,7 +14,7 @@ public:
     City();
     ~City();
     void setBackground(QImage& basicbackground, QImage& bigbackground);
-    /*
+
     void setClock(QTime clock);
 
     void addStop(std::shared_ptr<Interface::IStop> stop);
@@ -32,8 +33,11 @@ public:
 
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
 
-    void isgameOver() const;
-    */
+    bool isGameOver() const;
+
+private:
+
+
 };
 
 } //namespace
