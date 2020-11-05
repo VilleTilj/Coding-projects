@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_HH
 #define MAINWINDOW_HH
 
+#include "dialoggamesettings.hh"
+
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QTimer>
@@ -32,12 +34,19 @@ public:
     ~mainwindow();
     void setBackground(QImage &image);
 
-signals:
+public slots:
 
+    /*!
+     * \brief adjustGameSettings
+     */
+    void adjustGameSettings(std::string name);
+
+    void defaultSettings();
 
 private:
     Ui::MainWindow *ui_;
     QGraphicsScene *map;
+    std::string playerName = "Timo";
 
     const int width_ = 500;
     const int height_ = 500;

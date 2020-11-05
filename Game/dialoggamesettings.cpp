@@ -8,9 +8,11 @@ DialogGameSettings::DialogGameSettings(QWidget *parent) :
     ui(new Ui::DialogGameSettings)
 {
     ui->setupUi(this);
-    //connect(ui->startButton, &QPushButton::clicked, this, &DialogGameSettings::showMainwindow);
-    connect(ui->startButton, &QPushButton::clicked, this, &DialogGameSettings::accept);
-    connect(ui->quitButton, &QPushButton::clicked, this, &DialogGameSettings::reject);
+    connect(ui->customSettings, &QPushButton::clicked, this, &DialogGameSettings::custom);
+    connect(ui->customSettings, &QPushButton::clicked, this, &DialogGameSettings::accept);
+
+    connect(ui->defaultButton, &QPushButton::clicked, this, &DialogGameSettings::defaults);
+    connect(ui->defaultButton, &QPushButton::clicked, this, &DialogGameSettings::reject);
 }
 
 DialogGameSettings::~DialogGameSettings()
@@ -18,8 +20,13 @@ DialogGameSettings::~DialogGameSettings()
     delete ui;
 }
 
-void DialogGameSettings::showMainwindow()
+void DialogGameSettings::custom()
 {
-    emit sendUserInputs();
+    emit customSettings(ui->lineEdit->text().toStdString());
+}
+
+void DialogGameSettings::defaults()
+{
+    emit defaultSettings();
 }
 } //namespace
