@@ -16,6 +16,7 @@ mainwindow::mainwindow(QWidget *parent) :
 
     map = new QGraphicsScene(this);
     ui_->gameView->setScene(map);
+    map->setSceneRect(0,0,width_,height_);
     resize(minimumSizeHint());
 
 
@@ -24,5 +25,10 @@ mainwindow::mainwindow(QWidget *parent) :
 mainwindow::~mainwindow()
 {
     delete ui_;
+}
+
+void mainwindow::setBackground(QImage &image)
+{
+    map->setBackgroundBrush(image);
 }
 }

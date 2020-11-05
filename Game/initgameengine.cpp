@@ -1,5 +1,5 @@
 #include "initgameengine.hh"
-#include "memory"
+#include <memory>
 #include <QImage>
 
 
@@ -9,6 +9,7 @@ InitGameEngine::InitGameEngine() :
     ui_(new StudentSide::mainwindow),
     logic_(new CourseSide::Logic),
     iCityPtr(nullptr)
+    //cityPtr_(nullptr)
 {
 
     gameSetting();
@@ -33,9 +34,14 @@ void InitGameEngine::gameWindow()
     big.load(bigMap);
     QImage small;
     small.load(smallMap);
-    iCityPtr->setBackground(small, big);
+    std::shared_ptr<StudentSide::City> cityPtr_ = std::dynamic_pointer_cast<StudentSide::City>(iCityPtr);
+    cityPtr_->setBackground(small, big);
+    QImage ryys = cityPtr_->getImage("big");
+    ui_->setBackground(ryys);
+
 
 }
+
 
 
 

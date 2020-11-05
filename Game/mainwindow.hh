@@ -30,6 +30,7 @@ public:
      */
     explicit mainwindow(QWidget *parent = nullptr);
     ~mainwindow();
+    void setBackground(QImage &image);
 
 signals:
 

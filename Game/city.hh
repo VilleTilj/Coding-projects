@@ -4,6 +4,8 @@
 
 #include "interfaces/icity.hh"
 #include <QTime>
+#include <initgameengine.hh>
+#include <mainwindow.hh>
 
 namespace StudentSide
 {
@@ -35,7 +37,12 @@ public:
 
     bool isGameOver() const;
 
+    QImage getImage(std::string image_size);
+
 private:
+    std::shared_ptr<StudentSide::mainwindow> ui_;
+    QImage small_;
+    QImage big_;
 
 
 };
