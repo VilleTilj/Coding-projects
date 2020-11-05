@@ -31,16 +31,16 @@ mainwindow::~mainwindow()
     delete ui_;
 }
 
-<<<<<<< HEAD
+
 void mainwindow::setBackground(QImage &image)
 {
     map->setBackgroundBrush(image);
 }
-=======
+
 void mainwindow::adjustGameSettings(std::string name)
 {
     playerName = name;
->>>>>>> villesBranch
+
 }
 
 void mainwindow::defaultSettings()
