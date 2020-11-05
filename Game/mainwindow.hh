@@ -22,6 +22,7 @@ class mainwindow : public QMainWindow
 public:
     explicit mainwindow(QWidget *parent = nullptr);
     ~mainwindow();
+    void setBackground(QImage &image);
 
 signals:
 

@@ -1,4 +1,5 @@
 #include "city.hh"
+#include <QDebug>
 
 namespace StudentSide
 {
@@ -14,6 +15,9 @@ City::~City()
 }
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground) {
+    small_ = basicbackground;
+    big_ = bigbackground;
+
 }
 
 void City::setClock(QTime clock)
@@ -66,5 +70,16 @@ bool City::isGameOver() const
 {
     return false;
 }
+
+QImage City::getImage(std::string image_size)
+{
+    if(image_size == "small") {
+        return small_;
+    }
+    else {
+        return big_;
+    }
+}
+
 
 }
