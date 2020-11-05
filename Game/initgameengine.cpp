@@ -16,13 +16,13 @@ InitGameEngine::InitGameEngine() :
 
 void InitGameEngine::gameSetting()
 {
-    //std::shared_ptr<Interface::ICity> city = Interface::createGame();
+    std::shared_ptr<Interface::ICity> city = Interface::createGame();
 }
 
 void InitGameEngine::gameWindow()
 {
-    //logic_->takeCity(iCityPtr);
-    //logic_->fileConfig();
+    logic_->takeCity(iCityPtr);
+    logic_->fileConfig();
     ui_->show();
     std::shared_ptr<Interface::ICity> iCityPtr = Interface::createGame();
     QImage big;
