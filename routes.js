@@ -4,6 +4,7 @@ const { renderPublic } = require('./utils/render');
 const { emailInUse, getAllUsers, saveNewUser, validateUser, updateUserRole } = require('./utils/users');
 const users = require('./utils/users');
 const { basicAuthChallenge } = require('./utils/responseUtils');
+const { getCurrentUser } = require('./auth/auth');
 
 /**
  * Known API routes and their allowed methods
@@ -13,7 +14,8 @@ const { basicAuthChallenge } = require('./utils/responseUtils');
  */
 const allowedMethods = {
   '/api/register': ['POST'],
-  '/api/users': ['GET']
+  '/api/users': ['GET'],
+  '/api/products': ['GET']
 };
 
 /**
@@ -95,9 +97,42 @@ const handleRequest = async (request, response) => {
   if (filePath === '/api/users' && method.toUpperCase() === 'GET') {
     // DONE: 8.3 Return all users as JSON
     // TODO: 8.4 Add authentication (only allowed to users with role "admin")
-    const users = getAllUsers();
-    return responseUtils.sendJson(response, users);
+    getCurrentUser(request).then(user =>{
+      if (!user) {
+        basicAuthChallenge(response);
+      } else {
+        if (user.role === 'admin'){
+           const users = getAllUsers();
+           return responseUtils.sendJson(response, users);
+        }else {
+          forbidden(response);
+        }
+      }
+    });
   }
+
+    // GET all products
+    if (filePath === '/api/products' && method.toUpperCase() === 'GET') {
+      // Get the current user
+      getCurrentUser(request).then(user => {
+  
+        // No authorization header
+        if (user === null) {
+          basicAuthChallenge(response);
+  
+          // Authorization header exists
+        } else {
+          // Authorized admin response
+          if (user.role === "admin" || user.role === "customer") {
+            return responseUtils.sendJson(response, productdata);
+            // Non-admin response
+          } else {
+            forbidden(response);
+          }
+        }
+      });
+    }
+  
 
   // register new user
   if (filePath === '/api/register' && method.toUpperCase() === 'POST') {
@@ -113,13 +148,13 @@ const handleRequest = async (request, response) => {
     const problems = validateUser(registerUser);
 
     // Check if there are errors in creating user and that the email is not in use allready
-    if ( problems.length == 0 || !emailInUse(registerUser.email)) {
+    if ( problems.length !== 0 || emailInUse(registerUser.email)) {
+      return responseUtils.badRequest(response, "400 Bad Request");
+    } else {     
+      // Set new user to the resourses
       let newUser = saveNewUser(registerUser);
       newUser = updateUserRole(newUser._id, 'customer')
       return responseUtils.createdResource(response, newUser);
-      
-    } else {
-      return responseUtils.badRequest(response, "400 Bad Request");
     }
   }
 };

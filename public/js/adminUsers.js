@@ -12,9 +12,36 @@
  *           <button class="delete-button" id="delete-{userId}">Delete</button>
  *         </div>
  *
- *       - Each cloned template fragment should be appended to <div id="users-container">
+ *       - Each cloned fragment should be appended to <div id="users-container">
  *       - Use getJSON() function from utils.js to fetch user data from server
- *
+ */
+const temp = document.getElementById('user-template');
+const users = "/api/users"
+
+getJSON(users).then(json => {
+    const users = json;
+    for (const user of users) {
+        let clone = temp.content.cloneNode(true);
+        clone = updateUserTemplate(clone, user);
+        // Add event
+        clone.querySelector('.modify-button').addEventListener('click', function(){
+            let temp = document.getElementById("form-template");
+            let clone = temp.content.cloneNode(true);
+
+            clone.querySelector("#id-input").value = user._id;
+            clone.querySelector("#name-input").value = user.name;
+            clone.querySelector("#email-input").value = user.email;
+            clone.querySelector("#role-input").value = user.role;
+
+            document.getElementById("modify-user").appendChild(clone);
+
+        })
+        document.getElementById("users-container").appendChild(clone);
+    }
+})
+
+
+ /**
  * TODO: 8.5 Updating/modifying and deleting existing users
  *       - Use postOrPutJSON() function from utils.js to send your data back to server
  *       - Use deleteResource() function from utils.js to delete users from server

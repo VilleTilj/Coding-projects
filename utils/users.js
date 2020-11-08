@@ -133,11 +133,7 @@ const deleteUserById = userId => {
  */
 const getAllUsers = () => {
   // TODO: 8.3 Retrieve all users
-	AllUsers = []
- 	for(i=0; i < data.users.length; i++){
-		copy = Object.assign({},data.users[i]);
-		AllUsers.push(copy);
-	}
+	const AllUsers = data.users.map(user => ({...user}))
 	return AllUsers;
 };
 
@@ -204,7 +200,7 @@ const updateUserRole = (userId, role) => {
  */
 const validateUser = user => {
   // TODO: 8.3 Validate user before saving
-	problems = [];
+	const problems = [];
 	if(user.hasOwnProperty("name") != true){
 		problems.push("Missing name");
 	}

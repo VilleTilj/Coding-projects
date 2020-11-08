@@ -52,17 +52,13 @@ const acceptsJson = request => {
  * @returns {boolean}
  */
 const isJson = request => {
-  // TODO: 8.3 Check whether request "Content-Type" is JSON or not
-	if(request.headers["content-type"] != undefined){
-		if(request.headers['content-type'] != ""){
-			if(request.headers['content-type'].toString().includes("json")){
-				return true;
-			}
-		}
+	const contentType = request.headers['content-type'];
+	if (contentType === undefined || contentType === '' || contentType !== 'application/json') {
+	  return false;
+	} else if (contentType === 'application/json') {
+	  return true;
 	}
-	return false;
-};
-
+  };
 /**
  * Asynchronously parse request body to JSON
  *
