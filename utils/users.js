@@ -78,11 +78,8 @@ const getUser = (email, password) => {
   // TODO: 8.3 Get user whose email and password match the provided values
 	for(let i=0; i < data.users.length; i++){
 		if(data.users[i].email === email && data.users[i].password === password){
-<<<<<<< HEAD
-			copy = {...data.users[i]};
-=======
+	
 			const copy = {...data.users[i]};
->>>>>>> villesbranch
 			return copy;
 		}
 	}
@@ -100,18 +97,10 @@ const getUser = (email, password) => {
  */
 const getUserById = userId => {
   // TODO: 8.3 Find user by user id
-<<<<<<< HEAD
- 	for(i=0; i < data.users.length; i++){
-		if(data.users[i]._id === userId){
-			copy = {...data.users[i]};
-			return copy;
-		}
-=======
   for(let i=0; i < data.users.length; i++){
 	if(data.users[i]._id === userId){
 		const copy = {...data.users[i]};
 	return copy;
->>>>>>> villesbranch
 	}
 }
   return undefined;
@@ -127,11 +116,7 @@ const deleteUserById = userId => {
   // TODO: 8.3 Delete user with a given id
   for(let i=0; i < data.users.length; i++){
 		if(data.users[i]._id === userId){
-<<<<<<< HEAD
-			copy = {...data.users[i]};
-=======
 			const copy = {...data.users[i]};
->>>>>>> villesbranch
 			data.users.splice(i, 1);
 			return copy;
 		}
@@ -172,11 +157,7 @@ const saveNewUser = user => {
 	if(Object.prototype.hasOwnProperty.call(user, "role") !== true){
 		user.role = "customer";
 	}
-<<<<<<< HEAD
-	copy = {...user};
-=======
 	const copy = {...user};
->>>>>>> villesbranch
 	data.users.push(copy);
 	return copy;
 };
@@ -202,11 +183,7 @@ const updateUserRole = (userId, role) => {
   for(let i=0; i < data.users.length; i++){
 		if(data.users[i]._id === userId){
 			data.users[i].role = role;
-<<<<<<< HEAD
-			copy = {...data.users[i]};
-=======
 			const copy = {...data.users[i]};
->>>>>>> villesbranch
 			return copy;
 		}
 	}
