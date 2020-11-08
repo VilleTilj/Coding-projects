@@ -1,7 +1,7 @@
 const responseUtils = require('./utils/responseUtils');
 const { acceptsJson, isJson, parseBodyJson } = require('./utils/requestUtils');
 const { renderPublic } = require('./utils/render');
-const { emailInUse, getAllUsers, saveNewUser, validateUser } = require('./utils/users');
+const { emailInUse, getAllUsers, saveNewUser, validateUser, updateUserRole } = require('./utils/users');
 const users = require('./utils/users');
 const { basicAuthChallenge } = require('./utils/responseUtils');
 
@@ -93,7 +93,7 @@ const handleRequest = async (request, response) => {
 
   // GET all users
   if (filePath === '/api/users' && method.toUpperCase() === 'GET') {
-    // TODO: 8.3 Return all users as JSON
+    // DONE: 8.3 Return all users as JSON
     // TODO: 8.4 Add authentication (only allowed to users with role "admin")
     const users = getAllUsers();
     return responseUtils.sendJson(response, users);
@@ -108,7 +108,19 @@ const handleRequest = async (request, response) => {
 
     // TODO: 8.3 Implement registration
     // You can use parseBodyJson(request) from utils/requestUtils.js to parse request body
-    throw new Error('Not Implemented');
+    // throw new Error('Not Implemented');
+    const registerUser = await (parseBodyJson(request));
+    const problems = validateUser(registerUser);
+
+    // Check if there are errors in creating user and that the email is not in use allready
+    if ( problems.length == 0 || !emailInUse(registerUser.email)) {
+      let newUser = saveNewUser(registerUser);
+      newUser = updateUserRole(newUser._id, 'customer')
+      return responseUtils.createdResource(response, newUser);
+      
+    } else {
+      return responseUtils.badRequest(response, "400 Bad Request");
+    }
   }
 };
 
