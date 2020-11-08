@@ -16,25 +16,25 @@
  *       - Use getJSON() function from utils.js to fetch user data from server
  */
 const temp = document.getElementById('user-template');
-const users = "/api/users"
+const users = "/api/users";
 
 getJSON(users).then(json => {
     const users = json;
     for (const user of users) {
-        let clone = temp.content.cloneNode(true);
-        clone.querySelector(".item-row").setAttribute('id', "user-" + user._id);
-        clone.querySelector(".user-name").setAttribute('id', "name-" + user._id);
-        clone.querySelector(".user-email").setAttribute('id', "email-" + user._id);
-        clone.querySelector(".user-role").setAttribute('id', "role-" + user._id);
-        clone.querySelector(".modify-button").setAttribute('id', "modify-" + user._id);
-        clone.querySelector(".delete-button").setAttribute('id', "delete-" + user._id);
+        const clone = temp.content.cloneNode(true);
+        clone.querySelector(".item-row").setAttribute('id', `user-${ user._id}`);
+        clone.querySelector(".user-name").setAttribute('id', `name-${ user._id}`);
+        clone.querySelector(".user-email").setAttribute('id', `email-${ user._id}`);
+        clone.querySelector(".user-role").setAttribute('id', `role-${ user._id}`);
+        clone.querySelector(".modify-button").setAttribute('id', `modify-${ user._id}`);
+        clone.querySelector(".delete-button").setAttribute('id', `delete-${ user._id}`);
         clone.querySelector(".user-name").textContent = user.name;
         clone.querySelector(".user-email").textContent = user.email;
         clone.querySelector(".user-role").textContent = user.role;
         // Add event
         clone.querySelector('.modify-button').addEventListener('click', function(){
-            let temp = document.getElementById("form-template");
-            let clone = temp.content.cloneNode(true);
+            const temp = document.getElementById("form-template");
+            const clone = temp.content.cloneNode(true);
 
             clone.querySelector("#id-input").value = user._id;
             clone.querySelector("#name-input").value = user.name;
@@ -43,10 +43,10 @@ getJSON(users).then(json => {
 
             document.getElementById("modify-user").appendChild(clone);
 
-        })
+        });
         document.getElementById("users-container").appendChild(clone);
     }
-})
+});
 
 
 

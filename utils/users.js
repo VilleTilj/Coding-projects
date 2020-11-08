@@ -78,7 +78,7 @@ const getUser = (email, password) => {
   // TODO: 8.3 Get user whose email and password match the provided values
 	for(i=0; i < data.users.length; i++){
 		if(data.users[i].email === email && data.users[i].password === password){
-			copy = Object.assign({},data.users[i]);
+			copy = {...data.users[i]};
 			return copy;
 		}
 	}
@@ -98,7 +98,7 @@ const getUserById = userId => {
   // TODO: 8.3 Find user by user id
  	for(i=0; i < data.users.length; i++){
 		if(data.users[i]._id === userId){
-			copy = Object.assign({},data.users[i]);
+			copy = {...data.users[i]};
 			return copy;
 		}
 	}
@@ -115,8 +115,8 @@ const deleteUserById = userId => {
   // TODO: 8.3 Delete user with a given id
  	for(i=0; i < data.users.length; i++){
 		if(data.users[i]._id === userId){
-			copy = Object.assign({},data.users[i]);
-			data.users.splice(i,1);
+			copy = {...data.users[i]};
+			data.users.splice(i, 1);
 			return copy;
 		}
 	}
@@ -133,7 +133,7 @@ const deleteUserById = userId => {
  */
 const getAllUsers = () => {
   // TODO: 8.3 Retrieve all users
-	const AllUsers = data.users.map(user => ({...user}))
+	const AllUsers = data.users.map(user => ({...user}));
 	return AllUsers;
 };
 
@@ -156,7 +156,7 @@ const saveNewUser = user => {
 	if(user.hasOwnProperty("role") != true){
 		user.role = "customer";
 	}
-	copy = Object.assign({},user);
+	copy = {...user};
 	data.users.push(copy);
 	return copy;
 };
@@ -182,7 +182,7 @@ const updateUserRole = (userId, role) => {
  	for(i=0; i < data.users.length; i++){
 		if(data.users[i]._id === userId){
 			data.users[i].role = role;
-			copy = Object.assign({},data.users[i]);
+			copy = {...data.users[i]};
 			return copy;
 		}
 	}

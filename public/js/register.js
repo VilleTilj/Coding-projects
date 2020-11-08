@@ -24,8 +24,8 @@ document.getElementById('btnRegister').addEventListener('click', function(event)
             password: password
         };
         console.log(userInfo);
-        postOrPutJSON('/api/register','POST', user).then(response => {
+        postOrPutJSON('/api/register', 'POST', user).then(response => {
             document.getElementById('register-form').reset();
         });
     }
-})
+});
