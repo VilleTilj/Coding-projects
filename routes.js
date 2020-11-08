@@ -1,9 +1,9 @@
 const responseUtils = require('./utils/responseUtils');
 const { acceptsJson, isJson, parseBodyJson } = require('./utils/requestUtils');
 const { renderPublic } = require('./utils/render');
-const { emailInUse, getAllUsers, saveNewUser, validateUser, updateUserRole } = require('./utils/users');
+const { emailInUse, getAllUsers, saveNewUser, validateUser, updateUserRole, getUserById } = require('./utils/users');
 const users = require('./utils/users');
-const { basicAuthChallenge } = require('./utils/responseUtils');
+const { basicAuthChallenge, notFound, sendJson } = require('./utils/responseUtils');
 const { getCurrentUser } = require('./auth/auth');
 
 /**
@@ -14,8 +14,7 @@ const { getCurrentUser } = require('./auth/auth');
  */
 const allowedMethods = {
   '/api/register': ['POST'],
-  '/api/users': ['GET'],
-  '/api/products': ['GET']
+  '/api/users': ['GET']
 };
 
 /**
@@ -74,7 +73,39 @@ const handleRequest = async (request, response) => {
   if (matchUserId(filePath)) {
     // TODO: 8.5 Implement view, update and delete a single user by ID (GET, PUT, DELETE)
     // You can use parseBodyJson(request) from utils/requestUtils.js to parse request body
-    throw new Error('Not Implemented');
+    //throw new Error('Not Implemented');
+    // Check for authorization
+    if ( request.headers['authorization']) {
+      const user = await getCurrentUser(request);
+      if(user.role === 'admin'){
+        const reqName = filePath.split('/').pop();
+        const reqUser = getUserById(reqName);
+        if (!reqUser){ notFound(response); }
+          if ( request.method === 'GET') { 
+            sendJson(response, reqUser);
+          }
+          if ( request.method === 'PUT') { 
+            const updateRequest = await parseBodyJson(request);
+            // if role can be found
+            if (updateRequest.role) {
+              try {
+                const updatedUser = updateUserRole(requestedUsername, updateRequest.role);
+                sendJson(response, updatedUser);
+              }
+              catch (err) {badRequest(response);}
+            } else { badRequest(response);}
+          }
+           if (request.method === 'DELETE') {
+            // try to delete user
+            const deleted = deleteUserById(requestedUsername);
+            if (deleted) {
+              sendJson(response, deleted);
+            }
+          }
+      } else {forbidden(response); }
+    } else {
+      basicAuthChallenge(response);
+    }
   }
 
   // Default to 404 Not Found if unknown url
@@ -110,28 +141,6 @@ const handleRequest = async (request, response) => {
       }
     });
   }
-  // GET all products
-  if (filePath === '/api/products' && method.toUpperCase() === 'GET') {
-    // Get the current user
-    getCurrentUser(request).then(user => {
-
-      // No authorization header
-      if (user === null) {
-        basicAuthChallenge(response);
-
-        // Authorization header exists
-      } else {
-        // Authorized admin response
-        if (user.role === "admin" || user.role === "customer") {
-          return responseUtils.sendJson(response, productdata);
-          // Non-admin response
-        } else {
-          forbidden(response);
-        }
-      }
-    });
-  }
-  
 
   // register new user
   if (filePath === '/api/register' && method.toUpperCase() === 'POST') {
