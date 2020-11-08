@@ -17,13 +17,13 @@ const getCurrentUser = async request => {
   const credentials = getCredentials(request);
 
   // Check if there are not credentials 
-  if ( credentials === null){ return null };
+  if ( credentials === null){ return null; }
   
   // Get user
-  const user = getUser(credentials[0],credentials[1]);
+  const user = getUser(credentials[0], credentials[1]);
   if ( user !== undefined) {
     return user;
-  } else { return null }
+  } else { return null; }
 };
 
 module.exports = { getCurrentUser };

@@ -21,14 +21,14 @@
 const getJSON = async url => {
   // TODO: 8.3 Implement this
   //throw new Error('Not Implemented');
-  let data = await (await (fetch(url)
+  const data = await (await (fetch(url)
         .then(res => {
-            return res.json()
+            return res.json();
         })
         .catch(err => {
-          console.log('Error: ', err)
+          console.log('Error: ', err);
         })
-    ))
+    ));
     return data;
 };
 
@@ -59,10 +59,10 @@ const postOrPutJSON = async (url, method, data = {}) => {
       'Accept': 'application/json'
     },
     body: JSON.stringify(data)
-   }
+   };
    
-  let data = await (fetch(url, contentType))
-  return data.json;
+  const dataContent = await (fetch(url, contentType));
+  return dataContent.json;
 };
 
 /**
@@ -78,8 +78,8 @@ const deleteResourse = async url => {
   // TODO: 8.5 Implement this
   //throw new Error('Not Implemented');
   const deleteOption = {
-    method : 'DELETE'}
-  let data = await fetch(url, deleteOption);
+    method : 'DELETE'};
+  const data = await fetch(url, deleteOption);
   return data.json();
 };
 
@@ -93,7 +93,7 @@ const deleteResourse = async url => {
 const generateId = () => {
   // Shamelessly borrowed from a Gist. See:
   // https://gist.github.com/gordonbrander/2230317
-  return ('_' + Math.random().toString(36).substr(2, 9));
+  return (`_${ Math.random().toString(36).substr(2, 9)}`);
 };
 
 /**
@@ -113,7 +113,7 @@ const createNotification = (message, containerId, isSuccess = true) => {
   const newParagraph = document.createElement('p');
 
   // Create unique id for the notification so that it can easily be removed after timeout
-  const notificationId = generateId()
+  const notificationId = generateId();
   newParagraph.id = notificationId;
 
   // Set CSS class for the paragraph based on the isSuccess variable

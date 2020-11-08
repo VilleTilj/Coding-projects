@@ -56,7 +56,7 @@ const generateId = () => {
  */
 const emailInUse = email => {
   // TODO: 8.3 Check if there already exists a user with a given email
-	for(i=0; i < data.users.length; i++){
+	for(let i=0; i < data.users.length; i++){
 		if(data.users[i].email === email){
 			return true;
 		}
@@ -76,9 +76,9 @@ const emailInUse = email => {
  */
 const getUser = (email, password) => {
   // TODO: 8.3 Get user whose email and password match the provided values
-	for(i=0; i < data.users.length; i++){
+	for(let i=0; i < data.users.length; i++){
 		if(data.users[i].email === email && data.users[i].password === password){
-			copy = Object.assign({},data.users[i]);
+			const copy = {...data.users[i]};
 			return copy;
 		}
 	}
@@ -96,13 +96,13 @@ const getUser = (email, password) => {
  */
 const getUserById = userId => {
   // TODO: 8.3 Find user by user id
- 	for(i=0; i < data.users.length; i++){
-		if(data.users[i]._id === userId){
-			copy = Object.assign({},data.users[i]);
-			return copy;
-		}
+  for(let i=0; i < data.users.length; i++){
+	if(data.users[i]._id === userId){
+		const copy = {...data.users[i]};
+	return copy;
 	}
-	return undefined;
+}
+  return undefined;
 };
 
 /**
@@ -113,10 +113,10 @@ const getUserById = userId => {
  */
 const deleteUserById = userId => {
   // TODO: 8.3 Delete user with a given id
- 	for(i=0; i < data.users.length; i++){
+  for(let i=0; i < data.users.length; i++){
 		if(data.users[i]._id === userId){
-			copy = Object.assign({},data.users[i]);
-			data.users.splice(i,1);
+			const copy = {...data.users[i]};
+			data.users.splice(i, 1);
 			return copy;
 		}
 	}
@@ -133,7 +133,7 @@ const deleteUserById = userId => {
  */
 const getAllUsers = () => {
   // TODO: 8.3 Retrieve all users
-	const AllUsers = data.users.map(user => ({...user}))
+	const AllUsers = data.users.map(user => ({...user}));
 	return AllUsers;
 };
 
@@ -153,10 +153,10 @@ const saveNewUser = user => {
   // TODO: 8.3 Save new user
   // Use generateId() to assign a unique id to the newly created user.
 	user._id = generateId();
-	if(user.hasOwnProperty("role") != true){
+	if(Object.prototype.hasOwnProperty.call(user, "role") !== true){
 		user.role = "customer";
 	}
-	copy = Object.assign({},user);
+	const copy = {...user};
 	data.users.push(copy);
 	return copy;
 };
@@ -176,13 +176,13 @@ const saveNewUser = user => {
  */
 const updateUserRole = (userId, role) => {
   // TODO: 8.3 Update user's role
-	if(role != "admin" && role != "customer"){
+	if(role !== "admin" && role !== "customer"){
 		throw new Error("Unknown role");
 	}
- 	for(i=0; i < data.users.length; i++){
+  for(let i=0; i < data.users.length; i++){
 		if(data.users[i]._id === userId){
 			data.users[i].role = role;
-			copy = Object.assign({},data.users[i]);
+			const copy = {...data.users[i]};
 			return copy;
 		}
 	}
@@ -201,17 +201,17 @@ const updateUserRole = (userId, role) => {
 const validateUser = user => {
   // TODO: 8.3 Validate user before saving
 	const problems = [];
-	if(user.hasOwnProperty("name") != true){
+	if(Object.prototype.hasOwnProperty.call(user, "name") !== true){
 		problems.push("Missing name");
 	}
-	if(user.hasOwnProperty("email") != true){
+	if(Object.prototype.hasOwnProperty.call(user, "email") !== true){
 		problems.push("Missing email");
 	}
-	if(user.hasOwnProperty("password") != true){
+	if(Object.prototype.hasOwnProperty.call(user, "password") !== true){
 		problems.push("Missing password");
 	}
-	if(user.hasOwnProperty("role")){
-		if(user.role != "admin" && user.role != "customer"){
+	if(Object.prototype.hasOwnProperty.call(user, "role")){
+		if(user.role !== "admin" && user.role !== "customer"){
 			problems.push("Unknown role");
 		}
 	}

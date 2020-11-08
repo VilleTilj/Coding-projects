@@ -10,7 +10,7 @@
 document.getElementById('btnRegister').addEventListener('click', function(event) {  
     event.preventDefault(); 
     // checking if password and password confirmation match
-    if (document.getElementById('password').value != document.getElementById('passwordConfirmation').value){
+    if (document.getElementById('password').value !== document.getElementById('passwordConfirmation').value){
         // if they don't, send notification to user
         createNotification('Password and password confirmation do not match', 'notifications-container');
     } else {
@@ -24,8 +24,8 @@ document.getElementById('btnRegister').addEventListener('click', function(event)
             password: password
         };
         console.log(userInfo);
-        postOrPutJSON('/api/register','POST', user).then(response => {
+        postOrPutJSON('/api/register', 'POST', user).then(response => {
             document.getElementById('register-form').reset();
         });
     }
-})
+});

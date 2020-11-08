@@ -11,11 +11,11 @@ const getCredentials = request => {
   //       You need to first decode the header back to its original form ("email:password").
   //  See: https://attacomsian.com/blog/nodejs-base64-encode-decode
   //       https://stackabuse.com/encoding-and-decoding-base64-strings-in-node-js/
-	if(request.headers.authorization != undefined){
+	if(request.headers.authorization !== undefined){
 		if(request.headers.authorization.toString().includes("Basic")){
-			code = request.headers.authorization.split(" ").pop();
+			const code = request.headers.authorization.split(" ").pop();
 			const buff = Buffer.from(code, 'base64');
-			decoded = buff.toString('utf-8');
+			const decoded = buff.toString('utf-8');
 			return decoded.split(":");
 		}
 	}
@@ -33,12 +33,12 @@ const acceptsJson = request => {
   // NOTE: "Accept" header format allows several comma separated values simultaneously
   // as in "text/html,application/xhtml+xml,application/json,application/xml;q=0.9,*/*;q=0.8"
   // Do not rely on the header value containing only single content type!
-	if(request.headers.accept != undefined){
-		if(request.headers.accept.toString().search("application/json") != -1){
+	if(request.headers.accept !== undefined){
+		if(request.headers.accept.toString().search("application/json") !== -1){
 			return true;
 		}
 		// searching for a wildcard symbol was quite annoying
-		if(request.headers.accept.toString().replace(/\*/g, 'G').search("G/G") != -1){
+		if(request.headers.accept.toString().replace(/\*/g, 'G').search("G/G") !== -1){
 			return true;
 		}
 	}
@@ -52,13 +52,17 @@ const acceptsJson = request => {
  * @returns {boolean}
  */
 const isJson = request => {
-	const contentType = request.headers['content-type'];
-	if (contentType === undefined || contentType === '' || contentType !== 'application/json') {
-	  return false;
-	} else if (contentType === 'application/json') {
-	  return true;
+  // TODO: 8.3 Check whether request "Content-Type" is JSON or not
+	if(request.headers["content-type"] !== undefined){
+		if(request.headers['content-type'] !== ""){
+			if(request.headers['content-type'].toString().includes("json")){
+				return true;
+			}
+		}
 	}
-  };
+	return false;
+};
+
 /**
  * Asynchronously parse request body to JSON
  *

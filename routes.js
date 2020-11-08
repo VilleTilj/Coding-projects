@@ -128,7 +128,7 @@ const handleRequest = async (request, response) => {
   if (filePath === '/api/users' && method.toUpperCase() === 'GET') {
     // DONE: 8.3 Return all users as JSON
     // TODO: 8.4 Add authentication (only allowed to users with role "admin")
-    getCurrentUser(request).then(user =>{
+    getCurrentUser(request).then(user => {
       if (!user) {
         basicAuthChallenge(response);
       } else {
@@ -161,7 +161,7 @@ const handleRequest = async (request, response) => {
     } else {     
       // Set new user to the resourses
       let newUser = saveNewUser(registerUser);
-      newUser = updateUserRole(newUser._id, 'customer')
+      newUser = updateUserRole(newUser._id, 'customer');
       return responseUtils.createdResource(response, newUser);
     }
   }
