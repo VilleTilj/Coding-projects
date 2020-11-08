@@ -22,7 +22,15 @@ getJSON(users).then(json => {
     const users = json;
     for (const user of users) {
         let clone = temp.content.cloneNode(true);
-        clone = updateUserTemplate(clone, user);
+        clone.querySelector(".item-row").setAttribute('id', "user-" + user._id);
+        clone.querySelector(".user-name").setAttribute('id', "name-" + user._id);
+        clone.querySelector(".user-email").setAttribute('id', "email-" + user._id);
+        clone.querySelector(".user-role").setAttribute('id', "role-" + user._id);
+        clone.querySelector(".modify-button").setAttribute('id', "modify-" + user._id);
+        clone.querySelector(".delete-button").setAttribute('id', "delete-" + user._id);
+        clone.querySelector(".user-name").textContent = user.name;
+        clone.querySelector(".user-email").textContent = user.email;
+        clone.querySelector(".user-role").textContent = user.role;
         // Add event
         clone.querySelector('.modify-button').addEventListener('click', function(){
             let temp = document.getElementById("form-template");
@@ -39,6 +47,7 @@ getJSON(users).then(json => {
         document.getElementById("users-container").appendChild(clone);
     }
 })
+
 
 
  /**

@@ -13,24 +13,18 @@ document.getElementById('btnRegister').addEventListener('click', function(event)
     if (document.getElementById('password').value != document.getElementById('passwordConfirmation').value){
         // if they don't, send notification to user
         createNotification('Password and password confirmation do not match', 'notifications-container');
-        
     } else {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
 
-        // saving all info to variables for easier use
-        var name = document.getElementById('name').value;
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
-
-        const user = {
+        const userInfo = {
             name: name,
             email: email,
             password: password
         };
-
-        console.log(user);
-        // POST request 
+        console.log(userInfo);
         postOrPutJSON('/api/register','POST', user).then(response => {
-            // console.log(response); // this should be the new user
             document.getElementById('register-form').reset();
         });
     }

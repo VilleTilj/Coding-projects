@@ -110,28 +110,27 @@ const handleRequest = async (request, response) => {
       }
     });
   }
+  // GET all products
+  if (filePath === '/api/products' && method.toUpperCase() === 'GET') {
+    // Get the current user
+    getCurrentUser(request).then(user => {
 
-    // GET all products
-    if (filePath === '/api/products' && method.toUpperCase() === 'GET') {
-      // Get the current user
-      getCurrentUser(request).then(user => {
-  
-        // No authorization header
-        if (user === null) {
-          basicAuthChallenge(response);
-  
-          // Authorization header exists
+      // No authorization header
+      if (user === null) {
+        basicAuthChallenge(response);
+
+        // Authorization header exists
+      } else {
+        // Authorized admin response
+        if (user.role === "admin" || user.role === "customer") {
+          return responseUtils.sendJson(response, productdata);
+          // Non-admin response
         } else {
-          // Authorized admin response
-          if (user.role === "admin" || user.role === "customer") {
-            return responseUtils.sendJson(response, productdata);
-            // Non-admin response
-          } else {
-            forbidden(response);
-          }
+          forbidden(response);
         }
-      });
-    }
+      }
+    });
+  }
   
 
   // register new user

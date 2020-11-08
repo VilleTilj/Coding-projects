@@ -21,7 +21,7 @@
 const getJSON = async url => {
   // TODO: 8.3 Implement this
   //throw new Error('Not Implemented');
-  let data = await ( (fetch(url)
+  let data = await (await (fetch(url)
         .then(res => {
             return res.json()
         })
@@ -59,8 +59,8 @@ const postOrPutJSON = async (url, method, data = {}) => {
       'Accept': 'application/json'
     },
     body: JSON.stringify(data)
-  }
-
+   }
+   
   let data = await (fetch(url, contentType))
   return data.json;
 };
@@ -76,7 +76,11 @@ const postOrPutJSON = async (url, method, data = {}) => {
  */
 const deleteResourse = async url => {
   // TODO: 8.5 Implement this
-  throw new Error('Not Implemented');
+  //throw new Error('Not Implemented');
+  const deleteOption = {
+    method : 'DELETE'}
+  let data = await fetch(url, deleteOption);
+  return data.json();
 };
 
 /**
