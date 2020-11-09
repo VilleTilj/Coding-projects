@@ -9,9 +9,7 @@ chai.use(chaiHttp);
 
 // helper function for creating randomized test data
 const generateRandomString = (len = 9) => {
-  return Math.random()
-    .toString(36)
-    .substr(2, len);
+  return Math.random().toString(36).substr(2, len);
 };
 
 const shortWaitTime = 200;
@@ -124,7 +122,7 @@ describe('User Inteface', () => {
 
       try {
         nameText = await (await nameElement[0].getProperty('textContent')).jsonValue();
-      } catch (error) {return;}
+      } catch (error) {}
 
       expect(nameText.trim()).to.equal(newCustomer.name.trim(), errorsMsg);
     });
