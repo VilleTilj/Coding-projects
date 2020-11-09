@@ -9,9 +9,13 @@ chai.use(chaiHttp);
 
 // helper function for creating randomized test data
 const generateRandomString = (len = 9) => {
-  return Math.random()
-    .toString(36)
-    .substr(2, len);
+  let str = '';
+
+  do {
+    str += Math.random().toString(36).substr(2, 9).trim();
+  } while (str.length < len);
+
+  return str.substr(0, len);
 };
 
 const shortWaitTime = 200;
@@ -125,7 +129,7 @@ describe('User Inteface', () => {
 
       try {
         nameText = await (await nameElement[0].getProperty('textContent')).jsonValue();
-      } catch (error) {return;}
+      } catch (error) {}
 
       expect(nameText.trim()).to.equal(newCustomer.name.trim(), errorMsg);
     });
@@ -140,7 +144,7 @@ describe('User Inteface', () => {
         await page.goto(usersPage, { waitUntil: 'networkidle0' });
         await page.click(openButtonSelector);
         await page.waitForTimeout(shortWaitTime);
-      } catch (error) {return;}
+      } catch (error) {}
 
       const updateButton = await page.$(updateButtonSelector);
       let errorMsg =
