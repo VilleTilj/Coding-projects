@@ -6,8 +6,8 @@ const userSchema = new Schema({
   // TODO: 9.4 Implement this
 	name: {type: String, required: true, trim: true, maxlength: 50},	
 	email: {type: String, required: true, unique: true, match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/},
-	password: {type: String, required: true, minlength: 10, set: v => bcrypt.hashSync(v)},
-	role: { type: String, required: true, default: "customer",lowercase: true, trim: true, match: "customer" || "admin"}
+	password: {type: String, required: true, minlength: 10, set: function(v){ if(v.length >9){return bcrypt.hashSync(v)}}},
+	role: {type: String, required: true, enum: ["customer", "admin"], lowercase: true, trim: true, default: "customer"}
 });
 
 /**
