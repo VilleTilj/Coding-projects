@@ -1,5 +1,6 @@
 #include "city.hh"
 #include <QDebug>
+#include <vector>
 
 namespace StudentSide
 {
@@ -22,12 +23,18 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground) {
 
 void City::setClock(QTime clock)
 {
-    return;
+    time_ = clock;
 }
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
-    return;
+
+    if(std::find(stops_.begin(), stops_.end(), stop) == stops_.end()){
+        stops_.push_back(stop);
+        Interface::Location location = stop->getLocation();
+        location.printBoth();
+        ui_->addActor(location.giveX(), location.giveY(), 0);
+    }
 }
 
 void City::startGame()
@@ -37,7 +44,12 @@ void City::startGame()
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
-    return;
+    if(std::find(actors_.begin(), actors_.end(), newactor) == actors_.end()){
+        actors_.push_back(newactor);
+        Interface::Location location = newactor->giveLocation();
+        location.printBoth();
+        ui_->addActor(location.giveX(), location.giveY(), 0);
+    }
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
@@ -79,6 +91,11 @@ QImage City::getImage(std::string image_size)
     else {
         return big_;
     }
+}
+
+void City::addUi(std::shared_ptr<mainwindow> ui)
+{
+    ui_ = ui;
 }
 
 

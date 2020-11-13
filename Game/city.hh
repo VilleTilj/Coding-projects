@@ -4,8 +4,8 @@
 
 #include "interfaces/icity.hh"
 #include <QTime>
-#include <initgameengine.hh>
-#include <mainwindow.hh>
+#include <algorithm>
+#include "mainwindow.hh"
 
 namespace StudentSide
 {
@@ -39,10 +39,15 @@ public:
 
     QImage getImage(std::string image_size);
 
+    void addUi(std::shared_ptr<mainwindow> ui);
+
 private:
     std::shared_ptr<StudentSide::mainwindow> ui_;
     QImage small_;
     QImage big_;
+    std::vector<std::shared_ptr<Interface::IActor>> actors_;
+    std::vector<std::shared_ptr<Interface::IStop>> stops_;
+    QTime time_;
 
 
 };
