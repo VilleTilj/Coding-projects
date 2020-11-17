@@ -3,9 +3,9 @@ const { acceptsJson, isJson, parseBodyJson } = require('./utils/requestUtils');
 const { renderPublic } = require('./utils/render');
 const { emailInUse, getAllUsers, saveNewUser, validateUser, updateUserRole, getUserById } = require('./utils/users');
 const {users, deleteUserById, requestedUsername} = require('./utils/users');
-const { basicAuthChallenge, notFound, sendJson, badRequest} = require('./utils/responseUtils');
+const { basicAuthChallenge, notFound, sendJson, badRequest, unauthorized} = require('./utils/responseUtils');
 const { getCurrentUser } = require('./auth/auth');
-
+const productdata = require('./products.json').map(function(product){({ ...product })});
 /**
  * Known API routes and their allowed methods
  *
@@ -82,7 +82,7 @@ const handleRequest = async (request, response) => {
         if( user.role === 'admin'){
           const reqName = filePath.split('/').pop();
           const reqUser = getUserById(reqName);
-          if (!reqUser){ notFound(response); }
+          if (reqUser){  
             if ( request.method === 'GET') { 
               return responseUtils.sendJson(response, reqUser);
             }
@@ -91,6 +91,7 @@ const handleRequest = async (request, response) => {
               // if role can be found
               if (updateRequest.role) {
                 try {
+                  
                   const updatedUser = updateUserRole(requestedUsername, updateRequest.role);
                   return responseUtils.sendJson(response, updatedUser);
                 }
@@ -103,6 +104,8 @@ const handleRequest = async (request, response) => {
               if (deleted) {
                 return responseUtils.sendJson(response, deleted);
               }
+            }} else {
+              unauthorized(response);
             }
         } else {return responseUtils.forbidden(response); }
       } else {

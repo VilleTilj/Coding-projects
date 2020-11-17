@@ -1,4 +1,4 @@
-var basicAuthChallenge = response => {
+const basicAuthChallenge = response => {
   // TODO: 8.4 Send proper basic authentication challenge headers
   response.writeHead(401, {"WWW-Authenticate" : "Basic"});
   response.statusCode = 401;
