@@ -5,8 +5,10 @@ const path = require('path');
 const dotEnvPath = path.resolve(__dirname, './.env');
 require('dotenv').config({ path: dotEnvPath });
 
+//Connect the database
 db.connectDB();
 
+// Create server here
 const PORT = process.env.PORT || 3000;
 const server = http.createServer(handleRequest);
 
