@@ -20,7 +20,7 @@ const noContent = response => {
 };
 
 const badRequest = (response, errorMsg) => {
-  if (errorMsg) return sendJson(response, { error: errorMsg }, 400);
+  if (errorMsg) {return sendJson(response, { error: errorMsg }, 400)};
 
   response.statusCode = 400;
   return response.end();

@@ -116,7 +116,7 @@ const deleteUserById = userId => {
   // TODO: 8.3 Delete user with a given id
   for(let i=0; i < data.users.length; i++){
 		if(data.users[i]._id === userId){
-			const copy = {...data.users[i]};
+			var copy = {...data.users[i]};
 			data.users.splice(i, 1);
 			return copy;
 		}

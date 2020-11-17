@@ -2,10 +2,11 @@ const responseUtils = require('./utils/responseUtils');
 const { acceptsJson, isJson, parseBodyJson } = require('./utils/requestUtils');
 const { renderPublic } = require('./utils/render');
 const { emailInUse, getAllUsers, saveNewUser, validateUser, updateUserRole, getUserById } = require('./utils/users');
-const {users, deleteUserById, requestedUsername} = require('./utils/users');
+const { deleteUserById, requestedUsername} = require('./utils/users');
 const { basicAuthChallenge, notFound, sendJson, badRequest, unauthorized} = require('./utils/responseUtils');
 const { getCurrentUser } = require('./auth/auth');
 const productdata = require('./products.json').map(function(product){({ ...product })});
+const users = getAllUsers();
 /**
  * Known API routes and their allowed methods
  *
@@ -82,36 +83,39 @@ const handleRequest = async (request, response) => {
         if( user.role === 'admin'){
           const reqName = filePath.split('/').pop();
           const reqUser = getUserById(reqName);
-          if (reqUser){  
-            if ( request.method === 'GET') { 
+          if (reqUser in users){  
+            if ( method.toUpperCase() === 'GET') { 
               return responseUtils.sendJson(response, reqUser);
             }
-            if ( request.method === 'PUT') { 
+            if ( method.toUpperCase() === 'PUT') { 
               const updateRequest = await parseBodyJson(request);
               // if role can be found
               if (updateRequest.role) {
-                try {
-                  
-                  const updatedUser = updateUserRole(requestedUsername, updateRequest.role);
+                try {            
+                  const updatedUser = updateUserRole(reqUser.name, updateRequest.role);
                   return responseUtils.sendJson(response, updatedUser);
                 }
                 catch (err) { badRequest(response, err);}
-              } else { return responseUtils.badRequest(response);}
+              } else { 
+                return responseUtils.badRequest(response);
+              }
             }
-            if (request.method === 'DELETE') {
+            if (method.toUpperCase() === 'DELETE') {
               // try to delete user
-              const deleted = deleteUserById(requestedUsername);
+              const deleted = deleteUserById(reqUser.name);
               if (deleted) {
                 return responseUtils.sendJson(response, deleted);
               }
             }} else {
-              unauthorized(response);
+              notFound(response);
             }
-        } else {return responseUtils.forbidden(response); }
+        } else {
+          return responseUtils.forbidden(response); 
+        }
       } else {
         return basicAuthChallenge(response);
       }
-    }else {
+     }else {
       unauthorized(response);
     }
   }
@@ -141,7 +145,6 @@ const handleRequest = async (request, response) => {
         basicAuthChallenge(response);
       } else {
         if (user.role === 'admin'){
-           const users = getAllUsers();
            return responseUtils.sendJson(response, users);
         }else {
           return responseUtils.forbidden(response);
@@ -149,7 +152,7 @@ const handleRequest = async (request, response) => {
       }
     });
   }
-  // And users
+  // And products
   if (filePath === '/api/products' && method.toUpperCase() === 'GET') {
     getCurrentUser(request).then(user => {
       if (user === null) {
