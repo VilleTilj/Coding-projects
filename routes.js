@@ -14,7 +14,8 @@ const { getCurrentUser } = require('./auth/auth');
  */
 const allowedMethods = {
   '/api/register': ['POST'],
-  '/api/users': ['GET']
+  '/api/users': ['GET'],
+  '/api/products': ['GET']
 };
 
 /**
@@ -77,34 +78,36 @@ const handleRequest = async (request, response) => {
     // Check for authorization
     if ( request.headers['authorization']) {
       const user = await getCurrentUser(request);
-      if(user != null && user.role === 'admin'){
-        const reqName = filePath.split('/').pop();
-        const reqUser = getUserById(reqName);
-        if (!reqUser){ notFound(response); }
-          if ( request.method === 'GET') { 
-            return responseUtils.sendJson(response, reqUser);
-          }
-          if ( request.method === 'PUT') { 
-            const updateRequest = await parseBodyJson(request);
-            // if role can be found
-            if (updateRequest.role) {
-              try {
-                const updatedUser = updateUserRole(requestedUsername, updateRequest.role);
-                return responseUtils.sendJson(response, updatedUser);
-              }
-              catch (err) { badRequest(response, err);}
-            } else { return responseUtils.badRequest(response);}
-          }
-           if (request.method === 'DELETE') {
-            // try to delete user
-            const deleted = deleteUserById(requestedUsername);
-            if (deleted) {
-              return responseUtils.sendJson(response, deleted);
+      if (user){
+        if( user.role === 'admin'){
+          const reqName = filePath.split('/').pop();
+          const reqUser = getUserById(reqName);
+          if (!reqUser){ notFound(response); }
+            if ( request.method === 'GET') { 
+              return responseUtils.sendJson(response, reqUser);
             }
-          }
-      } else {return responseUtils.forbidden(response); }
-    } else {
-      return basicAuthChallenge(response);
+            if ( request.method === 'PUT') { 
+              const updateRequest = await parseBodyJson(request);
+              // if role can be found
+              if (updateRequest.role) {
+                try {
+                  const updatedUser = updateUserRole(requestedUsername, updateRequest.role);
+                  return responseUtils.sendJson(response, updatedUser);
+                }
+                catch (err) { badRequest(response, err);}
+              } else { return responseUtils.badRequest(response);}
+            }
+            if (request.method === 'DELETE') {
+              // try to delete user
+              const deleted = deleteUserById(requestedUsername);
+              if (deleted) {
+                return responseUtils.sendJson(response, deleted);
+              }
+            }
+        } else {return responseUtils.forbidden(response); }
+      } else {
+        return basicAuthChallenge(response);
+      }
     }
   }
 
@@ -141,6 +144,21 @@ const handleRequest = async (request, response) => {
       }
     });
   }
+  // And users
+  if (filePath === '/api/products' && method.toUpperCase() === 'GET') {
+    getCurrentUser(request).then(user => {
+      if (user === null) {
+        return responseUtils.basicAuthChallenge(response);
+      } else {
+        if (user.role === "admin" || user.role === "customer") {
+          return responseUtils.sendJson(response, productdata);
+        } else {
+          return responseUtils.forbidden(response);
+        }
+      }
+    });
+  }
+
 
   // register new user
   if (filePath === '/api/register' && method.toUpperCase() === 'POST') {
