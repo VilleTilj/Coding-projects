@@ -111,6 +111,8 @@ const handleRequest = async (request, response) => {
       } else {
         return basicAuthChallenge(response);
       }
+    }else {
+      unauthorized(response);
     }
   }
 
