@@ -1,5 +1,11 @@
 const http = require('http');
 const { handleRequest } = require('./routes');
+const db = require('.models/db');
+const path = require('path');
+const dotEnvPath = path.resolve(__dirname, './.env');
+require('dotenv').config({ path: dotEnvPath });
+
+db.connectDB();
 
 const PORT = process.env.PORT || 3000;
 const server = http.createServer(handleRequest);
