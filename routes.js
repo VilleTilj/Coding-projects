@@ -2,8 +2,8 @@ const responseUtils = require('./utils/responseUtils');
 const { acceptsJson, isJson, parseBodyJson } = require('./utils/requestUtils');
 const { renderPublic } = require('./utils/render');
 const { emailInUse, getAllUsers, saveNewUser, validateUser, updateUserRole, getUserById } = require('./utils/users');
-const users = require('./utils/users');
-const { basicAuthChallenge, notFound, sendJson } = require('./utils/responseUtils');
+const {users, deleteUserById, requestedUsername} = require('./utils/users');
+const { basicAuthChallenge, notFound, sendJson, badRequest} = require('./utils/responseUtils');
 const { getCurrentUser } = require('./auth/auth');
 
 /**
@@ -77,12 +77,12 @@ const handleRequest = async (request, response) => {
     // Check for authorization
     if ( request.headers['authorization']) {
       const user = await getCurrentUser(request);
-      if(user.role === 'admin'){
+      if(user != null && user.role === 'admin'){
         const reqName = filePath.split('/').pop();
         const reqUser = getUserById(reqName);
         if (!reqUser){ notFound(response); }
           if ( request.method === 'GET') { 
-            sendJson(response, reqUser);
+            return responseUtils.sendJson(response, reqUser);
           }
           if ( request.method === 'PUT') { 
             const updateRequest = await parseBodyJson(request);
@@ -90,21 +90,21 @@ const handleRequest = async (request, response) => {
             if (updateRequest.role) {
               try {
                 const updatedUser = updateUserRole(requestedUsername, updateRequest.role);
-                sendJson(response, updatedUser);
+                return responseUtils.sendJson(response, updatedUser);
               }
-              catch (err) {badRequest(response);}
-            } else { badRequest(response);}
+              catch (err) { badRequest(response, err);}
+            } else { return responseUtils.badRequest(response);}
           }
            if (request.method === 'DELETE') {
             // try to delete user
             const deleted = deleteUserById(requestedUsername);
             if (deleted) {
-              sendJson(response, deleted);
+              return responseUtils.sendJson(response, deleted);
             }
           }
-      } else {forbidden(response); }
+      } else {return responseUtils.forbidden(response); }
     } else {
-      basicAuthChallenge(response);
+      return basicAuthChallenge(response);
     }
   }
 
@@ -136,7 +136,7 @@ const handleRequest = async (request, response) => {
            const users = getAllUsers();
            return responseUtils.sendJson(response, users);
         }else {
-          forbidden(response);
+          return responseUtils.forbidden(response);
         }
       }
     });
