@@ -26,19 +26,19 @@ void InitGameEngine::gameSetting()
 
 void InitGameEngine::gameWindow()
 {
-
+    //draw ui for user
     ui_->show();
     std::shared_ptr<Interface::ICity> iCityPtr = Interface::createGame();
+    //get graphics for the map and the to city
     QImage big;
     big.load(bigMap);
     QImage small;
     small.load(smallMap);
-
-    //std::shared_ptr<StudentSide::City> cityPtr_ = std::dynamic_pointer_cast<StudentSide::City>(iCityPtr);
     cityPtr_ = std::dynamic_pointer_cast<StudentSide::City>(iCityPtr);
-    cityPtr_->setBackground(small, big);
+    cityPtr_->setBackground(small, big);    
     QImage BigImage = cityPtr_->getImage("big");
     ui_->setBackground(BigImage);
+    //start game logic
     initLogic();
 
 }

@@ -10,8 +10,7 @@
 #include <memory>
 #include <QVector>
 #include <map>
-#include "graphics/simpleactoritem.hh"
-
+#include "actoritem.hh"
 
 namespace Ui {
 class MainWindow;
@@ -54,7 +53,7 @@ private:
     const int width_ = 1095;
     const int height_ = 592;
     QVector<QGraphicsItem*> actors_;
-    CourseSide::SimpleActorItem* last_;
+    StudentSide::ActorItem* last_;
 
 
 };

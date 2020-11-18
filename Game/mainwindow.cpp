@@ -1,6 +1,7 @@
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 #include <QDebug>
+#include <QImage>
 
 const int PADDING = 10;
 
@@ -24,7 +25,6 @@ mainwindow::mainwindow(QWidget *parent) :
     map->setSceneRect(0,0,width_,height_);
     resize(minimumSizeHint());
 
-    myDialog->exec();
 }
 
 mainwindow::~mainwindow()
@@ -52,7 +52,7 @@ void mainwindow::adjustGameSettings(std::string name)
 void mainwindow::addActor(int locX, int locY, int type)
 {
 
-    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY);
+    StudentSide::ActorItem* nActor = new StudentSide::ActorItem(locX, locY, type);
     actors_.push_back(nActor);
     map->addItem(nActor);
     last_ = nActor;

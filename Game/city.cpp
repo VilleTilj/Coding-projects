@@ -23,7 +23,7 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground) {
 
 void City::setClock(QTime clock)
 {
-    //time_ = clock;
+    time_ = clock;
 }
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
@@ -32,7 +32,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
     if(std::find(stops_.begin(), stops_.end(), stop) == stops_.end()){
         stops_.push_back(stop);
         Interface::Location location = stop->getLocation();
-        location.printBoth();
+        //location.printBoth();
         ui_->addActor(location.giveX(), location.giveY(), 0);
     }
 }
@@ -47,8 +47,8 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
     if(std::find(actors_.begin(), actors_.end(), newactor) == actors_.end()){
         actors_.push_back(newactor);
         Interface::Location location = newactor->giveLocation();
-        location.printBoth();
-        ui_->addActor(location.giveX(), location.giveY(), 0);
+        //location.printBoth();
+        ui_->addActor(location.giveX(), location.giveY(), 1);
     }
 }
 
