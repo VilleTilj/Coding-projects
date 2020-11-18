@@ -31,9 +31,10 @@ private:
 
     const int BussStop = 0;
     const int Nysse = 1;
+    const int passenger = 2;
 
-    const int WIDTH = 15;
-    const int HEIGHT = 15;
+    const int WIDTH = 5;
+    const int HEIGHT = 5;
 
 };
 }

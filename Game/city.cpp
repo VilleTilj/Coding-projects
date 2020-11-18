@@ -44,12 +44,19 @@ void City::startGame()
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
+
+    int type = 1;
     if(std::find(actors_.begin(), actors_.end(), newactor) == actors_.end()){
         actors_.push_back(newactor);
+    }
+    if(std::shared_ptr<Interface::IPassenger> nysse = std::dynamic_pointer_cast<Interface::IPassenger>(newactor)) {
+        type = 2;
+    }
+
         Interface::Location location = newactor->giveLocation();
         //location.printBoth();
-        ui_->addActor(location.giveX(), location.giveY(), 1);
-    }
+        qDebug() << type;
+        ui_->addActor(location.giveX(), location.giveY(), type);
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)

@@ -38,13 +38,17 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         image.load(bussi);
         bounds = QRectF(0, 0, 10, 13);
 
-
-        //QRectF bounds = boundingRect();
-        //QColor color(type_%256, type_%256, type_%256);
-        //QBrush brush(color);
-        //painter->setBrush(brush);
-        //painter->drawEllipse(bounds);
     }
+
+    else {
+
+        QRectF bounds = boundingRect();
+        QColor color(type_%256, type_%256, type_%256);
+        QBrush brush(color);
+        painter->setBrush(brush);
+        painter->drawEllipse(bounds);
+    }
+
 
     QBrush brush(image);
     painter->drawImage(bounds,image);
