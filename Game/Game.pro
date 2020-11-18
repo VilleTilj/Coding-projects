@@ -7,6 +7,7 @@ CONFIG += c++14
 
 SOURCES += \
     actor.cpp \
+    actoritem.cpp \
     city.cpp \
     creategame.cpp \
     dialoggamesettings.cpp \
@@ -21,6 +22,7 @@ else:win32:CONFIG(debug, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/debug/ -lCourseLib
 else:unix: LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/ -lCourseLib
+
 
 INCLUDEPATH += \
     $$PWD/../Course/CourseLib
@@ -45,8 +47,12 @@ FORMS += \
 
 HEADERS += \
     actor.hh \
+    actoritem.hh \
     city.hh \
     dialoggamesettings.hh \
     initgameengine.hh \
     mainwindow.hh \
     vehicle.hh
+
+RESOURCES += \
+    Graphics.qrc
