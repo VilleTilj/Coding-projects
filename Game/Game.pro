@@ -6,12 +6,14 @@ QT += core gui widgets network multimedia
 CONFIG += c++14
 
 SOURCES += \
+    actor.cpp \
     city.cpp \
     creategame.cpp \
     dialoggamesettings.cpp \
     initgameengine.cpp \
     main.cc \
-    mainwindow.cpp
+    mainwindow.cpp \
+    vehicle.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -42,7 +44,9 @@ FORMS += \
     mainwindow.ui
 
 HEADERS += \
+    actor.hh \
     city.hh \
     dialoggamesettings.hh \
     initgameengine.hh \
-    mainwindow.hh
+    mainwindow.hh \
+    vehicle.hh

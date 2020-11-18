@@ -38,13 +38,14 @@ public:
      * \brief
      */
     void gameWindow();
+    void initLogic();
 
 
 private:
     std::shared_ptr<StudentSide::mainwindow> ui_;
     std::shared_ptr<CourseSide::Logic> logic_;
     std::shared_ptr<Interface::ICity> iCityPtr;
-    //std::shared_ptr<StudentSide::City> cityPtr_;
+    std::shared_ptr<StudentSide::City> cityPtr_;
 };
 
 

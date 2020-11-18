@@ -1,5 +1,6 @@
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
+#include <QDebug>
 
 const int PADDING = 10;
 
@@ -34,14 +35,29 @@ mainwindow::~mainwindow()
 
 void mainwindow::setBackground(QImage &image)
 {
+    //QImage myImage = image;
+    //QTransform myTransform;
+    //myTransform.rotate(180);
+    //myImage = myImage.transformed(myTransform);
     map->setBackgroundBrush(image);
 }
+
 
 void mainwindow::adjustGameSettings(std::string name)
 {
     playerName = name;
 
 }
+
+void mainwindow::addActor(int locX, int locY, int type)
+{
+
+    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY);
+    actors_.push_back(nActor);
+    map->addItem(nActor);
+    last_ = nActor;
+}
+
 
 void mainwindow::defaultSettings()
 {

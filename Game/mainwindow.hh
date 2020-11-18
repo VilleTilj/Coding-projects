@@ -10,6 +10,8 @@
 #include <memory>
 #include <QVector>
 #include <map>
+#include "graphics/simpleactoritem.hh"
+
 
 namespace Ui {
 class MainWindow;
@@ -33,6 +35,7 @@ public:
     explicit mainwindow(QWidget *parent = nullptr);
     ~mainwindow();
     void setBackground(QImage &image);
+    void addActor(int locX, int locY, int type);
 
 public slots:
 
@@ -48,8 +51,11 @@ private:
     QGraphicsScene *map;
     std::string playerName = "Timo";
 
-    const int width_ = 500;
-    const int height_ = 500;
+    const int width_ = 1095;
+    const int height_ = 592;
+    QVector<QGraphicsItem*> actors_;
+    CourseSide::SimpleActorItem* last_;
+
 
 };
 } //namespace
