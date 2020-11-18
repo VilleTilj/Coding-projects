@@ -5,6 +5,7 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include "interfaces/iactor.hh"
 #include <QTimer>
 #include <iostream>
 #include <memory>
@@ -35,6 +36,8 @@ public:
     ~mainwindow();
     void setBackground(QImage &image);
     void addActor(int locX, int locY, int type);
+
+    void moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y);
 
 public slots:
 

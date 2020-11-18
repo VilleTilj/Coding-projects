@@ -58,6 +58,11 @@ void mainwindow::addActor(int locX, int locY, int type)
     last_ = nActor;
 }
 
+void mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y)
+{
+
+
+}
 
 void mainwindow::defaultSettings()
 {
