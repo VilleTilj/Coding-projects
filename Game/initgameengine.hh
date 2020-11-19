@@ -29,10 +29,6 @@ public:
 
     InitGameEngine();
 
-    /*!
-     * \brief
-     */
-    void gameSetting();
 
     /*!
      * \brief

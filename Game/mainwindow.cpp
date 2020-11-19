@@ -19,6 +19,9 @@ mainwindow::mainwindow(QWidget *parent) :
     ui_->gameView->setFixedSize(width_, height_);
     ui_->centralwidget->setFixedSize(width_ + ui_->startButton->width() + PADDING, height_ + PADDING);
     ui_->startButton->move(width_ + PADDING, PADDING);
+    ui_->nameLabel->move(width_ + PADDING + ui_->nameLabel->width(), PADDING);
+
+
 
     map = new QGraphicsScene(this);
     ui_->gameView->setScene(map);
@@ -43,10 +46,12 @@ void mainwindow::setBackground(QImage &image)
 }
 
 
-void mainwindow::adjustGameSettings(std::string name)
+void mainwindow::adjustGameSettings(QString name)
 {
-    playerName = name;
-
+    if(!name.isEmpty()) {
+        playerName_ = name;
+    }
+    ui_->nameLabel->setText(playerName_);
 }
 
 void mainwindow::addActor(int locX, int locY, int type)
@@ -61,7 +66,7 @@ void mainwindow::addActor(int locX, int locY, int type)
 
 void mainwindow::defaultSettings()
 {
-
+    ui_->nameLabel->setText(playerName_);
 }
 
 } //namespace

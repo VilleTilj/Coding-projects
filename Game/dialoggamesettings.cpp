@@ -22,7 +22,7 @@ DialogGameSettings::~DialogGameSettings()
 
 void DialogGameSettings::custom()
 {
-    emit customSettings(ui->lineEdit->text().toStdString());
+    emit customSettings(ui->lineEdit->text());
 }
 
 void DialogGameSettings::defaults()
