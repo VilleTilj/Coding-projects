@@ -21,15 +21,8 @@
 const getJSON = async url => {
   // TODO: 8.3 Implement this
   //throw new Error('Not Implemented');
-  const data = await (await (fetch(url)
-        .then(res => {
-            return res.json();
-        })
-        .catch(err => {
-          console.log('Error: ', err);
-        })
-    ));
-    return data;
+  const data = await fetch(url,{method: 'GET', headers: {'accept': 'application/json'}});
+  return data.json();
 };
 
 /**
@@ -52,17 +45,16 @@ const postOrPutJSON = async (url, method, data = {}) => {
   // TODO: 8.3 Implement this
   //throw new Error('Not Implemented');
 
-  const contentType = {
+  const contentType =await fetch(url, {
     method: method,
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     },
     body: JSON.stringify(data)
-   };
+   });
    
-  const dataContent = await (fetch(url, contentType));
-  return dataContent.json;
+  return contentType.json();
 };
 
 /**
@@ -77,8 +69,7 @@ const postOrPutJSON = async (url, method, data = {}) => {
 const deleteResourse = async url => {
   // TODO: 8.5 Implement this
   //throw new Error('Not Implemented');
-  const deleteOption = {
-    method : 'DELETE'};
+  const deleteOption = {method : 'DELETE', header: {'Accept':'application/json', 'Content-Type':'application/json'}};
   const data = await fetch(url, deleteOption);
   return data.json();
 };
