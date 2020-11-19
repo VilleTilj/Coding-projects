@@ -11,6 +11,7 @@
     "eslint": "eslint .",
     "fp-lint": "eslint --no-eslintrc --config ./.fplintrc.json --no-inline-config --ignore-path ./.fplintignore utils/",
     "test-8.3": "mocha  --timeout 10000 --recursive test/8.3",
+    "test-own": "mocha --exit --timeout 10000 --recursive test/own",
     "test-8.4": "mocha --exit --timeout 10000 --recursive test/8.4",
     "test-8.5": "mocha --exit --timeout 10000 --recursive test/8.5",
     "test-9.1": "mocha --exit --timeout 10000 --recursive test/9.1",
