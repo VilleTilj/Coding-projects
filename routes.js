@@ -4,8 +4,7 @@ const { renderPublic } = require('./utils/render');
 const getUser = require('./models/user');
 const { basicAuthChallenge, notFound, sendJson, badRequest, unauthorized} = require('./utils/responseUtils');
 const { getCurrentUser } = require('./auth/auth');
-const productdata = require('./products.json').map(function(product){({ ...product })});
-//const users = getAllUsers();
+const productdata = require('./products.json');
 /**
  * Known API routes and their allowed methods
  *
@@ -80,8 +79,8 @@ const handleRequest = async (request, response) => {
       const user = await getCurrentUser(request);
       if (user){
         if( user.role === 'admin'){
-          const reqName = filePath.split('/').pop();
-          const reqUser = await getUser.findOne({name: reqName}).exec();
+          const reqId = request.url.split('/')[3];
+          const reqUser = await getUser.findOById(reqId).exec();
           if (reqUser){  
             if ( method.toUpperCase() === 'GET') { 
               return responseUtils.sendJson(response, reqUser);
@@ -103,15 +102,12 @@ const handleRequest = async (request, response) => {
             }
             if (method.toUpperCase() === 'DELETE') {
               // try to delete user
-              await getUser.deleteOne({_id: reqUser._id}, function(err) {
-                if(err) console.log(err);
-                console.log("Delete succesfull");
-              });
+              const deleteUser = await getUser.findOneAndDelete({_id: reqUser._id}.exec());
               //const deleted = deleteUserById(reqUser.name);
-              if (deleted) {
-                return responseUtils.sendJson(response, deleted);
-              }
-            }} else {
+              return responseUtils.sendJson(response, deleteUser);
+              
+            }
+          } else {
               notFound(response);
             }
         } else {
@@ -145,22 +141,22 @@ const handleRequest = async (request, response) => {
   if (filePath === '/api/users' && method.toUpperCase() === 'GET') {
     // DONE: 8.3 Return all users as JSON
     // TODO: 8.4 Add authentication (only allowed to users with role "admin")
-    getCurrentUser(request).then(user => {
-      if (!user) {
+    const user = await getCurrentUser(request);
+      if (user === null) {
         basicAuthChallenge(response);
       } else {
         if (user.role === 'admin'){
-           return responseUtils.sendJson(response, users);
+          const users = await getUser.find({});
+          return responseUtils.sendJson(response, users);
         }else {
           return responseUtils.forbidden(response);
         }
       }
-    });
   }
   // And products
   if (filePath === '/api/products' && method.toUpperCase() === 'GET') {
-    getCurrentUser(request).then(user => {
-      if (user === null) {
+    const user = await getCurrentUser(request);
+      if (user === null || typeof user === 'undefined') {
         return responseUtils.basicAuthChallenge(response);
       } else {
         if (user.role === "admin" || user.role === "customer") {
@@ -169,7 +165,6 @@ const handleRequest = async (request, response) => {
           return responseUtils.forbidden(response);
         }
       }
-    });
   }
 
 
@@ -184,35 +179,24 @@ const handleRequest = async (request, response) => {
     // You can use parseBodyJson(request) from utils/requestUtils.js to parse request body
     // throw new Error('Not Implemented');
 
-    // This seems quite off.. Must be better way.
-    const registerUser = await (parseBodyJson(request));
-    const emailUser = await getUser.findOne({ email: registerUser.email }).exec();
-    const nameUser = await getUser.findOne({ name: registerUser.name }).exec();
-    const passwordUser = await getUser.findOne({ password: registerUser.password }).exec();
-    const roleUser = await getUser.findOne({ role: registerUser.role }).exec();
-
-    var problems = [];
-    if (emailUser !== true) {	problems.push("Missing email");}
-    if (nameUser !== true) {	problems.push("Missing name");}
-    if (passwordUser !== true) {	problems.push("Missing password");}
-    if (roleUser !== true) {	problems.push("Missing role");}
-    
-
-    // Check if there are errors in creating user and that the email is not in use allready
-    
-    if ( problems.length !== 0 || emailUser) {
-      return responseUtils.badRequest(response, "400 Bad Request");
-    } else {     
-      // Set new user to the resourses
-      
-      //let newUser = saveNewUser(registerUser);
-      let newUser = registerUser;
-      //newUser = updateUserRole(newUser._id, 'customer');
-      newUser.role = "customer";
-
-      return responseUtils.createdResource(response, newUser);
-    }
-  }
+    // Get user
+     const user = await (parseBodyJson(request));
+     const newUser = new getUser(user);
+     // attempt to register new user (save the document)
+     // all newly registered users should be customers
+     const emailUser = await getUser.findOne({ email: newUser.email }).exec();
+     if (emailUser !== null) {
+         return responseUtils.badRequest(response, '400 Bad Request');
+     }
+     try {
+         newUser.role = "customer";
+         const registereduser = await newUser.save();
+         return responseUtils.createdResource(response, registereduser);
+     }
+     catch (error) {
+         return responseUtils.badRequest(response, '400 Bad Request');
+     }
+ }
 };
 
 

@@ -18,7 +18,8 @@ const userSchema = new Schema({
  */
 userSchema.methods.checkPassword = async function (password) {
   // TODO: 9.4 Implement this
-	return comparison = bcrypt.compareSync(password, this.password);
+	const comparison = bcrypt.compareSync(password, this.password);
+	return comparison;
 };
 
 // Omit the version key when serialized to JSON
