@@ -12,17 +12,9 @@ InitGameEngine::InitGameEngine() :
     //cityPtr_(nullptr)
 
 {
-    gameSetting();
     gameWindow();
 }
 
-void InitGameEngine::gameSetting()
-{
-
-    DialogGameSettings *myDialog = new DialogGameSettings();
-    myDialog->exec();
-
-}
 
 void InitGameEngine::gameWindow()
 {

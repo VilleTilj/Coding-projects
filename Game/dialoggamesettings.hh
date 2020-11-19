@@ -49,7 +49,7 @@ signals:
     /*!
      * \brief customSettings
      */
-    void customSettings(std::string name); // TODO implement user input fields
+    void customSettings(QString name); // TODO implement user input fields
 
     /*!
      * \brief defaultSettings

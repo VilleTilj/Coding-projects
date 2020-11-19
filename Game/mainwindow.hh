@@ -42,14 +42,14 @@ public slots:
     /*!
      * \brief adjustGameSettings
      */
-    void adjustGameSettings(std::string name);
+    void adjustGameSettings(QString name);
 
     void defaultSettings();
 
 private:
     Ui::MainWindow *ui_;
     QGraphicsScene *map;
-    std::string playerName = "Timo";
+    QString playerName_ = "Timo";
 
     const int width_ = 1095;
     const int height_ = 592;
