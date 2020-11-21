@@ -1,7 +1,6 @@
 const productdata = require('../products.json');
 const { getCurrentUser } = require('../auth/auth');
-const { basicAuthChallenge, notFound, sendJson, badRequest, unauthorized, forbidden} = require('./utils/responseUtils');
-const { forbidden } = require('../utils/responseUtils');
+const { basicAuthChallenge, notFound, sendJson, badRequest, unauthorized, forbidden} = require('../utils/responseUtils');
 const getUser = require('../models/user');
 
 /**
@@ -58,7 +57,13 @@ const updateUser = async (response, userId, currentUser, userData) => {
  */
 const viewUser = async (response, userId, currentUser) => {
   // TODO: 10.1 Implement this
-  throw new Error('Not Implemented');
+  //throw new Error('Not Implemented');
+  const reqUser = await getUser.findOById(userId).exec();
+  if (reqUser) {
+    return responseUtils.sendJson(response, reqUser);
+  } else {
+    return notFound(response);
+  }
 };
 
 /**
@@ -72,4 +77,4 @@ const registerUser = async (response, userData) => {
   throw new Error('Not Implemented');
 };
 
-module.exports = { getAllUsers, registerUser, deleteUser, viewUser, updateUser };
+module.exports = { getAllUsers, registerUser, deleteUser, viewUser, updateUser }};

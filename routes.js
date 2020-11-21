@@ -81,11 +81,9 @@ const handleRequest = async (request, response) => {
       if (user){
         if( user.role === 'admin'){
           const reqId = request.url.split('/')[3];
-          const reqUser = await getUser.findOById(reqId).exec();
-          if (reqUser){  
-            if ( method.toUpperCase() === 'GET') { 
-              return responseUtils.sendJson(response, reqUser);
-            }
+          if ( method.toUpperCase() === 'GET') { 
+            return viewUser(response, reqId, user);
+          }
             if ( method.toUpperCase() === 'PUT') { 
               const updateRequest = await parseBodyJson(request);
               // if role can be found
@@ -105,11 +103,7 @@ const handleRequest = async (request, response) => {
               // try to delete user
               const deleteUser = await getUser.findOneAndDelete({_id: reqUser._id}.exec());
               //const deleted = deleteUserById(reqUser.name);
-              return responseUtils.sendJson(response, deleteUser);
-              
-            }
-          } else {
-              notFound(response);
+              return responseUtils.sendJson(response, deleteUser);       
             }
         } else {
           return responseUtils.forbidden(response); 
