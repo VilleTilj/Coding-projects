@@ -32,7 +32,18 @@ const getAllUsers = async response => {
  */
 const deleteUser = async (response, userId, currentUser) => {
   // TODO: 10.1 Implement this
-  throw new Error('Not Implemented');
+  if ( currentUser.role === 'admin') {
+    const reqUser = await getUser.findOById(userId).exec();
+    if (reqUser) {
+      const deleteUser = await getUser.findOneAndDelete({_id: reqUser._id}.exec());
+      return sendJson(response, deleteUser); 
+    }
+    else {
+      return notFound(response);
+    }
+  } else {
+    return forbidden(response);
+  }
 };
 
 /**
@@ -58,12 +69,17 @@ const updateUser = async (response, userId, currentUser, userData) => {
 const viewUser = async (response, userId, currentUser) => {
   // TODO: 10.1 Implement this
   //throw new Error('Not Implemented');
-  const reqUser = await getUser.findOById(userId).exec();
-  if (reqUser) {
-    return responseUtils.sendJson(response, reqUser);
+  if ( currentUser.role === 'admin') {
+      const reqUser = await getUser.findOById(userId).exec();
+    if (reqUser) {
+      return responseUtils.sendJson(response, reqUser);
+    } else {
+      return notFound(response);
+    }
   } else {
-    return notFound(response);
+    return forbidden(response);
   }
+
 };
 
 /**

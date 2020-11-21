@@ -4,8 +4,8 @@ const { renderPublic } = require('./utils/render');
 const getUser = require('./models/user');
 const { basicAuthChallenge, notFound, sendJson, badRequest, unauthorized} = require('./utils/responseUtils');
 const { getCurrentUser } = require('./auth/auth');
-const {getAllProducts, } = require('./controllers/products.js');
-const {getAllUsers} = require('./controllers/users');
+const {getAllProducts } = require('./controllers/products.js');
+const { getAllUsers, registerUser, deleteUser, viewUser, updateUser } = require('./controllers/users');
 /**
  * Known API routes and their allowed methods
  *
@@ -78,36 +78,29 @@ const handleRequest = async (request, response) => {
     // Check for authorization
     if ( request.headers['authorization']) {
       const user = await getCurrentUser(request);
-      if (user){
-        if( user.role === 'admin'){
-          const reqId = request.url.split('/')[3];
-          if ( method.toUpperCase() === 'GET') { 
-            return viewUser(response, reqId, user);
-          }
-            if ( method.toUpperCase() === 'PUT') { 
-              const updateRequest = await parseBodyJson(request);
-              // if role can be found
-              if (updateRequest.role) {
-                try {            
-                  reqUser.role = updateRequest.role;
-                  await reqUser.save();
-                  //const updatedUser = updateUserRole(reqUser.name, updateRequest.role);
-                  return responseUtils.sendJson(response, reqUser);
-                }
-                catch (err) { badRequest(response, err);}
-              } else { 
-                return responseUtils.badRequest(response);
-              }
-            }
-            if (method.toUpperCase() === 'DELETE') {
-              // try to delete user
-              const deleteUser = await getUser.findOneAndDelete({_id: reqUser._id}.exec());
-              //const deleted = deleteUserById(reqUser.name);
-              return responseUtils.sendJson(response, deleteUser);       
-            }
-        } else {
-          return responseUtils.forbidden(response); 
+      if (user){ 
+        const reqId = request.url.split('/')[3];
+        if ( method.toUpperCase() === 'GET') { 
+          return viewUser(response, reqId, user);
         }
+          if ( method.toUpperCase() === 'PUT') { 
+            const updateRequest = await parseBodyJson(request);
+            // if role can be found
+            if (updateRequest.role) {
+              try {            
+                reqUser.role = updateRequest.role;
+                await reqUser.save();
+                //const updatedUser = updateUserRole(reqUser.name, updateRequest.role);
+                return responseUtils.sendJson(response, reqUser);
+              }
+              catch (err) { badRequest(response, err);}
+            } else { 
+              return responseUtils.badRequest(response);
+            }
+          }
+          if (method.toUpperCase() === 'DELETE') {
+            return deleteUser(response, reqId, user);
+          }
       } else {
         return basicAuthChallenge(response);
       }
