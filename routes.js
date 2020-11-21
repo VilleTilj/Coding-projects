@@ -85,18 +85,7 @@ const handleRequest = async (request, response) => {
         }
           if ( method.toUpperCase() === 'PUT') { 
             const updateRequest = await parseBodyJson(request);
-            // if role can be found
-            if (updateRequest.role) {
-              try {            
-                reqUser.role = updateRequest.role;
-                await reqUser.save();
-                //const updatedUser = updateUserRole(reqUser.name, updateRequest.role);
-                return responseUtils.sendJson(response, reqUser);
-              }
-              catch (err) { badRequest(response, err);}
-            } else { 
-              return responseUtils.badRequest(response);
-            }
+            return updateUser(response, reqId, user, updateRequest);
           }
           if (method.toUpperCase() === 'DELETE') {
             return deleteUser(response, reqId, user);

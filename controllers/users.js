@@ -35,8 +35,12 @@ const deleteUser = async (response, userId, currentUser) => {
   if ( currentUser.role === 'admin') {
     const reqUser = await getUser.findOById(userId).exec();
     if (reqUser) {
-      const deleteUser = await getUser.findOneAndDelete({_id: reqUser._id}.exec());
-      return sendJson(response, deleteUser); 
+      if ( reqUser === currentUser) {
+        return badRequest(response, '400 Bad Request');
+      } else {
+        const deleteUser = await getUser.findOneAndDelete({_id: reqUser._id}.exec());
+        return sendJson(response, deleteUser); 
+      }
     }
     else {
       return notFound(response);
@@ -56,7 +60,31 @@ const deleteUser = async (response, userId, currentUser) => {
  */
 const updateUser = async (response, userId, currentUser, userData) => {
   // TODO: 10.1 Implement this
-  throw new Error('Not Implemented');
+  if ( currentUser.role === 'admin') {
+    const reqUser = await getUser.findOById(userId).exec();
+    if (reqUser) {
+      if ( reqUser === currentUser) {
+        return badRequest(response, '400 Bad Request');
+      } else {
+        // if role can be found
+        if (userData.role) {
+          try {            
+            reqUser.role = userData.role;
+            await reqUser.save();
+            return responseUtils.sendJson(response, reqUser);
+          }
+          catch (err) { badRequest(response, err);}
+        } else { 
+          return responseUtils.badRequest(response);
+        }
+      }
+    }
+    else {
+      return notFound(response);
+    }
+  } else {
+    return forbidden(response);
+  }
 };
 
 /**
