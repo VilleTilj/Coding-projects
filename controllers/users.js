@@ -1,7 +1,7 @@
-const productdata = require('../products.json');
 const { getCurrentUser } = require('../auth/auth');
 const { basicAuthChallenge, notFound, sendJson, badRequest, unauthorized, forbidden} = require('../utils/responseUtils');
 const getUser = require('../models/user');
+const {isJson} = require('../utils/requestUtils');
 
 /**
  * Send all users as JSON
@@ -75,7 +75,7 @@ const updateUser = async (response, userId, currentUser, userData) => {
           }
           catch (err) { badRequest(response, err);}
         } else { 
-          return responseUtils.badRequest(response);
+          return badRequest(response);
         }
       }
     }
@@ -118,7 +118,28 @@ const viewUser = async (response, userId, currentUser) => {
  */
 const registerUser = async (response, userData) => {
   // TODO: 10.1 Implement this
-  throw new Error('Not Implemented');
+    // Fail if not a JSON request
+    if (!isJson(request)) {
+      return badRequest(response, 'Invalid Content-Type. Expected application/json');
+    }
+
+    // Get user
+     const user = await (parseBodyJson(request));
+     const newUser = new getUser(user);
+     // attempt to register new user (save the document)
+     // all newly registered users should be customers
+     const emailUser = await getUser.findOne({ email: newUser.email }).exec();
+     if (emailUser !== null) {
+         return responseUtils.badRequest(response, '400 Bad Request');
+     }
+     try {
+         newUser.role = userData.role;
+         const registereduser = await newUser.save();
+         return responseUtils.createdResource(response, registereduser);
+     }
+     catch (error) {
+         return responseUtils.badRequest(response, '400 Bad Request');
+     }
 };
 
 module.exports = { getAllUsers, registerUser, deleteUser, viewUser, updateUser }};

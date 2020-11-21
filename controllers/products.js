@@ -1,6 +1,6 @@
 const productdata = require('../products.json');
 const { getCurrentUser } = require('../auth/auth');
-const { basicAuthChallenge, notFound, sendJson, badRequest, unauthorized, forbidden} = require('../utils/responseUtils');
+const { sendJson, forbidden} = require('../utils/responseUtils');
 
 
 

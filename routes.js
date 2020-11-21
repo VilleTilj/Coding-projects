@@ -1,8 +1,7 @@
 const responseUtils = require('./utils/responseUtils');
-const { acceptsJson, isJson, parseBodyJson } = require('./utils/requestUtils');
+const { acceptsJson, parseBodyJson } = require('./utils/requestUtils');
 const { renderPublic } = require('./utils/render');
-const getUser = require('./models/user');
-const { basicAuthChallenge, notFound, sendJson, badRequest, unauthorized} = require('./utils/responseUtils');
+const { basicAuthChallenge,unauthorized} = require('./utils/responseUtils');
 const { getCurrentUser } = require('./auth/auth');
 const {getAllProducts } = require('./controllers/products.js');
 const { getAllUsers, registerUser, deleteUser, viewUser, updateUser } = require('./controllers/users');
@@ -129,33 +128,9 @@ const handleRequest = async (request, response) => {
 
   // register new user
   if (filePath === '/api/register' && method.toUpperCase() === 'POST') {
-    // Fail if not a JSON request
-    if (!isJson(request)) {
-      return responseUtils.badRequest(response, 'Invalid Content-Type. Expected application/json');
-    }
-
-    // TODO: 8.3 Implement registration
-    // You can use parseBodyJson(request) from utils/requestUtils.js to parse request body
-    // throw new Error('Not Implemented');
-
-    // Get user
-     const user = await (parseBodyJson(request));
-     const newUser = new getUser(user);
-     // attempt to register new user (save the document)
-     // all newly registered users should be customers
-     const emailUser = await getUser.findOne({ email: newUser.email }).exec();
-     if (emailUser !== null) {
-         return responseUtils.badRequest(response, '400 Bad Request');
-     }
-     try {
-         newUser.role = "customer";
-         const registereduser = await newUser.save();
-         return responseUtils.createdResource(response, registereduser);
-     }
-     catch (error) {
-         return responseUtils.badRequest(response, '400 Bad Request');
-     }
- }
+    const updateRequest = await parseBodyJson(request);
+    return registerUser(response, updateRequest);
+   }
 };
 
 
