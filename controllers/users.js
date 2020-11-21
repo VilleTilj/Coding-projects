@@ -1,3 +1,9 @@
+const productdata = require('../products.json');
+const { getCurrentUser } = require('../auth/auth');
+const { basicAuthChallenge, notFound, sendJson, badRequest, unauthorized, forbidden} = require('./utils/responseUtils');
+const { forbidden } = require('../utils/responseUtils');
+const getUser = require('../models/user');
+
 /**
  * Send all users as JSON
  *
@@ -5,7 +11,17 @@
  */
 const getAllUsers = async response => {
   // TODO: 10.1 Implement this
-  throw new Error('Not Implemented');
+  //throw new Error('Not Implemented');
+  const user = await getCurrentUser(request);
+  if (user === null) {
+    basicAuthChallenge(response);
+  } else {
+    if (user.role === 'admin'){
+      const users = await getUser.find({});
+      return sendJson(response, users);
+    }else {
+      return forbidden(response);
+    }
 };
 
 /**

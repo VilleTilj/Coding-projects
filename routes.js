@@ -4,8 +4,8 @@ const { renderPublic } = require('./utils/render');
 const getUser = require('./models/user');
 const { basicAuthChallenge, notFound, sendJson, badRequest, unauthorized} = require('./utils/responseUtils');
 const { getCurrentUser } = require('./auth/auth');
-const  = require('./controllers/products.js');
-const 
+const {getAllProducts, } = require('./controllers/products.js');
+const {getAllUsers} = require('./controllers/users');
 /**
  * Known API routes and their allowed methods
  *
@@ -142,30 +142,12 @@ const handleRequest = async (request, response) => {
   if (filePath === '/api/users' && method.toUpperCase() === 'GET') {
     // DONE: 8.3 Return all users as JSON
     // TODO: 8.4 Add authentication (only allowed to users with role "admin")
-    const user = await getCurrentUser(request);
-      if (user === null) {
-        basicAuthChallenge(response);
-      } else {
-        if (user.role === 'admin'){
-          const users = await getUser.find({});
-          return responseUtils.sendJson(response, users);
-        }else {
-          return responseUtils.forbidden(response);
-        }
-      }
+    return getAllUsers(response);
+
   }
   // And products
   if (filePath === '/api/products' && method.toUpperCase() === 'GET') {
-    const user = await getCurrentUser(request);
-      if (user === null || typeof user === 'undefined') {
-        return responseUtils.basicAuthChallenge(response);
-      } else {
-        if (user.role === "admin" || user.role === "customer") {
-          return responseUtils.sendJson(response, productdata);
-        } else {
-          return responseUtils.forbidden(response);
-        }
-      }
+     return getAllProducts(response);
   }
 
 
