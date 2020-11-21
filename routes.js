@@ -4,7 +4,8 @@ const { renderPublic } = require('./utils/render');
 const getUser = require('./models/user');
 const { basicAuthChallenge, notFound, sendJson, badRequest, unauthorized} = require('./utils/responseUtils');
 const { getCurrentUser } = require('./auth/auth');
-const productdata = require('./products.json');
+const  = require('./controllers/products.js');
+const 
 /**
  * Known API routes and their allowed methods
  *
