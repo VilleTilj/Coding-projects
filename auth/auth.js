@@ -23,10 +23,10 @@ const getCurrentUser = async request => {
   // Get user
   const user = await getUser.findOne({email: credentials[email]}).exec();
 
-  if ( user !== undefined) {
+  if ( user ) {
     if ( await user.checkPassword(credentials[password])){
         return user;
-    }
+    } else{ return null; } 
   } else { return null; }
 };
 

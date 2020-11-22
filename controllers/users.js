@@ -62,7 +62,7 @@ const updateUser = async (response, userId, currentUser, userData) => {
   // TODO: 10.1 Implement this
   if ( currentUser.role === 'admin') {
     const reqUser = await getUser.findOById(userId).exec();
-    if (reqUser) {
+    if (typeof reqUser._id != 'undefined') {
       if ( reqUser === currentUser) {
         return badRequest(response, '400 Bad Request');
       } else {
@@ -99,7 +99,7 @@ const viewUser = async (response, userId, currentUser) => {
   //throw new Error('Not Implemented');
   if ( currentUser.role === 'admin') {
       const reqUser = await getUser.findOById(userId).exec();
-    if (reqUser) {
+    if (typeof reqUser._id != 'undefined') {
       return responseUtils.sendJson(response, reqUser);
     } else {
       return notFound(response);
