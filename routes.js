@@ -4,6 +4,7 @@ const { renderPublic } = require('./utils/render');
 const { basicAuthChallenge,unauthorized} = require('./utils/responseUtils');
 const { getCurrentUser } = require('./auth/auth');
 const {getAllProducts } = require('./controllers/products.js');
+const getUser = require('./models/user');
 const { getAllUsers, registerUser, deleteUser, viewUser, updateUser } = require('./controllers/users');
 /**
  * Known API routes and their allowed methods
@@ -78,16 +79,16 @@ const handleRequest = async (request, response) => {
     if ( request.headers['authorization']) {
       const user = await getCurrentUser(request);
       if (user){ 
-        const reqId = request.url.split('/')[3];
+        const reqUser = await getUser.findById(request.url.split('/')[3]).exec();
         if ( method.toUpperCase() === 'GET') { 
-          return viewUser(response, reqId, user);
+          return viewUser(response, reqUser, user);
         }
           if ( method.toUpperCase() === 'PUT') { 
             const updateRequest = await parseBodyJson(request);
-            return updateUser(response, reqId, user, updateRequest);
+            return updateUser(response, reqUser._id, user, updateRequest);
           }
           if (method.toUpperCase() === 'DELETE') {
-            return deleteUser(response, reqId, user);
+            return deleteUser(response, reqUser, user);
           }
       } else {
         return basicAuthChallenge(response);
@@ -96,6 +97,7 @@ const handleRequest = async (request, response) => {
       unauthorized(response);
     }
   }
+
 
   // Default to 404 Not Found if unknown url
   if (!(filePath in allowedMethods)) return responseUtils.notFound(response);
@@ -112,25 +114,42 @@ const handleRequest = async (request, response) => {
   if (!acceptsJson(request)) {
     return responseUtils.contentTypeNotAcceptable(response);
   }
+  const user = await getCurrentUser(request);
+  if (user === null) {
+    basicAuthChallenge(response);
+  } else {
 
-  // GET all users
-  if (filePath === '/api/users' && method.toUpperCase() === 'GET') {
-    // DONE: 8.3 Return all users as JSON
-    // TODO: 8.4 Add authentication (only allowed to users with role "admin")
-    return getAllUsers(response);
+    // GET all users
+    if (filePath === '/api/users' && method.toUpperCase() === 'GET') {
+      // DONE: 8.3 Return all users as JSON
+      // TODO: 8.4 Add authentication (only allowed to users with role "admin")
+        if (user.role === 'admin'){
+          const users = await getUser.find({});
+          return getAllUsers(response);
+        }else {
+          return forbidden(response);
+        }}
 
-  }
-  // And products
-  if (filePath === '/api/products' && method.toUpperCase() === 'GET') {
-     return getAllProducts(response);
-  }
+    
+    // And products
+    if (filePath === '/api/products' && method.toUpperCase() === 'GET') {  
+      if (user.role === "admin" || user.role === "customer") {
+        return getAllProducts(response);
+      } else {
+        return forbidden(respponse);
+      }     
+    }
 
 
-  // register new user
-  if (filePath === '/api/register' && method.toUpperCase() === 'POST') {
-    const updateRequest = await parseBodyJson(request);
-    return registerUser(response, updateRequest);
-   }
+    // register new user
+    if (filePath === '/api/register' && method.toUpperCase() === 'POST') {
+      if (!isJson(request)) {
+        return badRequest(response, 'Invalid Content-Type. Expected application/json');
+      }
+      const updateRequest = await parseBodyJson(request);
+      return registerUser(response, updateRequest);
+    }
+    }
 };
 
 

@@ -13,16 +13,7 @@ const { sendJson, forbidden} = require('../utils/responseUtils');
 const getAllProducts = async response => {
   // TODO: 10.1 Implement this
   // throw new Error('Not Implemented');
-  const user = await getCurrentUser(request);
-      if (user === null || typeof user === 'undefined') {
-        return responseUtils.basicAuthChallenge(response);
-      } else {
-        if (user.role === "admin" || user.role === "customer") {
-          return sendJson(response, productdata);
-        } else {
-          return forbidden(respponse);
-        }
-      }
+  return sendJson(response, productdata);
 };
 
 module.exports = { getAllProducts };
