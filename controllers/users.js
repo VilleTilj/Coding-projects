@@ -1,7 +1,6 @@
 const { getCurrentUser } = require('../auth/auth');
 const { basicAuthChallenge, createdResource, notFound, sendJson, badRequest, unauthorized, forbidden} = require('../utils/responseUtils');
 const getUser = require('../models/user');
-var ObjectId = require('mongodb').ObjectID;
 
 
 /**
