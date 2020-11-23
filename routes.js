@@ -1,7 +1,7 @@
 const responseUtils = require('./utils/responseUtils');
 const { acceptsJson, parseBodyJson } = require('./utils/requestUtils');
 const { renderPublic } = require('./utils/render');
-const { basicAuthChallenge,unauthorized} = require('./utils/responseUtils');
+const { basicAuthChallenge,unauthorized, badRequest, forbidden} = require('./utils/responseUtils');
 const { getCurrentUser } = require('./auth/auth');
 const {getAllProducts } = require('./controllers/products.js');
 const getUser = require('./models/user');
@@ -115,7 +115,8 @@ const handleRequest = async (request, response) => {
     return responseUtils.contentTypeNotAcceptable(response);
   }
   const user = await getCurrentUser(request);
-  if (user === null) {
+  
+  if (!user) {
     basicAuthChallenge(response);
   } else {
 
@@ -124,7 +125,6 @@ const handleRequest = async (request, response) => {
       // DONE: 8.3 Return all users as JSON
       // TODO: 8.4 Add authentication (only allowed to users with role "admin")
         if (user.role === 'admin'){
-          const users = await getUser.find({});
           return getAllUsers(response);
         }else {
           return forbidden(response);
@@ -143,9 +143,23 @@ const handleRequest = async (request, response) => {
 
     // register new user
     if (filePath === '/api/register' && method.toUpperCase() === 'POST') {
-      if (!isJson(request)) {
+      const isJSON = request => {
+        try {
+          JSON.parse(request);
+      } catch (e) {
+          return false;
+      }
+      return true;
+      }; 
+      if (!isJSON ) {
         return badRequest(response, 'Invalid Content-Type. Expected application/json');
       }
+
+      // Check for email
+      if (!user.email){
+        return badRequest(response, '400 Bad Request');
+      }
+
       const updateRequest = await parseBodyJson(request);
       return registerUser(response, updateRequest);
     }
