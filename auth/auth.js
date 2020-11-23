@@ -23,11 +23,15 @@ const getCurrentUser = async request => {
   // Get user
   const user = await getUser.findOne({email: credentials[email]}).exec();
 
-  if ( user ) {
+  if ( user !== null) {
     if ( await user.checkPassword(credentials[password])){
         return user;
-    } else{ return null; } 
-  } else { return null; }
+    } else {
+      return null;
+    }
+  } else { 
+    return null; 
+  }
 };
 
 module.exports = { getCurrentUser };

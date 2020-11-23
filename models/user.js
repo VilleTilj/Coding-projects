@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
 const userSchema = new Schema({
   // TODO: 9.4 Implement this
 	name: {type: String, required: true, trim: true, maxlength: 50},	
