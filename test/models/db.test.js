@@ -1,5 +1,6 @@
 const { expect } = require('chai');
-const { getDbUrl } = require('../../models/db');
+const { getDbUrl, connectDB, disconnectDB } = require('../../models/db');
+const mongoose = require('mongoose');
 
 describe('getDbUrl()', () => {
   let envBackup;
@@ -25,3 +26,13 @@ describe('getDbUrl()', () => {
     expect(getDbUrl()).to.equal(dbUrl);
   });
 });
+
+describe('connectDB()', () => {
+  it('should connect to database', () => {
+    connectDB();
+    expect(mongoose.connection).to.be.true;
+  });
+});
+
+
+

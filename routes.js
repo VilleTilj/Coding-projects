@@ -130,17 +130,6 @@ const handleRequest = async (request, response) => {
           return forbidden(response);
         }}
 
-    
-    // And products
-    if (filePath === '/api/products' && method.toUpperCase() === 'GET') {  
-      if (user.role === "admin" || user.role === "customer") {
-        return getAllProducts(response);
-      } else {
-        return forbidden(respponse);
-      }     
-    }
-
-
     // register new user
     if (filePath === '/api/register' && method.toUpperCase() === 'POST') {
       const isJSON = request => {
@@ -163,6 +152,17 @@ const handleRequest = async (request, response) => {
       const updateRequest = await parseBodyJson(request);
       return registerUser(response, updateRequest);
     }
+    
+    // And products
+    if (filePath === '/api/products' && method.toUpperCase() === 'GET') {  
+      if (user.role === "admin" || user.role === "customer") {
+        return getAllProducts(response);
+      } else {
+        return forbidden(response);
+      }     
+    }
+
+
     }
 };
 
