@@ -27,8 +27,8 @@ const deleteUser = async (response, userId, currentUser) => {
   // TODO: 10.1 Implement this
   if ( currentUser.role === 'admin') {
     if (userId) {
-      if ( userId._id === currentUser._id) {
-        return badRequest(response, '400 Bad Request');
+      if ( userId === currentUser.id) {
+        return badRequest(response, 'Deleting own data is not allowed');
       } else {
         const deleteUser = await getUser.findOneAndDelete({"_id": ObjectId("userId._id")}.exec());
         return sendJson(response, deleteUser); 
@@ -55,8 +55,8 @@ const updateUser = async (response, userId, currentUser, userData) => {
   if ( currentUser.role === 'admin') {
     const reqUser = await getUser.findById(userId).exec();
     if (reqUser) {
-      if ( userId === currentUser._id) {
-        return badRequest(response, '400 Bad Request');
+      if ( userId === currentUser.id) {
+        return badRequest(response, 'Updating own data is not allowed');
       } else {
         // if role can be found
         if (userData.role) {

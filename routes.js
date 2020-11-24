@@ -85,10 +85,10 @@ const handleRequest = async (request, response) => {
         }
           if ( method.toUpperCase() === 'PUT') { 
             const updateRequest = await parseBodyJson(request);
-            return updateUser(response, reqUser._id, user, updateRequest);
+            return updateUser(response, reqUser.id, user, updateRequest);
           }
           if (method.toUpperCase() === 'DELETE') {
-            return deleteUser(response, reqUser, user);
+            return deleteUser(response, reqUser.id, user);
           }
       } else {
         return basicAuthChallenge(response);
