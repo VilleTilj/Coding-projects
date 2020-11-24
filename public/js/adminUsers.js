@@ -21,6 +21,7 @@ const listAllUsers = () => {
 
     getJSON(users).then(json => {
         const users = json;
+        /*
         for (const user of users) {
             const clone = temp.content.cloneNode(true);
             clone.querySelector(".item-row").setAttribute('id', `user-${ user._id}`);
@@ -46,7 +47,7 @@ const listAllUsers = () => {
 
             });
             document.getElementById("users-container").appendChild(clone);
-        }
+        }*/
     });
 }
 
