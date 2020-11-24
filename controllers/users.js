@@ -26,15 +26,15 @@ const getAllUsers = async response => {
 const deleteUser = async (response, userId, currentUser) => {
   // TODO: 10.1 Implement this
   if ( currentUser.role === 'admin') {
-    if (userId) {
+    const reqUser = await getUser.findById(userId).exec();
+    if (reqUser){
       if ( userId === currentUser.id) {
         return badRequest(response, 'Deleting own data is not allowed');
       } else {
-        const deleteUser = await getUser.findOneAndDelete({"_id": ObjectId("userId._id")}.exec());
+        const deleteUser = await getUser.findByIdAndRemove(reqUser.id).exec();
         return sendJson(response, deleteUser); 
       }
-    }
-    else {
+    } else {
       return notFound(response);
     }
   } else {
