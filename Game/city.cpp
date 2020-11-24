@@ -31,9 +31,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 
     if(std::find(stops_.begin(), stops_.end(), stop) == stops_.end()){
         stops_.push_back(stop);
-        Interface::Location location = stop->getLocation();
-        //location.printBoth();
-        ui_->addActor(location.giveX(), location.giveY(), 0);
+        ui_->addStop(stop);
     }
 }
 
@@ -46,15 +44,13 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     if(std::find(actors_.begin(), actors_.end(), newactor) == actors_.end()){
         actors_.push_back(newactor);
-        Interface::Location location = newactor->giveLocation();
-        //location.printBoth();
-        ui_->addActor(location.giveX(), location.giveY(), 1);
+        ui_->addActor(newactor);
     }
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-    return;
+    actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
@@ -64,18 +60,23 @@ void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
+
+    if(std::find(actors_.begin(), actors_.end(), actor) != actors_.end()){
+        return true;
+    }
     return false;
 }
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
+
     std::vector<std::shared_ptr<Interface::IActor>> ryys;
     return ryys;
 }
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
-    return;
+
 }
 
 bool City::isGameOver() const

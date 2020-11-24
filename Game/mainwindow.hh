@@ -5,12 +5,17 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include "interfaces/iactor.hh"
 #include <QTimer>
 #include <iostream>
 #include <memory>
 #include <QVector>
-#include <map>
+#include <QMap>
 #include "actoritem.hh"
+#include "actor.hh"
+#include "interfaces/ipassenger.hh"
+#include "interfaces/ivehicle.hh"
+#include "interfaces/istop.hh"
 
 namespace Ui {
 class MainWindow;
@@ -34,7 +39,11 @@ public:
     explicit mainwindow(QWidget *parent = nullptr);
     ~mainwindow();
     void setBackground(QImage &image);
-    void addActor(int locX, int locY, int type);
+    void addActor(std::shared_ptr<Interface::IActor> actor);
+
+    void addStop(std::shared_ptr<Interface::IStop> stop);
+
+    void moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y);
 
 public slots:
 
@@ -52,10 +61,16 @@ private:
 
     const int width_ = 1095;
     const int height_ = 592;
-    QVector<QGraphicsItem*> actors_;
     StudentSide::ActorItem* last_;
 
+    QMap<std::shared_ptr<Interface::IActor>, StudentSide::ActorItem *> actors_;
+    QMap<std::shared_ptr<Interface::IStop>, StudentSide::ActorItem *>stops_;
 
+
+    int type = 0;
+    const int BussStop = 0;
+    const int Nysse = 1;
+    const int passenger = 2;
 };
 } //namespace
 #endif // MAINWINDOW_HH

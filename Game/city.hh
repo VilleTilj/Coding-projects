@@ -5,6 +5,8 @@
 #include <QTime>
 #include <algorithm>
 #include "mainwindow.hh"
+#include "actor.hh"
+#include "vehicle.hh"
 
 namespace StudentSide
 {
