@@ -76,7 +76,8 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
-
+    Interface::Location location = actor->giveLocation();
+    ui_->moveActor(actor, location.giveX(), location.giveY());
 }
 
 bool City::isGameOver() const

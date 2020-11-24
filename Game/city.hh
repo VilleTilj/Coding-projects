@@ -16,6 +16,7 @@ class City : public Interface::ICity
 public:
     City();
     ~City();
+
     void setBackground(QImage& basicbackground, QImage& bigbackground);
 
     void setClock(QTime clock);
@@ -42,6 +43,7 @@ public:
 
     void addUi(std::shared_ptr<StudentSide::mainwindow> ui);
 
+
 private:
 
     QImage small_;
@@ -51,6 +53,7 @@ private:
     std::shared_ptr<StudentSide::mainwindow> ui_;
     QTime time_;
 
+    std::vector<std::shared_ptr<Interface::IActor>> movedActors;
 
 };
 

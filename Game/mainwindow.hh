@@ -10,6 +10,7 @@
 #include <iostream>
 #include <memory>
 #include <QVector>
+#include <QPixmap>
 #include <QMap>
 #include "actoritem.hh"
 #include "actor.hh"
@@ -38,12 +39,13 @@ public:
      */
     explicit mainwindow(QWidget *parent = nullptr);
     ~mainwindow();
-    void setBackground(QImage &image);
+    void setBackground(QPixmap &image);
     void addActor(std::shared_ptr<Interface::IActor> actor);
 
     void addStop(std::shared_ptr<Interface::IStop> stop);
 
     void moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y);
+
 
 public slots:
 
@@ -59,8 +61,8 @@ private:
     QGraphicsScene *map;
     QString playerName_ = "Timo";
 
-    const int width_ = 1095;
-    const int height_ = 592;
+    const int width_ = 500;
+    const int height_ = 500;
     StudentSide::ActorItem* last_;
 
     QMap<std::shared_ptr<Interface::IActor>, StudentSide::ActorItem *> actors_;

@@ -32,8 +32,10 @@ void InitGameEngine::gameWindow()
     small.load(smallMap);
     cityPtr_ = std::dynamic_pointer_cast<StudentSide::City>(iCityPtr);
     cityPtr_->setBackground(small, big);    
-    QImage BigImage = cityPtr_->getImage("big");
-    ui_->setBackground(BigImage);
+
+    QPixmap map;
+    map.load(smallMap);
+    ui_->setBackground(map);
     //start game logic
     initLogic();
 
@@ -44,7 +46,7 @@ void InitGameEngine::initLogic()
     cityPtr_->addUi(ui_);
     logic_->takeCity(cityPtr_);
     logic_->fileConfig();
-    //logic_->setTime(17, 00);
+    logic_->setTime(17, 00);
     logic_->finalizeGameStart();
 }
 

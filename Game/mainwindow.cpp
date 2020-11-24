@@ -39,13 +39,13 @@ mainwindow::~mainwindow()
 }
 
 
-void mainwindow::setBackground(QImage &image)
+void mainwindow::setBackground(QPixmap &image)
 {
-    //QImage myImage = image;
+    QPixmap myImage = image;
     //QTransform myTransform;
     //myTransform.rotate(180);
     //myImage = myImage.transformed(myTransform);
-    map->setBackgroundBrush(image);
+   map->addPixmap(image);
 }
 
 
@@ -70,7 +70,7 @@ void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
         type = Nysse;
     }
 
-    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(), location.giveY(), type);
+    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(), 500 -  location.giveY(), type);
     actors_[actor] = graphicActor;
     map->addItem(graphicActor);
     last_ = graphicActor;
@@ -79,7 +79,7 @@ void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
 void mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     Interface::Location location = stop->getLocation();
-    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(), location.giveY(), BussStop);
+    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(),500 - location.giveY(), BussStop);
     stops_[stop] = graphicActor;
     map->addItem(graphicActor);
     last_ = graphicActor;
@@ -88,8 +88,16 @@ void mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
 void mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y)
 {
 
+    //find corresponding gpraphic actor.
 
+    QMap<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
+
+    for (it = actors_.begin(); it != actors_.end(); ++it)
+        if(it.key() == actor){
+            it.value()->setCoord(x, 500 - y);
+        }
 }
+
 
 void mainwindow::defaultSettings()
 {

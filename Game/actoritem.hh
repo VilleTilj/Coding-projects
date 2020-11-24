@@ -2,16 +2,18 @@
 #define ACTORITEM_HH
 
 #include <QGraphicsItem>
+#include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QPainter>
 
 
 const QString nysseStop = ":/../pics/pics/NysseStop.png";
 const QString bussi = "://../pics/pics/bussi.png";
+const QString human = "://../pics/pics/huma.png";
 
 namespace StudentSide {
 
-class ActorItem : public QGraphicsItem
+class ActorItem : public QGraphicsPixmapItem
 {
 
 public:
@@ -19,8 +21,6 @@ public:
 
     ActorItem(int x, int y, int type = 0);
     ~ActorItem();
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void setCoord(int x, int y);
 
@@ -35,7 +35,7 @@ private:
 
     const int WIDTH = 9;
     const int HEIGHT = 9;
-
+    QPixmap image;
 };
 }
 #endif // ACTORITEM_HH
