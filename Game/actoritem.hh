@@ -33,8 +33,8 @@ private:
     const int Nysse = 1;
     const int passenger = 2;
 
-    const int WIDTH = 5;
-    const int HEIGHT = 5;
+    const int WIDTH = 9;
+    const int HEIGHT = 9;
 
 };
 }

@@ -10,10 +10,14 @@ InitGameEngine::InitGameEngine() :
     logic_(new CourseSide::Logic),
     iCityPtr(nullptr)
     //cityPtr_(nullptr)
+    
 
 {
     gameSetting();
     gameWindow();
+    
+    
+    
 }
 
 void InitGameEngine::gameSetting()
@@ -48,6 +52,7 @@ void InitGameEngine::initLogic()
     cityPtr_->addUi(ui_);
     logic_->takeCity(cityPtr_);
     logic_->fileConfig();
+    //logic_->setTime(17, 00);
     logic_->finalizeGameStart();
 }
 

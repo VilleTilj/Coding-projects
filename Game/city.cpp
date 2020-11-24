@@ -31,9 +31,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 
     if(std::find(stops_.begin(), stops_.end(), stop) == stops_.end()){
         stops_.push_back(stop);
-        Interface::Location location = stop->getLocation();
-        //location.printBoth();
-        ui_->addActor(location.giveX(), location.giveY(), 0);
+        ui_->addStop(stop);
     }
 }
 
@@ -44,21 +42,10 @@ void City::startGame()
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
-    Interface::Location location = newactor->giveLocation();
-    location.printBoth();
-    /*
-    int type = 1;
-
     if(std::find(actors_.begin(), actors_.end(), newactor) == actors_.end()){
         actors_.push_back(newactor);
+        ui_->addActor(newactor);
     }
-    if(std::shared_ptr<Interface::IVehicle> nysse = std::dynamic_pointer_cast<Interface::IVehicle>(newactor)) {
-        type = 2;
-    }
-
-        Interface::Location location = newactor->giveLocation();
-        location.printBoth(); */
-        ui_->addActor(location.giveX(), location.giveY(), 1);
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
@@ -73,6 +60,7 @@ void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
+
     if(std::find(actors_.begin(), actors_.end(), actor) != actors_.end()){
         return true;
     }
@@ -81,6 +69,7 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
+
     std::vector<std::shared_ptr<Interface::IActor>> ryys;
     return ryys;
 }

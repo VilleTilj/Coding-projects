@@ -19,7 +19,12 @@ public:
     bool isRemoved() const;
 
     void remove();
+
+private:
+    Interface::Location locations_;
 };
+
+
 
 } //namespace
 

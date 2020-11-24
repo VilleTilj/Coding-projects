@@ -36,7 +36,7 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     else if (type_ == Nysse) {
 
         image.load(bussi);
-        bounds = QRectF(0, 0, 10, 13);
+        bounds = QRectF(0, 0, 20, 20);
 
     }
 
