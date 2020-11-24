@@ -30,10 +30,11 @@ const resetUsers = () => {
   data.users = require('../users.json').map(user => ({ ...user }));
 };
 
+// Is not needed in week 10.
 /**
  * Generate a random string for use as user ID
  * @returns {string}
- */
+ 
 const generateId = () => {
   let id;
 
@@ -47,6 +48,7 @@ const generateId = () => {
 
   return id;
 };
+*/
 
 /**
  * Check if email is already in use by another user
@@ -56,13 +58,8 @@ const generateId = () => {
  */
 const emailInUse = email => {
   // TODO: 8.3 Check if there already exists a user with a given email
-	for(let i=0; i < data.users.length; i++){
-		if(data.users[i].email === email){
-			return true;
-		}
-	}
-  return false;
-};
+  return data.users.some(user => user.email === email);
+}
 
 /**
  * Return user object with the matching email and password or undefined if not found
@@ -76,11 +73,10 @@ const emailInUse = email => {
  */
 const getUser = (email, password) => {
   // TODO: 8.3 Get user whose email and password match the provided values
-	for(let i=0; i < data.users.length; i++){
-		if(data.users[i].email === email && data.users[i].password === password){
-	
-			const copy = {...data.users[i]};
-			return copy;
+  const user = data.users.find(user => user.email === email);
+	if(user !== undefined){
+		if (user.password === password) {
+			return {...user};
 		}
 	}
 	return undefined;
@@ -97,13 +93,12 @@ const getUser = (email, password) => {
  */
 const getUserById = userId => {
   // TODO: 8.3 Find user by user id
-  for(let i=0; i < data.users.length; i++){
-	if(data.users[i]._id === userId){
-		const copy = {...data.users[i]};
-	return copy;
+  const user = data.users.find(user => user._id === userId);
+  if(user !== undefined){
+	return {...user};
+} else {
+	return undefined;
 	}
-}
-  return undefined;
 };
 
 /**
@@ -114,14 +109,12 @@ const getUserById = userId => {
  */
 const deleteUserById = userId => {
   // TODO: 8.3 Delete user with a given id
-  for(let i=0; i < data.users.length; i++){
-		if(data.users[i]._id === userId){
-			var copy = {...data.users[i]};
-			data.users.splice(i, 1);
-			return copy;
-		}
-	}
-	return undefined;
+  const user = data.users.findIndex(user => user._id === userId);
+  if(user === -1) {return undefined;}
+  else {
+	  return data.users.splice(user)[0];
+  }
+
 };
 
 /**
@@ -180,14 +173,7 @@ const updateUserRole = (userId, role) => {
 	if(role !== "admin" && role !== "customer"){
 		throw new Error("Unknown role");
 	}
-  for(let i=0; i < data.users.length; i++){
-		if(data.users[i]._id === userId){
-			data.users[i].role = role;
-			const copy = {...data.users[i]};
-			return copy;
-		}
-	}
-	return undefined;
+ 
 };
 
 /**
