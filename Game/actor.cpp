@@ -1,4 +1,4 @@
-#include "actor.hh"
+﻿#include "actor.hh"
 
 namespace StudentSide
 {
@@ -16,13 +16,13 @@ StudentSide::Actor::~Actor()
 
 Interface::Location Actor::giveLocation() const
 {
-    Interface::Location location;
-    return location;
+
+    //return locations_;
 }
 
 void Actor::move(Interface::Location loc)
 {
-    return;
+    locations_ = loc;
 }
 
 bool Actor::isRemoved() const
@@ -34,4 +34,5 @@ void Actor::remove()
 {
     return;
 }
+
 }

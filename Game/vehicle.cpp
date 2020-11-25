@@ -23,7 +23,9 @@ std::vector<std::shared_ptr<Interface::IPassenger> > Vehicle::getPassengers() co
 {
     std::vector<std::shared_ptr<Interface::IPassenger>> Vehicle;
     return  Vehicle;
-    ;}
+
+
+}
 
 void Vehicle::addPassenger(std::shared_ptr<Interface::IPassenger> passenger)
 {

@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QImage>
+
+
 const int PADDING = 10;
 
 
@@ -13,6 +15,8 @@ mainwindow::mainwindow(QWidget *parent) :
 {
     ui_->setupUi(this);
     DialogGameSettings *myDialog = new DialogGameSettings;
+    
+    //signals
     connect(myDialog, &DialogGameSettings::customSettings, this, &mainwindow::adjustGameSettings);
     connect(myDialog, &DialogGameSettings::defaultSettings, this, &mainwindow::defaultSettings);
     connect(ui_->quitButton, &QPushButton::clicked, this, &mainwindow::close);
@@ -40,13 +44,13 @@ mainwindow::~mainwindow()
 }
 
 
-void mainwindow::setBackground(QImage &image)
+void mainwindow::setBackground(QPixmap &image)
 {
-    //QImage myImage = image;
+    QPixmap myImage = image;
     //QTransform myTransform;
     //myTransform.rotate(180);
     //myImage = myImage.transformed(myTransform);
-    map->setBackgroundBrush(image);
+   map->addPixmap(image);
 }
 
 
@@ -58,13 +62,45 @@ void mainwindow::adjustGameSettings(QString name)
     ui_->nameLabel->setText(playerName_);
 }
 
-void mainwindow::addActor(int locX, int locY, int type)
+void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
 {
 
-    StudentSide::ActorItem* nActor = new StudentSide::ActorItem(locX, locY, type);
-    actors_.push_back(nActor);
-    map->addItem(nActor);
-    last_ = nActor;
+    Interface::Location location = actor->giveLocation();
+    if(std::shared_ptr<Interface::IPassenger> nActor = std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
+        type = passenger;
+
+    }
+
+    else if(std::shared_ptr<Interface::IVehicle> nActor = std::dynamic_pointer_cast<Interface::IVehicle>(actor)) {
+        type = Nysse;
+    }
+
+    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(), 500 -  location.giveY(), type);
+    actors_[actor] = graphicActor;
+    map->addItem(graphicActor);
+    last_ = graphicActor;
+}
+
+void mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
+{
+    Interface::Location location = stop->getLocation();
+    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(),500 - location.giveY(), BussStop);
+    stops_[stop] = graphicActor;
+    map->addItem(graphicActor);
+    last_ = graphicActor;
+}
+
+void mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y)
+{
+
+    //find corresponding gpraphic actor.
+
+    QMap<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
+
+    for (it = actors_.begin(); it != actors_.end(); ++it)
+        if(it.key() == actor){
+            it.value()->setCoord(x, 500 - y);
+        }
 }
 
 
