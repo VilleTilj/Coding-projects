@@ -24,6 +24,7 @@ public:
 
 private:
     Interface::Location location_;
+    bool removed = false;
 };
 
 

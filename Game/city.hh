@@ -7,6 +7,7 @@
 #include "mainwindow.hh"
 #include "actor.hh"
 #include "vehicle.hh"
+#include "actor.hh"
 
 namespace StudentSide
 {
@@ -45,18 +46,19 @@ public:
 
     void makePlayer();
 
+    std::vector<std::shared_ptr<Interface::IActor>> giveMovedActors();
 private:
 
     QImage small_;
     QImage big_;
     std::vector<std::shared_ptr<Interface::IActor>> actors_;
+    std::vector<std::shared_ptr<Interface::IActor>> moved_actor;
     std::vector<std::shared_ptr<Interface::IStop>> stops_;
     std::shared_ptr<StudentSide::mainwindow> ui_;
     QTime time_;
 
-    std::vector<std::shared_ptr<Interface::IActor>> movedActors;
-    
     std::shared_ptr<StudentSide::Actor> player_ ;
+
 
     //const int DEFAUL_X = 500;
     //const int DEFAULT_Y = -500;

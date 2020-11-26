@@ -24,6 +24,7 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground) {
 void City::setClock(QTime clock)
 {
     time_ = clock;
+
 }
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
@@ -43,8 +44,11 @@ void City::startGame()
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     if(std::find(actors_.begin(), actors_.end(), newactor) == actors_.end()){
+        Interface::Location location = newactor->giveLocation();
+        if(location.giveX() > 0 && location.giveX() < 500 && location.giveY() > 0 && location.giveY() < 500) {
         actors_.push_back(newactor);
         ui_->addActor(newactor);
+        }
     }
 }
 
@@ -70,15 +74,21 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
-
-    std::vector<std::shared_ptr<Interface::IActor>> ryys;
-    return ryys;
+    std::vector<std::shared_ptr<Interface::IActor>> actors_close;
+    for(unsigned long int i = 0; i < actors_.size(); i++) {
+        if(actors_[i]->giveLocation().isClose(loc) == true){
+            actors_close.push_back(actors_[i]);
+        }
+    }
+    return actors_close;
 }
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
+    //moved_actor.push_back(actor);
     Interface::Location location = actor->giveLocation();
     ui_->moveActor(actor, location.giveX(), location.giveY());
+
 }
 
 bool City::isGameOver() const
@@ -103,13 +113,16 @@ void City::addUi(std::shared_ptr<StudentSide::mainwindow> ui)
 
 void City::makePlayer()
 {
-
     Interface::Location location;
-
     player_ = std::make_shared<StudentSide::Actor>(StudentSide::Actor());
     player_->addLocation(location);
     ui_->addPlayer(player_);
+}
 
-
+std::vector<std::shared_ptr<Interface::IActor> > City::giveMovedActors()
+{
+    std::vector<std::shared_ptr<Interface::IActor>> actors = moved_actor;
+    moved_actor.clear();
+    return actors;
 }
 }

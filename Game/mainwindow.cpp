@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QImage>
-#include <QKeyEvent>
+#include "QTimer"
 
 const int PADDING = 10;
 
@@ -15,7 +15,7 @@ mainwindow::mainwindow(QWidget *parent) :
 {
     ui_->setupUi(this);
     DialogGameSettings *myDialog = new DialogGameSettings;
-    
+
     //signals
     connect(myDialog, &DialogGameSettings::customSettings, this, &mainwindow::adjustGameSettings);
     connect(myDialog, &DialogGameSettings::defaultSettings, this, &mainwindow::defaultSettings);
@@ -36,7 +36,11 @@ mainwindow::mainwindow(QWidget *parent) :
     map->setSceneRect(0,0,width_,height_);
     resize(minimumSizeHint());
     myDialog->exec();
+    timer = new QTimer;
+    connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+    timer->start(1500);
 }
+
 
 mainwindow::~mainwindow()
 {
@@ -62,6 +66,7 @@ void mainwindow::adjustGameSettings(QString name)
     ui_->nameLabel->setText(playerName_);
 }
 
+
 void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
 {
 
@@ -81,6 +86,7 @@ void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
     last_ = graphicActor;
 }
 
+
 void mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     Interface::Location location = stop->getLocation();
@@ -89,6 +95,7 @@ void mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
     map->addItem(graphicActor);
     last_ = graphicActor;
 }
+
 
 void mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y)
 {
@@ -103,6 +110,7 @@ void mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int 
         }
 }
 
+
 void mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
     QMap<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
@@ -115,54 +123,31 @@ void mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
     actors_.erase(it);
 }
 
+
 void mainwindow::addPlayer(std::shared_ptr<Actor> player)
 {
     player_ = player;
     Interface::Location location = player_->giveLocation();
-    graphicPlayer_ = new StudentSide::ActorItem(location.giveX(), 500 - location.giveY(), PLAYER);
+    graphicPlayer_ = new StudentSide::playerActor(location);
     map->addItem(graphicPlayer_);
+    graphicPlayer_->setFlag(QGraphicsPixmapItem::ItemIsFocusable);
+    graphicPlayer_->setFocus();
 }
 
+
+Interface::Location mainwindow::GivePlayerLocation()
+{
+    return graphicPlayer_->giveLocation();
+}
+
+playerActor *mainwindow::returnPlayer()
+{
+    return graphicPlayer_;
+}
 
 void mainwindow::defaultSettings()
 {
     ui_->nameLabel->setText(playerName_);
-}
-
-
-void mainwindow::keyPressEvent( QKeyEvent * event )
-{
-    Interface::Location location = player_->giveLocation();
-    qDebug() << location.giveX();
-    qDebug() << location.giveY();
-
-    if( event->key() == Qt::Key_W && location.giveY() > UP_BORDER)
-    {
-        graphicPlayer_->setCoord(location.giveX(), location.giveY() - MOVE_UP);
-        location.setXY(location.giveX(), location.giveY() - MOVE_UP);
-        player_->addLocation(location);
-    }
-
-    else if( event->key() == Qt::Key_A && location.giveX() > LEFT_BORDER)
-    {
-        graphicPlayer_->setCoord(location.giveX() - MOVE_LEFT, location.giveY());
-        location.setXY(location.giveX() - MOVE_LEFT, location.giveY());
-        player_->addLocation(location);
-    }
-
-    else if( event->key() == Qt::Key_S && location.giveY() < DOWN_BORDER)
-    {
-        graphicPlayer_->setCoord(location.giveX(), location.giveY() + MOVE_DOWN);
-        location.setXY(location.giveX(), location.giveY() + MOVE_DOWN);
-        player_->addLocation(location);
-    }
-
-    else if( event->key() == Qt::Key_D && location.giveX() < RIGHT_BORDER)
-    {
-        graphicPlayer_->setCoord(location.giveX() + MOVE_RIGHT, location.giveY());
-        location.setXY(location.giveX() + MOVE_RIGHT, location.giveY());
-        player_->addLocation(location);
-    }
 }
 
 } //namespace

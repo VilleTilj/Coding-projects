@@ -7,6 +7,9 @@
 #include "city.hh"
 #include "../Course/CourseLib/core/logic.hh"
 #include <QImage>
+#include "playeractor.hh"
+#include "QTime"
+
 
 const QString bigMap = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
 const QString smallMap = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
@@ -19,8 +22,14 @@ namespace StudentSide {
  * dialog window for settings and initializes gamewindow.
  */
 
-class InitGameEngine
+class InitGameEngine : public QObject
 {
+
+public slots:
+
+    void advance();
+
+
 public:
 
     /*!
@@ -42,6 +51,9 @@ private:
     std::shared_ptr<CourseSide::Logic> logic_;
     std::shared_ptr<Interface::ICity> iCityPtr;
     std::shared_ptr<StudentSide::City> cityPtr_;
+    StudentSide::playerActor* graphicPlayer_;
+
+    QTimer* timer = nullptr;
 };
 
 

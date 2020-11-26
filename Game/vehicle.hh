@@ -24,5 +24,4 @@ public:
 
 } //namespace
 
-
 #endif // VEHICLE_HH
