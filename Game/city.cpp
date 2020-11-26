@@ -51,6 +51,7 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
     actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
+    ui_->removeActor(actor);
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
@@ -98,5 +99,17 @@ QImage City::getImage(std::string image_size)
 void City::addUi(std::shared_ptr<StudentSide::mainwindow> ui)
 {
     ui_ = ui;
+}
+
+void City::makePlayer()
+{
+
+    Interface::Location location;
+
+    player_ = std::make_shared<StudentSide::Actor>(StudentSide::Actor());
+    player_->addLocation(location);
+    ui_->addPlayer(player_);
+
+
 }
 }

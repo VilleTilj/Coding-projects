@@ -20,8 +20,10 @@ public:
 
     void remove();
 
+    void addLocation(Interface::Location location);
+
 private:
-    Interface::Location locations_;
+    Interface::Location location_;
 };
 
 

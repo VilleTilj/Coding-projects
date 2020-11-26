@@ -1,4 +1,4 @@
-#ifndef CITY_HH
+﻿#ifndef CITY_HH
 #define CITY_HH
 
 #include "interfaces/icity.hh"
@@ -43,6 +43,7 @@ public:
 
     void addUi(std::shared_ptr<StudentSide::mainwindow> ui);
 
+    void makePlayer();
 
 private:
 
@@ -54,7 +55,11 @@ private:
     QTime time_;
 
     std::vector<std::shared_ptr<Interface::IActor>> movedActors;
+    
+    std::shared_ptr<StudentSide::Actor> player_ ;
 
+    //const int DEFAUL_X = 500;
+    //const int DEFAULT_Y = -500;
 };
 
 } //namespace

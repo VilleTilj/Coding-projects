@@ -98,6 +98,25 @@ void mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int 
         }
 }
 
+void mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
+{
+    QMap<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
+
+    for (it = actors_.begin(); it != actors_.end(); ++it)
+        if(it.key() == actor){
+            map->removeItem(it.value());
+            delete it.value();
+        }
+    actors_.erase(it);
+}
+
+void mainwindow::addPlayer(std::shared_ptr<Actor> player_)
+{
+    Interface::Location location = player_->giveLocation();
+    StudentSide::ActorItem* graphicPlayer = new StudentSide::ActorItem(location.giveX(), 500 - location.giveY(), player);
+    map->addItem(graphicPlayer);
+}
+
 
 void mainwindow::defaultSettings()
 {

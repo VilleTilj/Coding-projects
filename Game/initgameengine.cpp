@@ -14,9 +14,7 @@ InitGameEngine::InitGameEngine() :
 
 {
     gameWindow();
-    
-    
-    
+        
 }
 
 
@@ -34,7 +32,7 @@ void InitGameEngine::gameWindow()
     cityPtr_->setBackground(small, big);    
 
     QPixmap map;
-    map.load(smallMap);
+    map.load(bigMap);
     ui_->setBackground(map);
     //start game logic
     initLogic();
@@ -48,6 +46,7 @@ void InitGameEngine::initLogic()
     logic_->fileConfig();
     logic_->setTime(17, 00);
     logic_->finalizeGameStart();
+    cityPtr_->makePlayer();
 }
 
 } //namespace

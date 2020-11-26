@@ -10,6 +10,7 @@
 const QString nysseStop = ":/../pics/pics/NysseStop.png";
 const QString bussi = "://../pics/pics/bussi.png";
 const QString human = "://../pics/pics/huma.png";
+const QString TIMO = "://../pics/pics/timoTaxi.png";
 
 namespace StudentSide {
 

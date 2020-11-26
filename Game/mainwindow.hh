@@ -17,6 +17,7 @@
 #include "interfaces/ipassenger.hh"
 #include "interfaces/ivehicle.hh"
 #include "interfaces/istop.hh"
+#include "actor.hh"
 
 namespace Ui {
 class MainWindow;
@@ -46,6 +47,10 @@ public:
 
     void moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y);
 
+    void removeActor(std::shared_ptr<Interface::IActor> actor);
+
+    void addPlayer(std::shared_ptr<StudentSide::Actor> player_);
+
 
 public slots:
 
@@ -61,8 +66,8 @@ private:
     QGraphicsScene *map;
     QString playerName_ = "Timo";
 
-    const int width_ = 500;
-    const int height_ = 500;
+    const int width_ = 1095;
+    const int height_ = 592;
     StudentSide::ActorItem* last_;
 
     QMap<std::shared_ptr<Interface::IActor>, StudentSide::ActorItem *> actors_;
@@ -73,6 +78,7 @@ private:
     const int BussStop = 0;
     const int Nysse = 1;
     const int passenger = 2;
+    const int player = 3;
 };
 } //namespace
 #endif // MAINWINDOW_HH

@@ -17,12 +17,12 @@ StudentSide::Actor::~Actor()
 Interface::Location Actor::giveLocation() const
 {
 
-    //return locations_;
+    return location_;
 }
 
 void Actor::move(Interface::Location loc)
 {
-    locations_ = loc;
+    location_ = loc;
 }
 
 bool Actor::isRemoved() const
@@ -33,6 +33,11 @@ bool Actor::isRemoved() const
 void Actor::remove()
 {
     return;
+}
+
+void Actor::addLocation(Interface::Location location)
+{
+    location_ = location;
 }
 
 }
