@@ -19,6 +19,7 @@
 #include "interfaces/istop.hh"
 #include "playeractor.hh"
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -53,7 +54,7 @@ public:
 
     Interface::Location GivePlayerLocation();
 
-
+    StudentSide::playerActor *returnPlayer();
 
 
 public slots:
@@ -70,8 +71,8 @@ private:
     QGraphicsScene *map;
     QString playerName_ = "Timo";
 
-    const int width_ = 1095;
-    const int height_ = 592;
+    const int width_ = 500;
+    const int height_ = 500;
     StudentSide::ActorItem* last_;
 
     QMap<std::shared_ptr<Interface::IActor>, StudentSide::ActorItem *> actors_;
@@ -81,16 +82,9 @@ private:
     std::shared_ptr<Actor> player_;
     StudentSide::playerActor* graphicPlayer_;
 
-    int type = 0;
-    const int MOVE_RIGHT = 10;
-    const int MOVE_LEFT = 10;
-    const int MOVE_UP = 10;
-    const int MOVE_DOWN = 10;
+    QTimer* timer = nullptr;
 
-    const int UP_BORDER = -10;
-    const int DOWN_BORDER = 520;
-    const int LEFT_BORDER = -10;
-    const int RIGHT_BORDER = 1020;
+    int type = 0;
 
     const int BussStop = 0;
     const int Nysse = 1;

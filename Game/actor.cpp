@@ -27,12 +27,12 @@ void Actor::move(Interface::Location loc)
 
 bool Actor::isRemoved() const
 {
-    return false;
+    return removed;
 }
 
 void Actor::remove()
 {
-    return;
+    removed = true;
 }
 
 void Actor::addLocation(Interface::Location location)

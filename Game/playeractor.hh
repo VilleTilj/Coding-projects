@@ -25,6 +25,7 @@ public:
     Interface::Location giveLocation();
 
 
+
 private:
     int x_;
     int y_;
@@ -36,10 +37,10 @@ private:
     const int MOVE_UP = 10;
     const int MOVE_DOWN = 10;
 
-    const int UP_BORDER = -10;
-    const int DOWN_BORDER = 520;
-    const int LEFT_BORDER = -10;
-    const int RIGHT_BORDER = 1020;
+    const int UP_BORDER = 0;
+    const int DOWN_BORDER = 500;
+    const int LEFT_BORDER = 0;
+    const int RIGHT_BORDER = 500;
     Interface::Location location_;
 
 };
