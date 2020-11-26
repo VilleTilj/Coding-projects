@@ -171,6 +171,7 @@ void mainwindow::start_game()
     timer_.start(SECOND);
     timelimit_running = true;
     ui_->startButton->setEnabled(false);
+    emit initialize_logic();
 }
 
 void mainwindow::update_time_lcd()
