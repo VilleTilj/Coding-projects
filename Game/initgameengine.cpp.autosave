@@ -61,9 +61,9 @@ void InitGameEngine::advance()
     graphicPlayer_->giveLocation();
     std::vector<std::shared_ptr<Interface::IActor>> actor = cityPtr_->getNearbyActors(graphicPlayer_->giveLocation());
     for(unsigned long int i = 0; i < actor.size(); i++){
-        cityPtr_->removeActor(actor.at(i));
+       cityPtr_->removeActor(actor.at(i));
     }
-    //qDebug() << actor.size();
+    //sdqDebug() << actor.size();
 
 }
 

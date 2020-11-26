@@ -88,7 +88,7 @@ void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
         type = Nysse;
     }
 
-    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(), 500 -  location.giveY(), type);
+    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(), location.giveY(), type);
     actors_[actor] = graphicActor;
     map->addItem(graphicActor);
     last_ = graphicActor;
@@ -98,7 +98,7 @@ void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
 void mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     Interface::Location location = stop->getLocation();
-    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(),500 - location.giveY(), BussStop);
+    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(),location.giveY(), BussStop);
     stops_[stop] = graphicActor;
     map->addItem(graphicActor);
     last_ = graphicActor;
@@ -114,7 +114,7 @@ void mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int 
 
     for (it = actors_.begin(); it != actors_.end(); ++it)
         if(it.key() == actor){
-            it.value()->setCoord(x, 500 - y);
+            it.value()->setCoord(x, y);
         }
 }
 

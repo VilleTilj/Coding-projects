@@ -45,17 +45,23 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     if(std::find(actors_.begin(), actors_.end(), newactor) == actors_.end()){
         Interface::Location location = newactor->giveLocation();
-        if(location.giveX() > 0 && location.giveX() < 500 && location.giveY() > 0 && location.giveY() < 500) {
+        if(location.giveX() > 0 && location.giveX() < 1200 && location.giveY() > 0 && location.giveY() < 600) {
         actors_.push_back(newactor);
         ui_->addActor(newactor);
         }
     }
 }
 
+
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-    actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
-    ui_->removeActor(actor);
+    qDebug() << "ryys";
+
+    if (actor->isRemoved() == false) {
+       actor->remove();
+       actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
+       ui_->removeActor(actor);
+    }
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
@@ -76,7 +82,11 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 {
     std::vector<std::shared_ptr<Interface::IActor>> actors_close;
     for(unsigned long int i = 0; i < actors_.size(); i++) {
-        if(actors_[i]->giveLocation().isClose(loc) == true){
+        Interface::Location location = actors_.at(i)->giveLocation();
+        //qDebug() << location.giveX(), location.giveY();
+        //qDebug() << loc.giveX();
+        //qDebug() << loc.giveY();
+        if(location.isClose(loc, 30) == true){
             actors_close.push_back(actors_[i]);
         }
     }

@@ -92,8 +92,8 @@ private:
     QGraphicsScene *map;
     QString playerName_ = "Timo";
 
-    const int width_ = 500;
-    const int height_ = 500;
+    const int width_ = 1095;
+    const int height_ = 592;
     StudentSide::ActorItem* last_;
 
     QMap<std::shared_ptr<Interface::IActor>, StudentSide::ActorItem *> actors_;

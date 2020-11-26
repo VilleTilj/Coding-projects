@@ -25,10 +25,9 @@ namespace StudentSide {
 class InitGameEngine : public QObject
 {
 
-public slots:
+private slots:
 
     void advance();
-
 
 public:
 
@@ -53,7 +52,7 @@ private:
     std::shared_ptr<StudentSide::City> cityPtr_;
     StudentSide::playerActor* graphicPlayer_;
 
-    QTimer* timer = nullptr;
+    QTimer timer;
 };
 
 

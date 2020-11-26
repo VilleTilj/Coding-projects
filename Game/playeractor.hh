@@ -38,9 +38,9 @@ private:
     const int MOVE_DOWN = 10;
 
     const int UP_BORDER = 0;
-    const int DOWN_BORDER = 500;
+    const int DOWN_BORDER = 590;
     const int LEFT_BORDER = 0;
-    const int RIGHT_BORDER = 500;
+    const int RIGHT_BORDER = 1000;
     Interface::Location location_;
 
 };
