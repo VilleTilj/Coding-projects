@@ -133,31 +133,34 @@ void mainwindow::defaultSettings()
 void mainwindow::keyPressEvent( QKeyEvent * event )
 {
     Interface::Location location = player_->giveLocation();
-    if( event->key() == Qt::Key_W )
+    qDebug() << location.giveX();
+    qDebug() << location.giveY();
+
+    if( event->key() == Qt::Key_W && location.giveY() > UP_BORDER)
     {
-        graphicPlayer_->setCoord(location.giveX(), location.giveY() - 10);
-        location.setXY(location.giveX(), location.giveY() - 10);
+        graphicPlayer_->setCoord(location.giveX(), location.giveY() - MOVE_UP);
+        location.setXY(location.giveX(), location.giveY() - MOVE_UP);
         player_->addLocation(location);
     }
 
-    else if( event->key() == Qt::Key_A )
+    else if( event->key() == Qt::Key_A && location.giveX() > LEFT_BORDER)
     {
-        graphicPlayer_->setCoord(location.giveX() - 10, location.giveY());
-        location.setXY(location.giveX() - 10, location.giveY());
+        graphicPlayer_->setCoord(location.giveX() - MOVE_LEFT, location.giveY());
+        location.setXY(location.giveX() - MOVE_LEFT, location.giveY());
         player_->addLocation(location);
     }
 
-    else if( event->key() == Qt::Key_S )
+    else if( event->key() == Qt::Key_S && location.giveY() < DOWN_BORDER)
     {
-        graphicPlayer_->setCoord(location.giveX(), location.giveY() + 10);
-        location.setXY(location.giveX(), location.giveY() + 10);
+        graphicPlayer_->setCoord(location.giveX(), location.giveY() + MOVE_DOWN);
+        location.setXY(location.giveX(), location.giveY() + MOVE_DOWN);
         player_->addLocation(location);
     }
 
-    else if( event->key() == Qt::Key_D)
+    else if( event->key() == Qt::Key_D && location.giveX() < RIGHT_BORDER)
     {
-        graphicPlayer_->setCoord(location.giveX() + 10, location.giveY());
-        location.setXY(location.giveX() + 10, location.giveY());
+        graphicPlayer_->setCoord(location.giveX() + MOVE_RIGHT, location.giveY());
+        location.setXY(location.giveX() + MOVE_RIGHT, location.giveY());
         player_->addLocation(location);
     }
 }

@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_HH
+﻿#ifndef MAINWINDOW_HH
 #define MAINWINDOW_HH
 
 #include "dialoggamesettings.hh"
@@ -80,6 +80,16 @@ private:
     StudentSide::ActorItem* graphicPlayer_;
 
     int type = 0;
+    const int MOVE_RIGHT = 10;
+    const int MOVE_LEFT = 10;
+    const int MOVE_UP = 10;
+    const int MOVE_DOWN = 10;
+
+    const int UP_BORDER = -10;
+    const int DOWN_BORDER = 520;
+    const int LEFT_BORDER = -10;
+    const int RIGHT_BORDER = 1020;
+
     const int BussStop = 0;
     const int Nysse = 1;
     const int passenger = 2;
