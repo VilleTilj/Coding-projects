@@ -33,6 +33,7 @@ const int BussStop = 0;
 const int Nysse = 1;
 const int passenger = 2;
 const int PLAYER = 3;
+const int SECOND = 1000;
 
 namespace Ui {
 class MainWindow;
@@ -68,7 +69,7 @@ public:
 
     void keyPressEvent(QKeyEvent* event) override;
 
-public slots:
+private slots:
 
     /*!
      * \brief adjustGameSettings
@@ -76,6 +77,11 @@ public slots:
     void adjustGameSettings(QString name, int game_time);
 
     void defaultSettings();
+
+    void update_timelimit();
+
+    void start_game();
+
 
 private:
     Ui::MainWindow *ui_;
@@ -93,8 +99,13 @@ private:
     StudentSide::ActorItem* graphicPlayer_;
 
     int type = 0;
+    QTimer timer_;
     int timelimit = 0;
+    int seconds = 0;
     bool isInfiniteTime = true;
+    bool timelimit_running = false;
+
+    void update_time_lcd();
 
 };
 } //namespace

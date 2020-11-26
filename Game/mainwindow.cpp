@@ -20,6 +20,8 @@ mainwindow::mainwindow(QWidget *parent) :
     connect(myDialog, &DialogGameSettings::normalSettings, this, &mainwindow::adjustGameSettings);
     connect(myDialog, &DialogGameSettings::infiniteSettings, this, &mainwindow::defaultSettings);
     connect(ui_->quitButton, &QPushButton::clicked, this, &mainwindow::close);
+    connect(ui_->startButton, &QPushButton::clicked, this, &mainwindow::start_game);
+    connect(&timer_, &QTimer::timeout, this, &mainwindow::update_timelimit);
     ui_->gameView->setFixedSize(width_, height_);
     ui_->centralwidget->setFixedSize(width_ + ui_->startButton->width() + PADDING, height_ + PADDING);
     ui_->startButton->move(width_ + PADDING, PADDING);
@@ -63,8 +65,9 @@ void mainwindow::adjustGameSettings(QString name, int game_time)
     }
     ui_->nameLabel->setText(playerName_);
     timelimit = game_time;
-    ui_->time_lcd_min->display(timelimit / 60);
-    ui_->time_lcd_sec->display(timelimit % 60);
+    seconds = timelimit;
+    update_time_lcd();
+    isInfiniteTime = false;
 }
 
 void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
@@ -131,9 +134,40 @@ void mainwindow::addPlayer(std::shared_ptr<Actor> player)
 
 void mainwindow::defaultSettings()
 {
-    ui_->nameLabel->setText(playerName_);
-    ui_->time_lcd_min->display(timelimit / 60);
-    ui_->time_lcd_sec->display(timelimit % 60);
+    ui_->nameLabel->setText(playerName_); 
+    update_time_lcd();
+    isInfiniteTime = true;
+}
+
+void mainwindow::update_timelimit()
+{
+    if(!isInfiniteTime){
+        if(timelimit_running && seconds > 0){
+            seconds--;
+            update_time_lcd();
+        } else {
+            timer_.stop();
+            ui_->startButton->setEnabled(true);
+            timelimit_running = false;
+        }
+    } else {
+        seconds++;
+        update_time_lcd();
+    }
+}
+
+void mainwindow::start_game()
+{
+    seconds = timelimit;
+    timer_.start(SECOND);
+    timelimit_running = true;
+    ui_->startButton->setEnabled(false);
+}
+
+void mainwindow::update_time_lcd()
+{
+    ui_->time_lcd_min->display(seconds / 60);
+    ui_->time_lcd_sec->display(seconds % 60);
 }
 
 
