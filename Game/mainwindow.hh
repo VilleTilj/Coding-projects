@@ -53,6 +53,7 @@ public:
 
     void addPlayer(std::shared_ptr<StudentSide::Actor> player_);
 
+    void keyPressEvent(QKeyEvent* event) override;
 
 public slots:
 
@@ -75,12 +76,14 @@ private:
     QMap<std::shared_ptr<Interface::IActor>, StudentSide::ActorItem *> actors_;
     QMap<std::shared_ptr<Interface::IStop>, StudentSide::ActorItem *>stops_;
 
+    std::shared_ptr<Actor> player_;
+    StudentSide::ActorItem* graphicPlayer_;
 
     int type = 0;
     const int BussStop = 0;
     const int Nysse = 1;
     const int passenger = 2;
-    const int player = 3;
+    const int PLAYER = 3;
 };
 } //namespace
 #endif // MAINWINDOW_HH

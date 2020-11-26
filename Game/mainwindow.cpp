@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QImage>
-
+#include <QKeyEvent>
 
 const int PADDING = 10;
 
@@ -115,17 +115,51 @@ void mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
     actors_.erase(it);
 }
 
-void mainwindow::addPlayer(std::shared_ptr<Actor> player_)
+void mainwindow::addPlayer(std::shared_ptr<Actor> player)
 {
+    player_ = player;
     Interface::Location location = player_->giveLocation();
-    StudentSide::ActorItem* graphicPlayer = new StudentSide::ActorItem(location.giveX(), 500 - location.giveY(), player);
-    map->addItem(graphicPlayer);
+    graphicPlayer_ = new StudentSide::ActorItem(location.giveX(), 500 - location.giveY(), PLAYER);
+    map->addItem(graphicPlayer_);
 }
 
 
 void mainwindow::defaultSettings()
 {
     ui_->nameLabel->setText(playerName_);
+}
+
+
+void mainwindow::keyPressEvent( QKeyEvent * event )
+{
+    Interface::Location location = player_->giveLocation();
+    if( event->key() == Qt::Key_W )
+    {
+        graphicPlayer_->setCoord(location.giveX(), location.giveY() - 10);
+        location.setXY(location.giveX(), location.giveY() - 10);
+        player_->addLocation(location);
+    }
+
+    else if( event->key() == Qt::Key_A )
+    {
+        graphicPlayer_->setCoord(location.giveX() - 10, location.giveY());
+        location.setXY(location.giveX() - 10, location.giveY());
+        player_->addLocation(location);
+    }
+
+    else if( event->key() == Qt::Key_S )
+    {
+        graphicPlayer_->setCoord(location.giveX(), location.giveY() + 10);
+        location.setXY(location.giveX(), location.giveY() + 10);
+        player_->addLocation(location);
+    }
+
+    else if( event->key() == Qt::Key_D)
+    {
+        graphicPlayer_->setCoord(location.giveX() + 10, location.giveY());
+        location.setXY(location.giveX() + 10, location.giveY());
+        player_->addLocation(location);
+    }
 }
 
 } //namespace
