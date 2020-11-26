@@ -2,8 +2,11 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QImage>
-#include "QTimer"
+<<<<<<< HEAD
+=======
 
+
+>>>>>>> 02d20343b4c104ded6d82bb434c0c1731c1f5e1b
 const int PADDING = 10;
 
 
@@ -15,13 +18,11 @@ mainwindow::mainwindow(QWidget *parent) :
 {
     ui_->setupUi(this);
     DialogGameSettings *myDialog = new DialogGameSettings;
-
+    
     //signals
-    connect(myDialog, &DialogGameSettings::normalSettings, this, &mainwindow::adjustGameSettings);
-    connect(myDialog, &DialogGameSettings::infiniteSettings, this, &mainwindow::defaultSettings);
+    connect(myDialog, &DialogGameSettings::customSettings, this, &mainwindow::adjustGameSettings);
+    connect(myDialog, &DialogGameSettings::defaultSettings, this, &mainwindow::defaultSettings);
     connect(ui_->quitButton, &QPushButton::clicked, this, &mainwindow::close);
-    connect(ui_->startButton, &QPushButton::clicked, this, &mainwindow::start_game);
-    connect(&timer_, &QTimer::timeout, this, &mainwindow::update_timelimit);
     ui_->gameView->setFixedSize(width_, height_);
     ui_->centralwidget->setFixedSize(width_ + ui_->startButton->width() + PADDING, height_ + PADDING);
     ui_->startButton->move(width_ + PADDING, PADDING);
@@ -30,9 +31,7 @@ mainwindow::mainwindow(QWidget *parent) :
     ui_->playernameLabel->move(width_ + PADDING, PADDING + (5*30));
     ui_->nameLabel->move(width_ + PADDING, PADDING + (6*30));
     ui_->timeLabel->move(width_ + PADDING, PADDING + (3*30));
-    ui_->time_lcd_min->move(width_- PADDING, PADDING + (4*30));
-    ui_->time_lcd_sec->move(width_+ PADDING*4, PADDING + (4*30));
-
+    ui_->time_lcd->move(width_+ PADDING, PADDING + (4*30));
 
 
     map = new QGraphicsScene(this);
@@ -40,11 +39,7 @@ mainwindow::mainwindow(QWidget *parent) :
     map->setSceneRect(0,0,width_,height_);
     resize(minimumSizeHint());
     myDialog->exec();
-    timer = new QTimer;
-    connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
-    timer->start(1500);
 }
-
 
 mainwindow::~mainwindow()
 {
@@ -62,18 +57,13 @@ void mainwindow::setBackground(QPixmap &image)
 }
 
 
-void mainwindow::adjustGameSettings(QString name, int game_time)
+void mainwindow::adjustGameSettings(QString name)
 {
     if(!name.isEmpty()) {
         playerName_ = name;
     }
     ui_->nameLabel->setText(playerName_);
-    timelimit = game_time;
-    seconds = timelimit;
-    update_time_lcd();
-    isInfiniteTime = false;
 }
-
 
 void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
 {
@@ -94,7 +84,6 @@ void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
     last_ = graphicActor;
 }
 
-
 void mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     Interface::Location location = stop->getLocation();
@@ -103,7 +92,6 @@ void mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
     map->addItem(graphicActor);
     last_ = graphicActor;
 }
-
 
 void mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y)
 {
@@ -119,76 +107,9 @@ void mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int 
 }
 
 
-void mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
-{
-    QMap<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
-
-    for (it = actors_.begin(); it != actors_.end(); ++it)
-        if(it.key() == actor){
-            map->removeItem(it.value());
-            delete it.value();
-        }
-    actors_.erase(it);
-}
-
-
-void mainwindow::addPlayer(std::shared_ptr<Actor> player)
-{
-    player_ = player;
-    Interface::Location location = player_->giveLocation();
-    graphicPlayer_ = new StudentSide::playerActor(location);
-    map->addItem(graphicPlayer_);
-    graphicPlayer_->setFlag(QGraphicsPixmapItem::ItemIsFocusable);
-    graphicPlayer_->setFocus();
-}
-
-
-Interface::Location mainwindow::GivePlayerLocation()
-{
-    return graphicPlayer_->giveLocation();
-}
-
-void mainwindow::update_timelimit()
-{
-    if(!isInfiniteTime){
-        if(timelimit_running && seconds > 0){
-            seconds--;
-            update_time_lcd();
-        } else {
-            timer_.stop();
-            ui_->startButton->setEnabled(true);
-            timelimit_running = false;
-        }
-    } else {
-        seconds++;
-        update_time_lcd();
-    }
-}
-
-void mainwindow::start_game()
-{
-    seconds = timelimit;
-    timer_.start(SECOND);
-    timelimit_running = true;
-    ui_->startButton->setEnabled(false);
-}
-
-void mainwindow::update_time_lcd()
-{
-    ui_->time_lcd_min->display(seconds / 60);
-    ui_->time_lcd_sec->display(seconds % 60);
-}
-
-playerActor *mainwindow::returnPlayer()
-{
-    return graphicPlayer_;
-}
-
 void mainwindow::defaultSettings()
 {
     ui_->nameLabel->setText(playerName_);
-    update_time_lcd();
-    isInfiniteTime = true;
 }
 
 } //namespace
