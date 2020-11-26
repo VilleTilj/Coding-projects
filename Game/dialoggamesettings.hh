@@ -44,6 +44,17 @@ public slots:
      * \brief defaults
      */
     void defaults();
+
+    /*!
+     * \brief setState1min changes state of checkbox1min
+     */
+    void setState1min();
+
+    /*!
+     * \brief setState2minc hanges state of checkbox2min
+     */
+    void setState2min();
+
 signals:
 
     /*!
