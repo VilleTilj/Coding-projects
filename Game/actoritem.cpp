@@ -35,6 +35,7 @@ ActorItem::ActorItem(int x, int y, int type):x_(x), y_(y), type_(type)
     }
     
     else {
+        image.load(TIMO);
         image = image.scaled(70, 50);
         setPixmap(image);
     }
