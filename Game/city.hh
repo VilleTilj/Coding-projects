@@ -7,6 +7,7 @@
 #include "mainwindow.hh"
 #include "actor.hh"
 #include "vehicle.hh"
+#include "actor.hh"
 
 namespace StudentSide
 {
@@ -55,8 +56,8 @@ private:
     QTime time_;
 
     std::vector<std::shared_ptr<Interface::IActor>> movedActors;
-    
     std::shared_ptr<StudentSide::Actor> player_ ;
+
 
     //const int DEFAUL_X = 500;
     //const int DEFAULT_Y = -500;

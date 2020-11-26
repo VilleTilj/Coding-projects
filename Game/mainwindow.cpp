@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QImage>
-#include <QKeyEvent>
 
 const int PADDING = 10;
 
@@ -15,7 +14,7 @@ mainwindow::mainwindow(QWidget *parent) :
 {
     ui_->setupUi(this);
     DialogGameSettings *myDialog = new DialogGameSettings;
-    
+
     //signals
     connect(myDialog, &DialogGameSettings::customSettings, this, &mainwindow::adjustGameSettings);
     connect(myDialog, &DialogGameSettings::defaultSettings, this, &mainwindow::defaultSettings);
@@ -119,9 +118,17 @@ void mainwindow::addPlayer(std::shared_ptr<Actor> player)
 {
     player_ = player;
     Interface::Location location = player_->giveLocation();
-    graphicPlayer_ = new StudentSide::ActorItem(location.giveX(), 500 - location.giveY(), PLAYER);
+    graphicPlayer_ = new StudentSide::playerActor(location);
     map->addItem(graphicPlayer_);
+    graphicPlayer_->setFlag(QGraphicsPixmapItem::ItemIsFocusable);
+    graphicPlayer_->setFocus();
 }
+
+Interface::Location mainwindow::GivePlayerLocation()
+{
+    return graphicPlayer_->giveLocation();
+}
+
 
 
 void mainwindow::defaultSettings()
@@ -130,39 +137,5 @@ void mainwindow::defaultSettings()
 }
 
 
-void mainwindow::keyPressEvent( QKeyEvent * event )
-{
-    Interface::Location location = player_->giveLocation();
-    qDebug() << location.giveX();
-    qDebug() << location.giveY();
-
-    if( event->key() == Qt::Key_W && location.giveY() > UP_BORDER)
-    {
-        graphicPlayer_->setCoord(location.giveX(), location.giveY() - MOVE_UP);
-        location.setXY(location.giveX(), location.giveY() - MOVE_UP);
-        player_->addLocation(location);
-    }
-
-    else if( event->key() == Qt::Key_A && location.giveX() > LEFT_BORDER)
-    {
-        graphicPlayer_->setCoord(location.giveX() - MOVE_LEFT, location.giveY());
-        location.setXY(location.giveX() - MOVE_LEFT, location.giveY());
-        player_->addLocation(location);
-    }
-
-    else if( event->key() == Qt::Key_S && location.giveY() < DOWN_BORDER)
-    {
-        graphicPlayer_->setCoord(location.giveX(), location.giveY() + MOVE_DOWN);
-        location.setXY(location.giveX(), location.giveY() + MOVE_DOWN);
-        player_->addLocation(location);
-    }
-
-    else if( event->key() == Qt::Key_D && location.giveX() < RIGHT_BORDER)
-    {
-        graphicPlayer_->setCoord(location.giveX() + MOVE_RIGHT, location.giveY());
-        location.setXY(location.giveX() + MOVE_RIGHT, location.giveY());
-        player_->addLocation(location);
-    }
-}
 
 } //namespace

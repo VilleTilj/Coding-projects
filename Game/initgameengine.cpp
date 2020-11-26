@@ -1,4 +1,4 @@
-#include "initgameengine.hh"
+﻿#include "initgameengine.hh"
 #include <memory>
 #include <QImage>
 #include <QDebug>
@@ -10,11 +10,11 @@ InitGameEngine::InitGameEngine() :
     logic_(new CourseSide::Logic),
     iCityPtr(nullptr)
     //cityPtr_(nullptr)
-    
+
 
 {
     gameWindow();
-        
+
 }
 
 
@@ -29,7 +29,7 @@ void InitGameEngine::gameWindow()
     QImage small;
     small.load(smallMap);
     cityPtr_ = std::dynamic_pointer_cast<StudentSide::City>(iCityPtr);
-    cityPtr_->setBackground(small, big);    
+    cityPtr_->setBackground(small, big);
 
     QPixmap map;
     map.load(bigMap);

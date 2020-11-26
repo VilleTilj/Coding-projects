@@ -17,9 +17,7 @@
 #include "interfaces/ipassenger.hh"
 #include "interfaces/ivehicle.hh"
 #include "interfaces/istop.hh"
-#include "actor.hh"
-
-
+#include "playeractor.hh"
 
 namespace Ui {
 class MainWindow;
@@ -53,7 +51,10 @@ public:
 
     void addPlayer(std::shared_ptr<StudentSide::Actor> player_);
 
-    void keyPressEvent(QKeyEvent* event) override;
+    Interface::Location GivePlayerLocation();
+
+
+
 
 public slots:
 
@@ -76,8 +77,9 @@ private:
     QMap<std::shared_ptr<Interface::IActor>, StudentSide::ActorItem *> actors_;
     QMap<std::shared_ptr<Interface::IStop>, StudentSide::ActorItem *>stops_;
 
+
     std::shared_ptr<Actor> player_;
-    StudentSide::ActorItem* graphicPlayer_;
+    StudentSide::playerActor* graphicPlayer_;
 
     int type = 0;
     const int MOVE_RIGHT = 10;
