@@ -89,12 +89,12 @@
      <string>Playername:</string>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="time_lcd">
+   <widget class="QLCDNumber" name="time_lcd_sec">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>373</x>
       <y>10</y>
-      <width>64</width>
+      <width>51</width>
       <height>23</height>
      </rect>
     </property>
@@ -110,6 +110,26 @@
     </property>
     <property name="text">
      <string>Time</string>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="time_lcd_min">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>70</y>
+      <width>51</width>
+      <height>23</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="points_lcd">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>120</y>
+      <width>51</width>
+      <height>23</height>
+     </rect>
     </property>
    </widget>
   </widget>

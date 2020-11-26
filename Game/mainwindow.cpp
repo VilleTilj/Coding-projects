@@ -17,8 +17,8 @@ mainwindow::mainwindow(QWidget *parent) :
     DialogGameSettings *myDialog = new DialogGameSettings;
     
     //signals
-    connect(myDialog, &DialogGameSettings::customSettings, this, &mainwindow::adjustGameSettings);
-    connect(myDialog, &DialogGameSettings::defaultSettings, this, &mainwindow::defaultSettings);
+    connect(myDialog, &DialogGameSettings::normalSettings, this, &mainwindow::adjustGameSettings);
+    connect(myDialog, &DialogGameSettings::infiniteSettings, this, &mainwindow::defaultSettings);
     connect(ui_->quitButton, &QPushButton::clicked, this, &mainwindow::close);
     ui_->gameView->setFixedSize(width_, height_);
     ui_->centralwidget->setFixedSize(width_ + ui_->startButton->width() + PADDING, height_ + PADDING);
@@ -28,7 +28,9 @@ mainwindow::mainwindow(QWidget *parent) :
     ui_->playernameLabel->move(width_ + PADDING, PADDING + (5*30));
     ui_->nameLabel->move(width_ + PADDING, PADDING + (6*30));
     ui_->timeLabel->move(width_ + PADDING, PADDING + (3*30));
-    ui_->time_lcd->move(width_+ PADDING, PADDING + (4*30));
+    ui_->time_lcd_min->move(width_- PADDING, PADDING + (4*30));
+    ui_->time_lcd_sec->move(width_+ PADDING*4, PADDING + (4*30));
+
 
 
     map = new QGraphicsScene(this);
@@ -54,12 +56,15 @@ void mainwindow::setBackground(QPixmap &image)
 }
 
 
-void mainwindow::adjustGameSettings(QString name)
+void mainwindow::adjustGameSettings(QString name, int game_time)
 {
     if(!name.isEmpty()) {
         playerName_ = name;
     }
     ui_->nameLabel->setText(playerName_);
+    timelimit = game_time;
+    ui_->time_lcd_min->display(timelimit / 60);
+    ui_->time_lcd_sec->display(timelimit % 60);
 }
 
 void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
@@ -127,6 +132,8 @@ void mainwindow::addPlayer(std::shared_ptr<Actor> player)
 void mainwindow::defaultSettings()
 {
     ui_->nameLabel->setText(playerName_);
+    ui_->time_lcd_min->display(timelimit / 60);
+    ui_->time_lcd_sec->display(timelimit % 60);
 }
 
 

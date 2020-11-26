@@ -19,7 +19,20 @@
 #include "interfaces/istop.hh"
 #include "actor.hh"
 
+const int MOVE_RIGHT = 10;
+const int MOVE_LEFT = 10;
+const int MOVE_UP = 10;
+const int MOVE_DOWN = 10;
 
+const int UP_BORDER = -10;
+const int DOWN_BORDER = 520;
+const int LEFT_BORDER = -10;
+const int RIGHT_BORDER = 1020;
+
+const int BussStop = 0;
+const int Nysse = 1;
+const int passenger = 2;
+const int PLAYER = 3;
 
 namespace Ui {
 class MainWindow;
@@ -60,7 +73,7 @@ public slots:
     /*!
      * \brief adjustGameSettings
      */
-    void adjustGameSettings(QString name);
+    void adjustGameSettings(QString name, int game_time);
 
     void defaultSettings();
 
@@ -80,20 +93,9 @@ private:
     StudentSide::ActorItem* graphicPlayer_;
 
     int type = 0;
-    const int MOVE_RIGHT = 10;
-    const int MOVE_LEFT = 10;
-    const int MOVE_UP = 10;
-    const int MOVE_DOWN = 10;
+    int timelimit = 0;
+    bool isInfiniteTime = true;
 
-    const int UP_BORDER = -10;
-    const int DOWN_BORDER = 520;
-    const int LEFT_BORDER = -10;
-    const int RIGHT_BORDER = 1020;
-
-    const int BussStop = 0;
-    const int Nysse = 1;
-    const int passenger = 2;
-    const int PLAYER = 3;
 };
 } //namespace
 #endif // MAINWINDOW_HH

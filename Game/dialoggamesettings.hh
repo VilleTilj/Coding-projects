@@ -4,6 +4,9 @@
 #include <QDialog>
 //#include "mainwindow.hh"
 
+const int ONE_MINUTE = 60;
+const int TWO_MINUTE = 120;
+
 namespace Ui {
 class DialogGameSettings;
 }
@@ -36,14 +39,14 @@ public:
 public slots:
 
     /*!
-     * \brief custom
+     * \brief normal game
      */
-    void custom();
+    void normal();
 
     /*!
-     * \brief defaults
+     * \brief infinite time game
      */
-    void defaults();
+    void infinite();
 
     /*!
      * \brief setState1min changes state of checkbox1min
@@ -58,17 +61,20 @@ public slots:
 signals:
 
     /*!
-     * \brief customSettings
+     * \brief normalSettings
      */
-    void customSettings(QString name); // TODO implement user input fields
+    void normalSettings(QString name, int timelimit);
 
     /*!
-     * \brief defaultSettings
+     * \brief infiniteSettings
      */
-    void defaultSettings();
+    void infiniteSettings();
 
 private:
     Ui::DialogGameSettings *ui;
+    int timelimit = 0;
+
+    void setTimelimit();
 };
 } //namespace
 #endif // DIALOGGAMESETTINGS_HH

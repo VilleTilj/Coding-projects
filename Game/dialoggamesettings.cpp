@@ -8,11 +8,11 @@ DialogGameSettings::DialogGameSettings(QWidget *parent) :
     ui(new Ui::DialogGameSettings)
 {
     ui->setupUi(this);
-    connect(ui->customSettings, &QPushButton::clicked, this, &DialogGameSettings::custom);
-    connect(ui->customSettings, &QPushButton::clicked, this, &DialogGameSettings::accept);
+    connect(ui->normalGameButton, &QPushButton::clicked, this, &DialogGameSettings::normal);
+    connect(ui->normalGameButton, &QPushButton::clicked, this, &DialogGameSettings::accept);
 
-    connect(ui->defaultButton, &QPushButton::clicked, this, &DialogGameSettings::defaults);
-    connect(ui->defaultButton, &QPushButton::clicked, this, &DialogGameSettings::reject);
+    connect(ui->infiniteGameButton, &QPushButton::clicked, this, &DialogGameSettings::infinite);
+    connect(ui->infiniteGameButton, &QPushButton::clicked, this, &DialogGameSettings::reject);
 
     connect(ui->checkBox1min, &QCheckBox::stateChanged, this, &DialogGameSettings::setState2min);
     connect(ui->checkBox2min, &QCheckBox::stateChanged, this, &DialogGameSettings::setState1min);
@@ -23,14 +23,15 @@ DialogGameSettings::~DialogGameSettings()
     delete ui;
 }
 
-void DialogGameSettings::custom()
+void DialogGameSettings::normal()
 {
-    emit customSettings(ui->lineEdit->text());
+    setTimelimit();
+    emit normalSettings(ui->lineEdit->text(), timelimit);
 }
 
-void DialogGameSettings::defaults()
+void DialogGameSettings::infinite()
 {
-    emit defaultSettings();
+    emit infiniteSettings();
 }
 
 void DialogGameSettings::setState1min()
@@ -48,6 +49,15 @@ void DialogGameSettings::setState2min()
         ui->checkBox2min->setEnabled(false);
     } else {
         ui->checkBox2min->setEnabled(true);
+    }
+}
+
+void DialogGameSettings::setTimelimit()
+{
+    if(ui->checkBox1min->isChecked()){
+        timelimit = ONE_MINUTE;
+    } else {
+        timelimit = TWO_MINUTE;
     }
 }
 } //namespace
