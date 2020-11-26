@@ -14,8 +14,8 @@ DialogGameSettings::DialogGameSettings(QWidget *parent) :
     connect(ui->defaultButton, &QPushButton::clicked, this, &DialogGameSettings::defaults);
     connect(ui->defaultButton, &QPushButton::clicked, this, &DialogGameSettings::reject);
 
-    connect(ui->checkBox1min, &QCheckBox::stateChanged, this, &DialogGameSettings::setState2min);
-    connect(ui->checkBox2min, &QCheckBox::stateChanged, this, &DialogGameSettings::setState1min);
+    //connect(ui->checkBox1min, &QCheckBox::stateChanged, this, &DialogGameSettings::setState2min);
+    //connect(ui->checkBox2min, &QCheckBox::stateChanged, this, &DialogGameSettings::setState1min);
 }
 
 DialogGameSettings::~DialogGameSettings()
@@ -35,19 +35,23 @@ void DialogGameSettings::defaults()
 
 void DialogGameSettings::setState1min()
 {
+    /*
     if(ui->checkBox2min->isChecked()) {
         ui->checkBox1min->setEnabled(false);
     } else {
         ui->checkBox1min->setEnabled(true);
     }
+    */
 }
 
 void DialogGameSettings::setState2min()
 {
+    /*
     if(ui->checkBox1min->isChecked()) {
         ui->checkBox2min->setEnabled(false);
     } else {
         ui->checkBox2min->setEnabled(true);
     }
+    */
 }
 } //namespace
