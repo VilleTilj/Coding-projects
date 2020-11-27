@@ -56,9 +56,13 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
     if(std::find(actors_.begin(), actors_.end(), actor) != actors_.end()) {
-        actor->remove();
-        actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
-        ui_->removeActor(actor);
+        if(std::shared_ptr<Interface::IPassenger> passenger = std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
+            if(passenger->isInVehicle() == true) {
+                actor->remove();
+                actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
+                ui_->removeActor(actor);
+            }
+        }
     }
 
 }
