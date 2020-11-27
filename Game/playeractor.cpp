@@ -7,12 +7,15 @@
 
 namespace StudentSide {
 
-playerActor::playerActor(Interface::Location location):x_(location.giveX()), y_(location.giveY()), location_(location)
+playerActor::playerActor(Interface::Location location):
+    x_(location.giveX()),
+    y_(location.giveY()),
+    location_(location)
 {
     setPos(mapToParent(x_, y_ ));
 
     image.load(TIMO);
-    image = image.scaled(70, 50);
+    image = image.scaled(TIMO_WIDTH, TIMO_HEIGHT);
     setPixmap(image);
 }
 
@@ -62,4 +65,4 @@ Interface::Location playerActor::giveLocation()
     return location_;
 }
 
-}
+} // namespace

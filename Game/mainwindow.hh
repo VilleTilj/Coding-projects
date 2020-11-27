@@ -18,16 +18,6 @@
 #include "interfaces/istop.hh"
 #include "playeractor.hh"
 
-const int MOVE_RIGHT = 10;
-const int MOVE_LEFT = 10;
-const int MOVE_UP = 10;
-const int MOVE_DOWN = 10;
-
-const int UP_BORDER = -10;
-const int DOWN_BORDER = 520;
-const int LEFT_BORDER = -10;
-const int RIGHT_BORDER = 1020;
-
 const int PLAYER = 3;
 const int SECOND = 1000;
 const int WIDTH_MAIN = 1095;
@@ -44,7 +34,7 @@ namespace StudentSide {
 /*!
  * \brief The mainwindow class
  */
-class mainwindow : public QMainWindow
+class Mainwindow : public QMainWindow
 {
     Q_OBJECT
 
@@ -54,12 +44,12 @@ public:
      * \brief mainwindow constructor to create mainwindow userinterface.
      * \param parent
      */
-    explicit mainwindow(QWidget *parent = nullptr);
+    explicit Mainwindow(QWidget *parent = nullptr);
 
     /*!
      * \brief Destructor
      */
-    ~mainwindow();
+    ~Mainwindow();
 
     /*!
      * \brief setBackground sets the game map to gamewindow

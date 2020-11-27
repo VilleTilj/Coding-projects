@@ -8,7 +8,7 @@
 namespace StudentSide {
 
 GameEngine::GameEngine() :
-    ui(new StudentSide::mainwindow),
+    ui(new StudentSide::Mainwindow),
     logic_(new CourseSide::Logic),
     iCityPtr(nullptr)
 {

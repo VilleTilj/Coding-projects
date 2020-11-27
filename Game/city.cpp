@@ -133,7 +133,7 @@ QImage City::getImage(std::string image_size)
 }
 
 
-void City::addUi(std::shared_ptr<StudentSide::mainwindow> ui)
+void City::addUi(std::shared_ptr<StudentSide::Mainwindow> ui)
 {
     ui_ = ui;
 }

@@ -9,7 +9,7 @@ const int PADDING = 10;
 
 namespace StudentSide {
 
-mainwindow::mainwindow(QWidget *parent) :
+Mainwindow::Mainwindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
@@ -17,11 +17,11 @@ mainwindow::mainwindow(QWidget *parent) :
     DialogGameSettings *myDialog = new DialogGameSettings;
 
     //signals
-    connect(myDialog, &DialogGameSettings::normalSettings, this, &mainwindow::normalGameSettings);
-    connect(myDialog, &DialogGameSettings::infiniteSettings, this, &mainwindow::infiniteGameSettings);
-    connect(ui->quitButton, &QPushButton::clicked, this, &mainwindow::close);
-    connect(ui->startButton, &QPushButton::clicked, this, &mainwindow::startGame);
-    connect(&timer_, &QTimer::timeout, this, &mainwindow::updateTimelimit);
+    connect(myDialog, &DialogGameSettings::normalSettings, this, &Mainwindow::normalGameSettings);
+    connect(myDialog, &DialogGameSettings::infiniteSettings, this, &Mainwindow::infiniteGameSettings);
+    connect(ui->quitButton, &QPushButton::clicked, this, &Mainwindow::close);
+    connect(ui->startButton, &QPushButton::clicked, this, &Mainwindow::startGame);
+    connect(&timer_, &QTimer::timeout, this, &Mainwindow::updateTimelimit);
     ui->gameView->setFixedSize(WIDTH_MAIN, HEIGHT_MAIN);
     ui->centralwidget->setFixedSize(WIDTH_MAIN + ui->startButton->width() + PADDING, HEIGHT_MAIN + PADDING);
     ui->startButton->move(WIDTH_MAIN + PADDING, PADDING);
@@ -37,20 +37,20 @@ mainwindow::mainwindow(QWidget *parent) :
     ui->gameView->setScene(map);
     map->setSceneRect(0,0,WIDTH_MAIN,HEIGHT_MAIN);
     resize(minimumSizeHint());
-    //myDialog->exec();
+    myDialog->exec();
     timer = new QTimer;
     connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
     timer->start(1500);
 }
 
 
-mainwindow::~mainwindow()
+Mainwindow::~Mainwindow()
 {
     delete ui;
 }
 
 
-void mainwindow::setBackground(QPixmap &image)
+void Mainwindow::setBackground(QPixmap &image)
 {
     QPixmap myImage = image;
     //QTransform myTransform;
@@ -60,7 +60,7 @@ void mainwindow::setBackground(QPixmap &image)
 }
 
 
-void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
+void Mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
 {
     Interface::Location location = actor->giveLocation();
     if(std::shared_ptr<Interface::IVehicle> nActor = std::dynamic_pointer_cast<Interface::IVehicle>(actor)) {
@@ -79,7 +79,7 @@ void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
 }
 
 
-void mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
+void Mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     Interface::Location location = stop->getLocation();
     StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(),location.giveY(), BUSS_STOP);
@@ -89,7 +89,7 @@ void mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
 }
 
 
-void mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y)
+void Mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y)
 {
     //find corresponding gpraphic actor.
     std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
@@ -102,7 +102,7 @@ void mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int 
 }
 
 
-void mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
+void Mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
     std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
     for (it = actors_.begin(); it != actors_.end(); ++it){
@@ -115,7 +115,7 @@ void mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
 }
 
 
-void mainwindow::addPlayer(std::shared_ptr<Actor> player)
+void Mainwindow::addPlayer(std::shared_ptr<Actor> player)
 {
     player_ = player;
     Interface::Location location = player_->giveLocation();
@@ -124,19 +124,19 @@ void mainwindow::addPlayer(std::shared_ptr<Actor> player)
 }
 
 
-Interface::Location mainwindow::GivePlayerLocation()
+Interface::Location Mainwindow::GivePlayerLocation()
 {
     return graphicPlayer_->giveLocation();
 }
 
 
-playerActor *mainwindow::returnPlayer()
+playerActor *Mainwindow::returnPlayer()
 {
     return graphicPlayer_;
 }
 
 
-void mainwindow::normalGameSettings(QString name, int gameTime)
+void Mainwindow::normalGameSettings(QString name, int gameTime)
 {
     if(!name.isEmpty()) {
         playerName_ = name;
@@ -149,7 +149,7 @@ void mainwindow::normalGameSettings(QString name, int gameTime)
 }
 
 
-void mainwindow::infiniteGameSettings()
+void Mainwindow::infiniteGameSettings()
 {
     ui->nameLabel->setText(playerName_);
     update_time_lcd();
@@ -157,7 +157,7 @@ void mainwindow::infiniteGameSettings()
 }
 
 
-void mainwindow::updateTimelimit()
+void Mainwindow::updateTimelimit()
 {
     if(!isInfiniteTime){
         if(secondsRunning && seconds > 0){
@@ -175,7 +175,7 @@ void mainwindow::updateTimelimit()
 }
 
 
-void mainwindow::startGame()
+void Mainwindow::startGame()
 {
     seconds = timelimit;
     timer_.start(SECOND);
@@ -183,7 +183,7 @@ void mainwindow::startGame()
     ui->startButton->setEnabled(false);
 }
 
-void mainwindow::update_time_lcd()
+void Mainwindow::update_time_lcd()
 {
     ui->time_lcd_min->display(seconds / 60);
     ui->time_lcd_sec->display(seconds % 60);

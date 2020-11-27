@@ -114,7 +114,7 @@ public:
      * \brief addUi adds mainwindows userinterface to city.
      * \param ui Userinterface.
      */
-    void addUi(std::shared_ptr<StudentSide::mainwindow> ui);
+    void addUi(std::shared_ptr<StudentSide::Mainwindow> ui);
 
     /*!
      * \brief makePlayer creates player and adds it to userinterface.
@@ -132,7 +132,7 @@ private:
     std::vector<std::shared_ptr<Interface::IActor>> actors_;     //!< Vector containing actors in game
     std::vector<std::shared_ptr<Interface::IActor>> moved_actor; //!< Vector containing moved actors
     std::vector<std::shared_ptr<Interface::IStop>> stops_;       //!< Vector containing acotrs
-    std::shared_ptr<StudentSide::mainwindow> ui_;   //!< Pointer to userinterface
+    std::shared_ptr<StudentSide::Mainwindow> ui_;   //!< Pointer to userinterface
     QTime time_;         //!< Time for game and actors
     std::shared_ptr<StudentSide::Actor> player_ ;   //!< Pointer to player.
 };

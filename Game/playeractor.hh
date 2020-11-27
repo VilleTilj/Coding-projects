@@ -6,43 +6,66 @@
 
 
 const QString TIMO = "://../pics/pics/timoTaxi.png";
+const int TIMO_WIDTH = 70;
+const int TIMO_HEIGHT = 50;
+
+const int MOVE_RIGHT = 10;
+const int MOVE_LEFT = 10;
+const int MOVE_UP = 10;
+const int MOVE_DOWN = 10;
+
+const int UP_BORDER = 0;
+const int DOWN_BORDER = 590;
+const int LEFT_BORDER = 0;
+const int RIGHT_BORDER = 1000;
 
 namespace StudentSide {
 
-
+/*!
+ * \file playeractor.hh
+ * \brief The playerActor class
+ */
 
 class playerActor : public QGraphicsPixmapItem
 {
 public:
-    playerActor();
 
+    /*!
+     * \brief playerActor constructor to set player to map
+     * \param location Location to set player
+     */
     playerActor(Interface::Location location);
 
+    /*!
+     * \brief changePosition changes players position
+     * \param x x-coordinate
+     * \param y y-coordinate
+     */
     void changePosition(int x, int y);
 
+    /*!
+     * \brief keyPressEvent reads keyinputs
+     * \param event from key presses
+     */
     void keyPressEvent(QKeyEvent* event) override;
 
+    /*!
+     * \brief giveLocation returns location of player
+     * \return location of player
+     */
     Interface::Location giveLocation();
 
 
 
 private:
-    int x_;
-    int y_;
+    int x_;     //!< x-coordinate of player
+    int y_;     //!< y-coordinate of player
 
-    QPixmap image;
+    QPixmap image;  //!< Image of player
 
-    const int MOVE_RIGHT = 10;
-    const int MOVE_LEFT = 10;
-    const int MOVE_UP = 10;
-    const int MOVE_DOWN = 10;
-
-    const int UP_BORDER = 0;
-    const int DOWN_BORDER = 590;
-    const int LEFT_BORDER = 0;
-    const int RIGHT_BORDER = 1000;
-    Interface::Location location_;
+    Interface::Location location_; //!< Location of player
 
 };
-}
+
+} // namespace
 #endif // PLAYERACTOR_HH
