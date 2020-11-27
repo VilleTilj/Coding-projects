@@ -28,6 +28,8 @@ private slots:
 
     void advance();
 
+    void initLogic();
+
 public:
 
     /*!
@@ -41,7 +43,7 @@ public:
      * \brief
      */
     void gameWindow();
-    void initLogic();
+
 
 
 private:

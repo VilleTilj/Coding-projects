@@ -84,6 +84,9 @@ private slots:
 
     void start_game();
 
+signals:
+
+    void initialize_logic();
 
 private:
     Ui::MainWindow *ui_;
