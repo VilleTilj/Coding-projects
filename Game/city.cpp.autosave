@@ -127,8 +127,6 @@ void City::makePlayer()
     player_ = std::make_shared<StudentSide::Actor>(StudentSide::Actor());
     player_->addLocation(location);
     ui_->addPlayer(player_);
-
-
 }
 
 std::vector<std::shared_ptr<Interface::IActor> > City::giveMovedActors()
@@ -137,4 +135,4 @@ std::vector<std::shared_ptr<Interface::IActor> > City::giveMovedActors()
     moved_actor.clear();
     return actors;
 }
-}
+} // namespace

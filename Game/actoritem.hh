@@ -10,7 +10,11 @@
 const QString NYSSE_STOP = ":/../pics/pics/NysseStop.png";
 const QString BUSSI = "://../pics/pics/bussi.png";
 const QString HUMAN = "://../pics/pics/huma.png";
-
+const int BUSS_STOP = 0;
+const int NYSSE = 1;
+const int PASSENGER = 2;
+const int WIDTH = 9;
+const int HEIGHT = 9;
 
 
 namespace StudentSide {
@@ -45,17 +49,10 @@ public:
     void setCoord(int x, int y);
 
 private:
-    int x_;     //!< x-coordinate for the actor
-    int y_;     //!< y-coordinate for the actor
-    int type_;  //!< type for the actor
-
-    const int BussStop = 0;    //!<
-    const int Nysse = 1;       //!<
-    const int passenger = 2;   //!<
-
-    const int WIDTH = 9;    //!<
-    const int HEIGHT = 9;   //!<
-    QPixmap image;          //!<
+    int x_;         //!< x-coordinate for the actor
+    int y_;         //!< y-coordinate for the actor
+    int type_;      //!< type for the actor
+    QPixmap image;  //!< image for actor
 };
 }
 #endif // ACTORITEM_HH

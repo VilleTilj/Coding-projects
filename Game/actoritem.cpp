@@ -11,7 +11,7 @@ ActorItem::ActorItem(int x, int y, int type):x_(x), y_(y), type_(type)
 {
     setPos(mapToParent(x_, y_ ));
 
-    if (type_ == BussStop) {
+    if (type_ == BUSS_STOP) {
         image.load(NYSSE_STOP);
         image = image.scaled(10, 10);
         setPixmap(image);
@@ -19,7 +19,7 @@ ActorItem::ActorItem(int x, int y, int type):x_(x), y_(y), type_(type)
 
 
 
-    else if (type_ == Nysse) {
+    else if (type_ == NYSSE) {
 
         image.load(BUSSI);
         image = image.scaled(15, 15);
@@ -27,7 +27,7 @@ ActorItem::ActorItem(int x, int y, int type):x_(x), y_(y), type_(type)
 
     }
 
-    else if (type_ == passenger){
+    else if (type_ == PASSENGER){
 
         image.load(HUMAN);
         image = image.scaled(30, 30);
