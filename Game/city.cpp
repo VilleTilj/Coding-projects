@@ -46,8 +46,8 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
     if(std::find(actors_.begin(), actors_.end(), newactor) == actors_.end()){
         Interface::Location location = newactor->giveLocation();
         if(location.giveX() > 0 && location.giveX() < 1100 && location.giveY() > 0 && location.giveY() < 600) {
-        actors_.push_back(newactor);
-        ui_->addActor(newactor);
+            actors_.push_back(newactor);
+            ui_->addActor(newactor);
         }
     }
 }
@@ -69,7 +69,7 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
-    return;
+    qDebug() << actor->isRemoved();
 }
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const

@@ -17,7 +17,7 @@ DialogGameSettings::DialogGameSettings(QWidget *parent) :
     connect(ui->checkBox1min, &QCheckBox::stateChanged, this, &DialogGameSettings::setState2min);
     connect(ui->checkBox2min, &QCheckBox::stateChanged, this, &DialogGameSettings::setState1min);
 
-    enableButtons();
+    changeButtonsStates();
 }
 
 DialogGameSettings::~DialogGameSettings()
@@ -43,7 +43,7 @@ void DialogGameSettings::setState1min()
     } else {
         ui->checkBox1min->setEnabled(true);
     }
-    enableButtons();
+    changeButtonsStates();
 }
 
 void DialogGameSettings::setState2min()
@@ -53,7 +53,7 @@ void DialogGameSettings::setState2min()
     } else {
         ui->checkBox2min->setEnabled(true);
     } 
-    enableButtons();
+    changeButtonsStates();
 }
 
 void DialogGameSettings::setTimelimit()
@@ -65,7 +65,7 @@ void DialogGameSettings::setTimelimit()
     }
 }
 
-void DialogGameSettings::enableButtons()
+void DialogGameSettings::changeButtonsStates()
 {
     if(ui->checkBox1min->isChecked() || ui->checkBox2min->isChecked()) {
         ui->normalGameButton->setEnabled(true);

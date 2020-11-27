@@ -2,7 +2,6 @@
 #define DIALOGGAMESETTINGS_HH
 
 #include <QDialog>
-//#include "mainwindow.hh"
 
 const int ONE_MINUTE = 60;
 const int TWO_MINUTE = 120;
@@ -16,7 +15,6 @@ namespace StudentSide {
 /*!
  * \brief The DialogGaneSettings class sets up dialog window to get pre settings for the main game
  */
-
 class DialogGameSettings : public QDialog
 {
     Q_OBJECT
@@ -27,13 +25,11 @@ public:
      * \brief DialogGameSettings constructor for the dialog window
      * \param parent
      */
-
     explicit DialogGameSettings(QWidget *parent = nullptr);
 
     /*!
      * \brief Destructor
      */
-
     ~DialogGameSettings();
 
 public slots:
@@ -61,21 +57,32 @@ public slots:
 signals:
 
     /*!
-     * \brief normalSettings
+     * \brief normalSettings to set normal game settings
+     * \param name Name of the player
+     * \param timelimit Sets the timelimit for game
      */
     void normalSettings(QString name, int timelimit);
 
     /*!
-     * \brief infiniteSettings
+     * \brief infiniteSettings to set infinite time game.
      */
     void infiniteSettings();
 
 private:
-    Ui::DialogGameSettings *ui;
-    int timelimit = 0;
+    Ui::DialogGameSettings *ui; //!< Userinterface for dialog.
+    int timelimit = 0;          //!< timelimit for the game.
 
+    /*!
+     * \brief setTimelimit sets game timelimit depending on user choise.
+     */
     void setTimelimit();
-    void enableButtons();
+
+    /*!
+     * \brief changeButtonsStates change buttons state enabled or disabled
+     * depending on checkbox states.
+     */
+    void changeButtonsStates();
 };
+
 } //namespace
 #endif // DIALOGGAMESETTINGS_HH

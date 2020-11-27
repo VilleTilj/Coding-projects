@@ -11,7 +11,7 @@ SOURCES += \
     city.cpp \
     creategame.cpp \
     dialoggamesettings.cpp \
-    initgameengine.cpp \
+    gameengine.cpp \
     main.cc \
     mainwindow.cpp \
     playeractor.cpp \
@@ -51,7 +51,7 @@ HEADERS += \
     actoritem.hh \
     city.hh \
     dialoggamesettings.hh \
-    initgameengine.hh \
+    gameengine.hh \
     mainwindow.hh \
     playeractor.hh \
     vehicle.hh

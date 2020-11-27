@@ -13,7 +13,7 @@ ActorItem::ActorItem(int x, int y, int type):x_(x), y_(y), type_(type)
 
     if (type_ == BUSS_STOP) {
         image.load(NYSSE_STOP);
-        image = image.scaled(10, 10);
+        image = image.scaled(DIM_STOP, DIM_STOP);
         setPixmap(image);
     }
 
@@ -22,7 +22,7 @@ ActorItem::ActorItem(int x, int y, int type):x_(x), y_(y), type_(type)
     else if (type_ == NYSSE) {
 
         image.load(BUSSI);
-        image = image.scaled(15, 15);
+        image = image.scaled(DIM_BUSS, DIM_BUSS);
         setPixmap(image);
 
     }
@@ -30,7 +30,7 @@ ActorItem::ActorItem(int x, int y, int type):x_(x), y_(y), type_(type)
     else if (type_ == PASSENGER){
 
         image.load(HUMAN);
-        image = image.scaled(30, 30);
+        image = image.scaled(DIM_PASSENGER, DIM_PASSENGER);
         setPixmap(image);
     }
     

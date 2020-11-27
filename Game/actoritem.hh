@@ -7,9 +7,12 @@
 #include <QPainter>
 
 
-const QString NYSSE_STOP = ":/../pics/pics/NysseStop.png";
-const QString BUSSI = "://../pics/pics/bussi.png";
-const QString HUMAN = "://../pics/pics/huma.png";
+const QString NYSSE_STOP = ":/../pics/pics/NysseStop.png"; //!< Pic of stopsign
+const QString BUSSI = "://../pics/pics/bussi.png"; //!< pic of buss
+const QString HUMAN = "://../pics/pics/huma.png"; //!< pic of passenger
+const int DIM_STOP = 10;
+const int DIM_BUSS = 15;
+const int DIM_PASSENGER = 30;
 const int BUSS_STOP = 0;
 const int NYSSE = 1;
 const int PASSENGER = 2;
@@ -49,10 +52,10 @@ public:
     void setCoord(int x, int y);
 
 private:
-    int x_;         //!< x-coordinate for the actor
-    int y_;         //!< y-coordinate for the actor
-    int type_;      //!< type for the actor
-    QPixmap image;  //!< image for actor
+    int x_;     //!< x-coordinate for the actor
+    int y_;     //!< y-coordinate for the actor
+    int type_;  //!< type for the actor
+    QPixmap image;          //!<
 };
 }
 #endif // ACTORITEM_HH

@@ -28,7 +28,6 @@ const int DOWN_BORDER = 520;
 const int LEFT_BORDER = -10;
 const int RIGHT_BORDER = 1020;
 
-
 const int PLAYER = 3;
 const int SECOND = 1000;
 
