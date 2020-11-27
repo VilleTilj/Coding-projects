@@ -36,7 +36,7 @@ void playerActor::keyPressEvent(QKeyEvent *event)
     else if( event->key() == Qt::Key_A && x_ > LEFT_BORDER)
     {
 
-        x_ = x_ - MOVE_LEFT;
+        x_ = x_ - MOVE_RIGHT;
         changePosition(x_, y_ );
     }
 
@@ -50,9 +50,10 @@ void playerActor::keyPressEvent(QKeyEvent *event)
     else if( event->key() == Qt::Key_D && x_ < RIGHT_BORDER)
     {
 
-        x_ = x_ + MOVE_UP;
+        x_ = x_ + MOVE_LEFT;
         changePosition(x_, y_ );
     }
+
 
 }
 

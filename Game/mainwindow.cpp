@@ -125,7 +125,7 @@ void mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
     for (it = actors_.begin(); it != actors_.end(); ++it)
         if(it->first == actor){
             map->removeItem(it->second);
-            qDebug() << "ryyyyyyys";
+            //qDebug() << "ryyyyyyys";
             delete it->second;
             actors_.erase(actor);
         }
