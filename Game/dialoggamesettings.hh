@@ -75,6 +75,7 @@ private:
     int timelimit = 0;
 
     void setTimelimit();
+    void enableButtons();
 };
 } //namespace
 #endif // DIALOGGAMESETTINGS_HH

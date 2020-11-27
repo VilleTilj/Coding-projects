@@ -29,11 +29,8 @@ private slots:
 
     void advance();
 
-<<<<<<< HEAD
     void initLogic();
 
-=======
->>>>>>> bef43f5052d60f068966620e74f529c7f4cb87cf
 public:
 
     /*!
