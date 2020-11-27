@@ -5,29 +5,60 @@
 
 namespace StudentSide {
 
+/*!
+ * \file actor.hh
+ * \brief The Actor class
+ */
+
 class Actor : public Interface::IActor
 {
 public:
+
+    /*!
+     * \brief Constructor for Actors
+     */
     Actor();
 
+    /*!
+    * \brief Destructor
+    * \pre -
+    **/
     ~Actor();
 
+    /*!
+     * \brief giveLocation method gives location from Interface
+     * \return location of actor
+     */
     Interface::Location giveLocation() const;
 
+    /*!
+     * \brief move the actor
+     * \param loc, location of the actor
+     * \pre loc >= 0
+     */
     void move(Interface::Location loc);
 
+    /*!
+     * \brief isRemoved checks if actor has been removed
+     * \return boolean value of if actor is removed
+     */
     bool isRemoved() const;
 
+    /*!
+     * \brief remove actor
+     */
     void remove();
 
+    /*!
+     * \brief addLocation to actor
+     * \param location of a actor
+     */
     void addLocation(Interface::Location location);
 
 private:
-    Interface::Location location_;
-    bool removed = false;
+    Interface::Location location_; //!< location of actor
+    bool removed = false; //!< boolean value of if actor exists.
 };
-
-
 
 } //namespace
 

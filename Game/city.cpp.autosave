@@ -45,7 +45,7 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     if(std::find(actors_.begin(), actors_.end(), newactor) == actors_.end()){
         Interface::Location location = newactor->giveLocation();
-        if(location.giveX() > 0 && location.giveX() < 1100 && location.giveY() > 0 && location.giveY() < 600) {
+        if(location.giveX() > 0 && location.giveX() < 1200 && location.giveY() > 0 && location.giveY() < 600) {
         actors_.push_back(newactor);
         ui_->addActor(newactor);
         }
@@ -56,13 +56,9 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
     if(std::find(actors_.begin(), actors_.end(), actor) != actors_.end()) {
-        if(std::shared_ptr<Interface::IPassenger> passenger = std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
-            if(passenger->isInVehicle() == true) {
-                actor->remove();
-                actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
-                ui_->removeActor(actor);
-            }
-        }
+        actor->remove();
+        actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
+        ui_->removeActor(actor);
     }
 
 }
@@ -131,8 +127,6 @@ void City::makePlayer()
     player_ = std::make_shared<StudentSide::Actor>(StudentSide::Actor());
     player_->addLocation(location);
     ui_->addPlayer(player_);
-
-
 }
 
 std::vector<std::shared_ptr<Interface::IActor> > City::giveMovedActors()
@@ -141,4 +135,4 @@ std::vector<std::shared_ptr<Interface::IActor> > City::giveMovedActors()
     moved_actor.clear();
     return actors;
 }
-}
+} // namespace

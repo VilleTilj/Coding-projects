@@ -19,7 +19,7 @@ ActorItem::ActorItem(int x, int y, int type):x_(x), y_(y), type_(type)
 
 
 
-    else if (type_ == NYSSE) {
+    else if (type_ == Nysse) {
 
         image.load(BUSSI);
         image = image.scaled(15, 15);
@@ -27,7 +27,7 @@ ActorItem::ActorItem(int x, int y, int type):x_(x), y_(y), type_(type)
 
     }
 
-    else if (type_ == PASSENGER){
+    else if (type_ == passenger){
 
         image.load(HUMAN);
         image = image.scaled(30, 30);
