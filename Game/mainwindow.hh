@@ -128,6 +128,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;    //!< Mainwindows userinterface
+    DialogGameSettings *myDialog;
     QGraphicsScene *map;   //!< Scene of the map of game
     QString playerName_ = "Timo";   //!< Player name
     StudentSide::ActorItem* last_;  //!< last actoritem
@@ -147,6 +148,16 @@ private:
      * \brief update_time_lcd updates time to min and sec lcd
      */
     void update_time_lcd();
+
+    /*!
+     * \brief connectSignals connects all signals and slots
+     */
+    void connectSignals();
+
+    /*!
+     * \brief setUiWidgets sets ui component to mainwindow
+     */
+    void setUiWidgets();
 
 };
 } //namespace

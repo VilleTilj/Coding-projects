@@ -26,7 +26,6 @@ void GameEngine::advance()
     //qDebug() << actor.size();
     for(unsigned long int i = 0; i < actor.size(); i++){
         cityPtr_->removeActor(actor.at(i));
-        //qDebug() << "isoryys";
     }
 }
 

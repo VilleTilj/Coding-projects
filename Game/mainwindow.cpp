@@ -11,35 +11,23 @@ namespace StudentSide {
 
 Mainwindow::Mainwindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    myDialog(new DialogGameSettings)
 {
     ui->setupUi(this);
-    DialogGameSettings *myDialog = new DialogGameSettings;
 
-    //signals
-    connect(myDialog, &DialogGameSettings::normalSettings, this, &Mainwindow::normalGameSettings);
-    connect(myDialog, &DialogGameSettings::infiniteSettings, this, &Mainwindow::infiniteGameSettings);
-    connect(ui->quitButton, &QPushButton::clicked, this, &Mainwindow::close);
-    connect(ui->startButton, &QPushButton::clicked, this, &Mainwindow::startGame);
-    connect(&timer_, &QTimer::timeout, this, &Mainwindow::updateTimelimit);
-    ui->gameView->setFixedSize(WIDTH_MAIN, HEIGHT_MAIN);
-    ui->centralwidget->setFixedSize(WIDTH_MAIN + ui->startButton->width() + PADDING, HEIGHT_MAIN + PADDING);
-    ui->startButton->move(WIDTH_MAIN + PADDING, PADDING);
-    ui->scoresButton->move(WIDTH_MAIN + PADDING, PADDING + 30);
-    ui->quitButton->move(WIDTH_MAIN + PADDING, PADDING + (2 * 30));
-    ui->playernameLabel->move(WIDTH_MAIN + PADDING, PADDING + (5*30));
-    ui->nameLabel->move(WIDTH_MAIN + PADDING, PADDING + (6*30));
-    ui->timeLabel->move(WIDTH_MAIN + PADDING, PADDING + (3*30));
-    ui->time_lcd_min->move(WIDTH_MAIN- PADDING, PADDING + (4*30));
-    ui->time_lcd_sec->move(WIDTH_MAIN+ PADDING*4, PADDING + (4*30));
+    connectSignals();
+    setUiWidgets();
+    myDialog->exec();
 
+    // create scene
     map = new QGraphicsScene(this);
     ui->gameView->setScene(map);
     map->setSceneRect(0,0,WIDTH_MAIN,HEIGHT_MAIN);
     resize(minimumSizeHint());
-    myDialog->exec();
+
+    // Create timer to move actors
     timer = new QTimer;
-    connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
     timer->start(1500);
 }
 
@@ -187,6 +175,30 @@ void Mainwindow::update_time_lcd()
 {
     ui->time_lcd_min->display(seconds / 60);
     ui->time_lcd_sec->display(seconds % 60);
+}
+
+void Mainwindow::connectSignals()
+{
+    connect(myDialog, &DialogGameSettings::normalSettings, this, &Mainwindow::normalGameSettings);
+    connect(myDialog, &DialogGameSettings::infiniteSettings, this, &Mainwindow::infiniteGameSettings);
+    connect(ui->quitButton, &QPushButton::clicked, this, &Mainwindow::close);
+    connect(ui->startButton, &QPushButton::clicked, this, &Mainwindow::startGame);
+    connect(&timer_, &QTimer::timeout, this, &Mainwindow::updateTimelimit);
+    connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+}
+
+void Mainwindow::setUiWidgets()
+{
+    ui->gameView->setFixedSize(WIDTH_MAIN, HEIGHT_MAIN);
+    ui->centralwidget->setFixedSize(WIDTH_MAIN + ui->startButton->width() + PADDING, HEIGHT_MAIN + PADDING);
+    ui->startButton->move(WIDTH_MAIN + PADDING, PADDING);
+    ui->scoresButton->move(WIDTH_MAIN + PADDING, PADDING + 30);
+    ui->quitButton->move(WIDTH_MAIN + PADDING, PADDING + (2 * 30));
+    ui->playernameLabel->move(WIDTH_MAIN + PADDING, PADDING + (5*30));
+    ui->nameLabel->move(WIDTH_MAIN + PADDING, PADDING + (6*30));
+    ui->timeLabel->move(WIDTH_MAIN + PADDING, PADDING + (3*30));
+    ui->time_lcd_min->move(WIDTH_MAIN- PADDING, PADDING + (4*30));
+    ui->time_lcd_sec->move(WIDTH_MAIN+ PADDING*4, PADDING + (4*30));
 }
 
 } //namespace
