@@ -30,7 +30,7 @@ const int DOWN_BORDER = 520;
 const int LEFT_BORDER = -10;
 const int RIGHT_BORDER = 1020;
 
-const int BussStop = 0;
+const int BUSS_STOP = 0;
 const int Nysse = 1;
 const int passenger = 2;
 const int PLAYER = 3;
