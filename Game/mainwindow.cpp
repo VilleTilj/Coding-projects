@@ -18,7 +18,10 @@ Mainwindow::Mainwindow(QWidget *parent) :
 
     connectSignals();
     setUiWidgets();
-    myDialog->exec();
+
+    ui->gameView->setFixedSize(WIDTH_MAIN, HEIGHT_MAIN);
+    ui->centralwidget->setFixedSize(WIDTH_MAIN + ui->startButton->width() + PADDING, HEIGHT_MAIN + PADDING);
+    ui->startButton->move(WIDTH_MAIN + PADDING, PADDING);
 
     // create scene
     map = new QGraphicsScene(this);
@@ -29,6 +32,8 @@ Mainwindow::Mainwindow(QWidget *parent) :
     // Create timer to move actors
     timer = new QTimer;
     timer->start(1500);
+    myDialog->exec();
+
 }
 
 
@@ -199,6 +204,7 @@ void Mainwindow::setUiWidgets()
     ui->timeLabel->move(WIDTH_MAIN + PADDING, PADDING + (3*30));
     ui->time_lcd_min->move(WIDTH_MAIN- PADDING, PADDING + (4*30));
     ui->time_lcd_sec->move(WIDTH_MAIN+ PADDING*4, PADDING + (4*30));
+    ui->points_lcd->move(WIDTH_MAIN + PADDING, PADDING + (7*30));
 }
 
 } //namespace
