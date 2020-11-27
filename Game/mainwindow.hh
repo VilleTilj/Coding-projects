@@ -2,7 +2,6 @@
 #define MAINWINDOW_HH
 
 #include "dialoggamesettings.hh"
-
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include "interfaces/iactor.hh"
@@ -18,7 +17,6 @@
 #include "interfaces/ivehicle.hh"
 #include "interfaces/istop.hh"
 #include "playeractor.hh"
-#include "actor.hh"
 
 const int MOVE_RIGHT = 10;
 const int MOVE_LEFT = 10;
@@ -96,7 +94,7 @@ private:
     const int height_ = 592;
     StudentSide::ActorItem* last_;
 
-    QMap<std::shared_ptr<Interface::IActor>, StudentSide::ActorItem *> actors_;
+    std::map<std::shared_ptr<Interface::IActor>, StudentSide::ActorItem *> actors_;
     QMap<std::shared_ptr<Interface::IStop>, StudentSide::ActorItem *>stops_;
 
 
