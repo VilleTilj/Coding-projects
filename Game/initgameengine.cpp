@@ -47,23 +47,27 @@ void InitGameEngine::initLogic()
     cityPtr_->addUi(ui_);
     logic_->takeCity(cityPtr_);
     logic_->fileConfig();
-    logic_->setTime(17, 00);
+    logic_->setTime(8, 00);
     cityPtr_->makePlayer();
     graphicPlayer_ = ui_->returnPlayer();
     logic_->finalizeGameStart();
-    timer.start(250);
+    timer.start(150);
 }
 
 
 void InitGameEngine::advance()
 {
 
+    graphicPlayer_->setFlag(QGraphicsPixmapItem::ItemIsFocusable);
+    graphicPlayer_->setFocus();
     graphicPlayer_->giveLocation();
     std::vector<std::shared_ptr<Interface::IActor>> actor = cityPtr_->getNearbyActors(graphicPlayer_->giveLocation());
+    //qDebug() << actor.size();
     for(unsigned long int i = 0; i < actor.size(); i++){
         cityPtr_->removeActor(actor.at(i));
+        //qDebug() << "isoryys";
     }
-    //qDebug() << actor.size();
+
 
 }
 

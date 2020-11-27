@@ -2,7 +2,6 @@
 #define INITGAMEENGINE_HH
 
 #include "dialoggamesettings.hh"
-#include "graphics/simplemainwindow.hh"
 #include "creategame.hh"
 #include "city.hh"
 #include "../Course/CourseLib/core/logic.hh"

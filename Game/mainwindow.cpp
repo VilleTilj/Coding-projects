@@ -79,13 +79,13 @@ void mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
 {
 
     Interface::Location location = actor->giveLocation();
-    if(std::shared_ptr<Interface::IPassenger> nActor = std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
-        type = passenger;
+    if(std::shared_ptr<Interface::IVehicle> nActor = std::dynamic_pointer_cast<Interface::IVehicle>(actor)) {
+        type = Nysse;
 
     }
 
-    else if(std::shared_ptr<Interface::IVehicle> nActor = std::dynamic_pointer_cast<Interface::IVehicle>(actor)) {
-        type = Nysse;
+    else if(std::shared_ptr<Interface::IPassenger> nActor = std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
+        type = passenger;
     }
 
     StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(), location.giveY(), type);
@@ -110,25 +110,27 @@ void mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int 
 
     //find corresponding gpraphic actor.
 
-    QMap<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
+    std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
 
     for (it = actors_.begin(); it != actors_.end(); ++it)
-        if(it.key() == actor){
-            it.value()->setCoord(x, y);
+        if(it->first == actor){
+            it->second->setCoord(x, y);
         }
 }
 
 
 void mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-    QMap<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
-
+    std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
     for (it = actors_.begin(); it != actors_.end(); ++it)
-        if(it.key() == actor){
-            map->removeItem(it.value());
-            delete it.value();
+        if(it->first == actor){
+            map->removeItem(it->second);
+            qDebug() << "ryyyyyyys";
+            delete it->second;
+            actors_.erase(actor);
         }
-    actors_.erase(it);
+
+
 }
 
 
@@ -138,8 +140,6 @@ void mainwindow::addPlayer(std::shared_ptr<Actor> player)
     Interface::Location location = player_->giveLocation();
     graphicPlayer_ = new StudentSide::playerActor(location);
     map->addItem(graphicPlayer_);
-    graphicPlayer_->setFlag(QGraphicsPixmapItem::ItemIsFocusable);
-    graphicPlayer_->setFocus();
 }
 
 
@@ -171,6 +171,7 @@ void mainwindow::start_game()
     timer_.start(SECOND);
     timelimit_running = true;
     ui_->startButton->setEnabled(false);
+
     emit initialize_logic();
 }
 
