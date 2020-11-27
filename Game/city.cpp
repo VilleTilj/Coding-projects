@@ -10,10 +10,12 @@ City::City()
 
 }
 
+
 City::~City()
 {
 
 }
+
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground) {
     small_ = basicbackground;
@@ -21,11 +23,13 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground) {
 
 }
 
+
 void City::setClock(QTime clock)
 {
     time_ = clock;
 
 }
+
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
@@ -36,10 +40,12 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
     }
 }
 
+
 void City::startGame()
 {
     return;
 }
+
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
@@ -67,10 +73,12 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 
 }
 
+
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
     qDebug() << actor->isRemoved();
 }
+
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
@@ -80,6 +88,7 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
     }
     return false;
 }
+
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
@@ -97,6 +106,7 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
     return actorsToBedeleted;
 }
 
+
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
     //moved_actor.push_back(actor);
@@ -105,10 +115,12 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 
 }
 
+
 bool City::isGameOver() const
 {
     return false;
 }
+
 
 QImage City::getImage(std::string image_size)
 {
@@ -120,10 +132,12 @@ QImage City::getImage(std::string image_size)
     }
 }
 
+
 void City::addUi(std::shared_ptr<StudentSide::mainwindow> ui)
 {
     ui_ = ui;
 }
+
 
 void City::makePlayer()
 {
@@ -135,10 +149,11 @@ void City::makePlayer()
 
 }
 
+
 std::vector<std::shared_ptr<Interface::IActor> > City::giveMovedActors()
 {
     std::vector<std::shared_ptr<Interface::IActor>> actors = moved_actor;
     moved_actor.clear();
     return actors;
 }
-}
+} // namespace
