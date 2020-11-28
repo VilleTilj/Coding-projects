@@ -21,6 +21,7 @@
 #include <QMessageBox>
 #include <QMenu>
 
+const QString RULES = "://../datafiles/datafiles/rules.txt";
 const int PLAYER = 3;
 const int SECOND = 1000;
 const int WIDTH_MAIN = 1095;
@@ -226,7 +227,7 @@ private:
      */
     void createMenus();
 
-    void readFileToMessage(QString fileName);
+    void readFileToMessage(QString fileName, QString title);
 
 };
 } //namespace

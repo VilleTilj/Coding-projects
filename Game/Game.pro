@@ -57,4 +57,5 @@ HEADERS += \
     vehicle.hh
 
 RESOURCES += \
-    Graphics.qrc
+    Graphics.qrc \
+    dataFiles.qrc

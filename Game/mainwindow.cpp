@@ -222,7 +222,8 @@ void Mainwindow::showTopScores()
 
 void Mainwindow::showRules()
 {
-
+    QString title = "Game Rules";
+    readFileToMessage(RULES, title);
 }
 
 void Mainwindow::showAboutInfo()
@@ -317,7 +318,7 @@ void Mainwindow::createMenus()
     aboutMenu->addAction(aboutUsAct);
 }
 
-void Mainwindow::readFileToMessage(QString fileName)
+void Mainwindow::readFileToMessage(QString fileName, QString title)
 {
     QString text = "";
     QFile inputFile(fileName);
@@ -327,12 +328,13 @@ void Mainwindow::readFileToMessage(QString fileName)
        while (!in.atEnd())
        {
           QString line = in.readLine();
-          text.append(line);
+          text.append(line + "\n");
        }
        inputFile.close();
     }
     QMessageBox msgBox;
     msgBox.setText(text);
+    msgBox.setWindowTitle(title);
     msgBox.exec();
 }
 
