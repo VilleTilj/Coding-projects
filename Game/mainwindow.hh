@@ -10,6 +10,7 @@
 #include "actoritem.hh"
 #include "actor.hh"
 #include "statistics.hh"
+#include "actors/nysse.hh"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
