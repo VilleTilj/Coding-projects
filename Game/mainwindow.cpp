@@ -29,6 +29,9 @@ Mainwindow::Mainwindow(QWidget *parent) :
     map->setSceneRect(0,0,WIDTH_MAIN,HEIGHT_MAIN);
     resize(minimumSizeHint());
 
+    createActions();
+    createMenus();
+
     // Create timer to move actors
     timer = new QTimer;
     timer->start(1500);
@@ -100,6 +103,7 @@ void Mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
     std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
     for (it = actors_.begin(); it != actors_.end(); ++it){
         if(it->first == actor){
+            addPoints();
             map->removeItem(it->second);
             delete it->second;
             actors_.erase(actor);
@@ -187,6 +191,11 @@ void Mainwindow::startGame()
     ui->startButton->setEnabled(false);
 }
 
+void Mainwindow::contextMenuEvent(QContextMenuEvent *event)
+{
+    QMenu menu(this);
+}
+
 void Mainwindow::update_time_lcd()
 {
     ui->time_lcd_min->display(seconds / 60);
@@ -217,6 +226,21 @@ void Mainwindow::setUiWidgets()
     ui->time_lcd_sec->move(WIDTH_MAIN+ PADDING*4, PADDING + (4*30));
     ui->points_lcd->move(WIDTH_MAIN + PADDING, PADDING + (7*30));
 
+}
+
+void Mainwindow::createActions()
+{
+    startAct = new QAction(tr("&New"),this);
+    startAct->setShortcut(tr("Ctrl+S"));
+    startAct->setStatusTip(tr("Start game!"));
+    connect(startAct, &QAction::triggered, this, &Mainwindow::startGame);
+
+}
+
+void Mainwindow::createMenus()
+{
+    gameMenu = menuBar()->addMenu(tr("&Game"));
+    gameMenu->addAction(startAct);
 }
 
 } //namespace

@@ -17,6 +17,7 @@
 #include "interfaces/ivehicle.hh"
 #include "interfaces/istop.hh"
 #include "playeractor.hh"
+#include <QMenu>
 
 const int PLAYER = 3;
 const int SECOND = 1000;
@@ -136,6 +137,12 @@ private slots:
      */
     void startGame();
 
+
+protected:
+#ifndef QT_NO_CONTEXTMENU
+    void contextMenuEvent(QContextMenuEvent *event) override;
+#endif // QT_NO_CONTEXTMENU
+
 private:
     Ui::MainWindow *ui;    //!< Mainwindows userinterface
     DialogGameSettings *myDialog;
@@ -154,6 +161,9 @@ private:
     bool isInfiniteTime = true; //!< boolean value to check gametype
     bool secondsRunning = false;//!< Check if seconds are runnign in lcds
     int points_ = 0;            //!< Game points
+    QMenu *gameMenu;
+    QAction *startAct;
+
     /*!
      * \brief update_time_lcd updates time to min and sec lcd
      */
@@ -168,6 +178,12 @@ private:
      * \brief setUiWidgets sets ui component to mainwindow
      */
     void setUiWidgets();
+
+    void createActions();
+
+    void createMenus();
+
+
 
 };
 } //namespace
