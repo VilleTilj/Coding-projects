@@ -24,6 +24,8 @@ const int SECOND = 1000;
 const int WIDTH_MAIN = 1095;
 const int HEIGHT_MAIN = 592;
 const int POINTS = 100;
+const int X_COMP = 355;
+const int Y_COMP = 547;
 
 
 namespace Ui {

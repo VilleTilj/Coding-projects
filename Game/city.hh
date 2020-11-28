@@ -14,6 +14,7 @@
  * \brief Defines city operations for game that has been inherited from iCity
  */
 
+
 namespace StudentSide
 {
 

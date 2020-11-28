@@ -67,7 +67,7 @@ void Mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
         type = PASSENGER;
     }
 
-    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(), location.giveY(), type);
+    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(X_COMP + location.giveX(), Y_COMP - location.giveY(), type);
     actors_[actor] = graphicActor;
     map->addItem(graphicActor);
     last_ = graphicActor;
@@ -77,7 +77,7 @@ void Mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
 void Mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     Interface::Location location = stop->getLocation();
-    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(location.giveX(),location.giveY(), BUSS_STOP);
+    StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(X_COMP + location.giveX(), Y_COMP - location.giveY(), BUSS_STOP);
     stops_[stop] = graphicActor;
     map->addItem(graphicActor);
     last_ = graphicActor;
@@ -91,7 +91,7 @@ void Mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int 
 
     for (it = actors_.begin(); it != actors_.end(); ++it){
         if(it->first == actor){
-            it->second->setCoord(x, y);
+            it->second->setCoord(X_COMP + x, Y_COMP - y);
         }
     }
 }
