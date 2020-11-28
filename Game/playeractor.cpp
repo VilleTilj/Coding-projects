@@ -21,9 +21,9 @@ playerActor::playerActor(Interface::Location location):
 
 void playerActor::changePosition(int x, int y)
 {
-    setX( x );
-    setY( y );
-    location_.setXY(x,y);
+    setX(x);
+    setY(y);
+    location_.setXY(x, y);
 }
 
 void playerActor::keyPressEvent(QKeyEvent *event)

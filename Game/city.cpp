@@ -95,10 +95,12 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
     std::vector<std::shared_ptr<Interface::IActor>> actorsToBedeleted;
     for(unsigned long int i = 0; i < actors_.size(); i++) {
         Interface::Location location = actors_.at(i)->giveLocation();
+        Interface::Location customLocation = loc;
+        customLocation.setXY(X_COMP + location.giveX(), Y_COMP - location.giveY());
         //qDebug() << location.giveX(), location.giveY();
         //qDebug() << loc.giveX();
         //qDebug() << loc.giveY();
-        if(location.isClose(loc, 30) == true){
+        if(customLocation.isClose(loc, 30) == true){
             actorsToBedeleted.push_back(actors_[i]);
 
         }
