@@ -22,6 +22,7 @@
 #include <QMenu>
 
 const QString RULES = "://../datafiles/datafiles/rules.txt";
+const QString ABOUT = "://../datafiles/datafiles/about.txt";
 const int PLAYER = 3;
 const int SECOND = 1000;
 const int WIDTH_MAIN = 1095;

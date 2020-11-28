@@ -228,7 +228,8 @@ void Mainwindow::showRules()
 
 void Mainwindow::showAboutInfo()
 {
-
+    QString title = "About...";
+    readFileToMessage(ABOUT, title);
 }
 
 void Mainwindow::contextMenuEvent(QContextMenuEvent *event)
@@ -294,7 +295,7 @@ void Mainwindow::createActions()
     quitAct->setStatusTip(tr("Quit game"));
     connect(quitAct, &QAction::triggered, this, &Mainwindow::close);
 
-    rulesAct = new QAction(tr("&Game rules"));
+    rulesAct = new QAction(tr("&Read me!"));
     rulesAct->setStatusTip(tr("Popup window containing rules"));
     connect(rulesAct, &QAction::triggered, this, &Mainwindow::showRules);
 

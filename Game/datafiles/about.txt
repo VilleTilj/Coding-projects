@@ -1,0 +1,12 @@
+TIE-02402 Ohjelmointi 3: Tekniikat, Syksy 2020
+TIE-02408 Programming 3: Techniques, fall 2020
+
+Nysse project
+
+We do NOT own any of these graphical properties of the software.
+
+The program is created by:
+Teemu Mökkönen, teemu.mokkonen@tuni.fi,
+Ville Tiljander, ville.tiljander@tuni.fi, 274523
+
+This program has been created for educational purposes!
