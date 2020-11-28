@@ -2,6 +2,11 @@
 #define STATISTICS_HH
 
 #include "interfaces/istatistics.hh"
+#include "interfaces/iactor.hh"
+#include "interfaces/ipassenger.hh"
+#include <memory>
+
+const int POINTS_FROM_PASSENGER = 100;
 
 namespace StudentSide {
 
@@ -13,13 +18,21 @@ public:
 
     ~Statistics();
 
-    void morePassengers(int num);
+    void morePassengers(int num) override;
 
-    void nysseRemoved();
+    void nysseRemoved() override;
 
-    void newNysse();
+    void newNysse() override;
 
-    void nysseLeft();
+    void nysseLeft() override;
+
+    void Addpoints(std::shared_ptr<Interface::IActor> actor);
+
+    int giveCurrentPoints();
+
+private:
+
+    int points = 0;
 };
 
 } //namespace

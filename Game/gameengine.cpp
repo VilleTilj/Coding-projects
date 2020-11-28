@@ -55,13 +55,15 @@ void GameEngine::initLogic()
 {
     cityPtr_->addUi(ui);
     cityPtr_->takeStats(stats);
+    ui->takeStats(stats);
+    cityPtr_->startGame();
     logic_->takeCity(cityPtr_);
     logic_->fileConfig();
     logic_->setTime(19, 00);
     cityPtr_->makePlayer();
     graphicPlayer_ = ui->returnPlayer();
     logic_->finalizeGameStart();
-    timer.start(350);
+    timer.start(1);
 }
 
 

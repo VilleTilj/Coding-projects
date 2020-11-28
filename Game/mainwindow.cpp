@@ -102,6 +102,7 @@ void Mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
     std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
     for (it = actors_.begin(); it != actors_.end(); ++it){
         if(it->first == actor){
+            stats_->Addpoints(actor);
             addPoints();
             map->removeItem(it->second);
             delete it->second;
@@ -133,8 +134,12 @@ playerActor *Mainwindow::returnPlayer()
 
 void Mainwindow::addPoints()
 {
-    points_ = points_ + POINTS;
-    ui->points_lcd->display(points_);
+    ui->points_lcd->display(stats_->giveCurrentPoints());
+}
+
+void Mainwindow::takeStats(std::shared_ptr<Statistics> stats)
+{
+    stats_ = stats;
 }
 
 QPushButton *Mainwindow::getStartButton()

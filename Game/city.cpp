@@ -44,7 +44,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 
 void City::startGame()
 {
-    return;
+    gamestarted = true;
 }
 
 

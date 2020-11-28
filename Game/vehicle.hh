@@ -29,25 +29,25 @@ public:
      * \brief getName returns the name of the vehicle
      * \return the name of vehicle
      */
-    std::string getName() const;
+    std::string getName() const override;
 
     /*!
      * \brief getPassengers returns vector containing passengers
      * \return vector containing passengers
      */
-    std::vector<std::shared_ptr<Interface::IPassenger> > getPassengers() const;
+    std::vector<std::shared_ptr<Interface::IPassenger> > getPassengers() const override;
 
     /*!
      * \brief addPassenger adds passenger to vehicle
      * \param passenger
      */
-    void addPassenger(std::shared_ptr<Interface::IPassenger> passenger);
+    void addPassenger(std::shared_ptr<Interface::IPassenger> passenger) override;
 
     /*!
      * \brief removePassenger removes passenger form vehicle
      * \param passenger
      */
-    void removePassenger(std::shared_ptr<Interface::IPassenger> passenger);
+    void removePassenger(std::shared_ptr<Interface::IPassenger> passenger) override;
 };
 
 } //namespace

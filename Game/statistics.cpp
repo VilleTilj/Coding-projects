@@ -38,4 +38,19 @@ void Statistics::nysseLeft()
 {
     qDebug() << "Nysse has left the game";
 }
+
+void Statistics::Addpoints(std::shared_ptr<Interface::IActor> actor)
+{
+     if(std::shared_ptr<Interface::IPassenger> passenger = std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
+         points += POINTS_FROM_PASSENGER;
+     }
+}
+
+int Statistics::giveCurrentPoints()
+{
+    return points;
+}
+
+
+
 }

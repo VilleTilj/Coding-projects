@@ -29,25 +29,25 @@ public:
      * \brief giveLocation method gives location from Interface
      * \return location of actor
      */
-    Interface::Location giveLocation() const;
+    Interface::Location giveLocation() const override;
 
     /*!
      * \brief move the actor
      * \param loc, location of the actor
      * \pre loc >= 0
      */
-    void move(Interface::Location loc);
+    void move(Interface::Location loc) override;
 
     /*!
      * \brief isRemoved checks if actor has been removed
      * \return boolean value of if actor is removed
      */
-    bool isRemoved() const;
+    bool isRemoved() const override;
 
     /*!
      * \brief remove actor
      */
-    void remove();
+    void remove() override;
 
     /*!
      * \brief addLocation to actor
