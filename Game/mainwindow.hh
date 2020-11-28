@@ -137,6 +137,11 @@ private slots:
      */
     void startGame();
 
+    /*!
+     * \brief restartGame restarts game with chosen settings
+     */
+    void restartGame();
+
 
 protected:
 #ifndef QT_NO_CONTEXTMENU
@@ -161,8 +166,10 @@ private:
     bool isInfiniteTime = true; //!< boolean value to check gametype
     bool secondsRunning = false;//!< Check if seconds are runnign in lcds
     int points_ = 0;            //!< Game points
+
     QMenu *gameMenu;
     QAction *startAct;
+    QAction *restartAct;
 
     /*!
      * \brief update_time_lcd updates time to min and sec lcd
@@ -179,8 +186,14 @@ private:
      */
     void setUiWidgets();
 
+    /*!
+     * \brief createActions creates menu actions
+     */
     void createActions();
 
+    /*!
+     * \brief createMenus creates menus to mainwindow
+     */
     void createMenus();
 
 

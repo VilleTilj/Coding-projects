@@ -191,9 +191,16 @@ void Mainwindow::startGame()
     ui->startButton->setEnabled(false);
 }
 
+void Mainwindow::restartGame()
+{
+
+}
+
 void Mainwindow::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu menu(this);
+    menu.addAction(startAct);
+    menu.exec(event->globalPos());
 }
 
 void Mainwindow::update_time_lcd()
@@ -230,17 +237,22 @@ void Mainwindow::setUiWidgets()
 
 void Mainwindow::createActions()
 {
-    startAct = new QAction(tr("&New"),this);
+    startAct = new QAction(tr("&Start"),this);
     startAct->setShortcut(tr("Ctrl+S"));
     startAct->setStatusTip(tr("Start game!"));
     connect(startAct, &QAction::triggered, this, &Mainwindow::startGame);
 
+    restartAct = new QAction(tr("&Restart"),this);
+    restartAct->setShortcut(tr("Ctrl+R"));
+    restartAct->setStatusTip(tr("Restart game"));
+    connect(restartAct, &QAction::triggered, this, &Mainwindow::restartGame);
 }
 
 void Mainwindow::createMenus()
 {
     gameMenu = menuBar()->addMenu(tr("&Game"));
     gameMenu->addAction(startAct);
+    gameMenu->addAction(restartAct);
 }
 
 } //namespace
