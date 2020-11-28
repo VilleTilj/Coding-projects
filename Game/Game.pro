@@ -59,3 +59,6 @@ HEADERS += \
 RESOURCES += \
     Graphics.qrc \
     dataFiles.qrc
+
+DISTFILES += \
+    scores.csv

@@ -153,6 +153,11 @@ void Mainwindow::normalGameSettings(QString name, int gameTime)
     if(!name.isEmpty()) {
         playerName_ = name;
     }
+    if(gameTime == ONE_MINUTE){
+        gamemode = "1min";
+    } else {
+        gamemode = "2min";
+    }
     ui->nameLabel->setText(playerName_);
     timelimit = gameTime;
     seconds = timelimit;
@@ -183,6 +188,7 @@ void Mainwindow::updateTimelimit()
             update_time_lcd();
         } else {
             timer_.stop();
+            gameEnding();
             ui->startButton->setEnabled(true);
             startAct->setEnabled(true);
             secondsRunning = false;
@@ -217,7 +223,8 @@ void Mainwindow::changeSettings()
 
 void Mainwindow::showTopScores()
 {
-
+    QString title = "Scores in format 'Gamemode Name Points'";
+    readFileToMessage(SCORES, title);
 }
 
 void Mainwindow::showRules()
@@ -239,6 +246,20 @@ void Mainwindow::contextMenuEvent(QContextMenuEvent *event)
     menu.addAction(restartAct);
     menu.exec(event->globalPos());
 }
+
+void Mainwindow::gameEnding()
+{
+    if(!isInfiniteTime) {
+        QFile data(SCORES);
+        if(data.open(QFile::WriteOnly |QFile::Truncate)){
+            QTextStream stream(&data);
+            stream << gamemode << "\t" << ui->playernameLabel->text() << "\t" << points_ << "\t";
+            data.close();
+        }
+    }
+}
+
+
 
 void Mainwindow::update_time_lcd()
 {
@@ -329,7 +350,15 @@ void Mainwindow::readFileToMessage(QString fileName, QString title)
        while (!in.atEnd())
        {
           QString line = in.readLine();
-          text.append(line + "\n");
+          if(title == "Scores"){
+                QStringList splittedline =  line.split(";");
+                for (int i = 0; i < splittedline.size(); i++){
+                    text.append(splittedline.at(i) + " ");
+                }
+                text.append("\n");
+          }else {
+                text.append(line + "\n");
+          }
        }
        inputFile.close();
     }

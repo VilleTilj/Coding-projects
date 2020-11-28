@@ -67,11 +67,13 @@ void DialogGameSettings::setTimelimit()
 
 void DialogGameSettings::changeButtonsStates()
 {
-    if(ui->checkBox1min->isChecked() || ui->checkBox2min->isChecked()) {
+    if((ui->checkBox1min->isChecked() || ui->checkBox2min->isChecked()) && !ui->lineEdit->text().isEmpty()) {
         ui->normalGameButton->setEnabled(true);
+        ui->infiniteGameButton->setEnabled(true);
     } else {
         ui->normalGameButton->setEnabled(false);
+        ui->infiniteGameButton->setEnabled(false);
+
     }
-    ui->infiniteGameButton->setEnabled(true);
 }
 } //namespace

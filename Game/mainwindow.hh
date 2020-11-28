@@ -23,11 +23,13 @@
 
 const QString RULES = "://../datafiles/datafiles/rules.txt";
 const QString ABOUT = "://../datafiles/datafiles/about.txt";
+const QString SCORES = "://../datafiles/datafiles/scores.csv";
+
 const int PLAYER = 3;
 const int SECOND = 1000;
 const int WIDTH_MAIN = 1095;
 const int HEIGHT_MAIN = 592;
-const int POINTS = 100;
+const int POINTS = 10;
 const int X_COMP = 355;
 const int Y_COMP = 547;
 
@@ -194,6 +196,7 @@ private:
     bool isInfiniteTime = true; //!< boolean value to check gametype
     bool secondsRunning = false;//!< Check if seconds are runnign in lcds
     int points_ = 0;            //!< Game points
+    QString gamemode = "";
 
     QMenu *gameMenu;
     QMenu *aboutMenu;
@@ -204,6 +207,12 @@ private:
     QAction *quitAct;
     QAction *rulesAct;
     QAction *aboutUsAct;
+
+    /*!
+     * \brief gameEnding stops game when timelimit is reached and save highscores
+     *
+     */
+    void gameEnding();
 
     /*!
      * \brief update_time_lcd updates time to min and sec lcd

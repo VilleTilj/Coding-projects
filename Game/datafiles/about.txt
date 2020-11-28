@@ -5,6 +5,12 @@ Nysse project
 
 We do NOT own any of these graphical properties of the software.
 
+Used sources for pictures:
+[1] Taxi: https://www.pinterest.com/pin/584482857867566535/
+[2] Sticman:
+[3] BussStop:
+[4] Buss:
+
 The program is created by:
 Teemu Mökkönen, teemu.mokkonen@tuni.fi,
 Ville Tiljander, ville.tiljander@tuni.fi, 274523
