@@ -66,7 +66,7 @@ signals:
     /*!
      * \brief infiniteSettings to set infinite time game.
      */
-    void infiniteSettings();
+    void infiniteSettings(QString name);
 
 private:
     Ui::DialogGameSettings *ui; //!< Userinterface for dialog.

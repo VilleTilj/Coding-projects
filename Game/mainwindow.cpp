@@ -20,7 +20,7 @@ Mainwindow::Mainwindow(QWidget *parent) :
     setUiWidgets();
 
     ui->gameView->setFixedSize(WIDTH_MAIN, HEIGHT_MAIN);
-    ui->centralwidget->setFixedSize(WIDTH_MAIN + ui->startButton->width() + PADDING, HEIGHT_MAIN + PADDING);
+    ui->centralwidget->setFixedSize(WIDTH_MAIN + ui->startButton->width() + PADDING*2, HEIGHT_MAIN + PADDING);
     ui->startButton->move(WIDTH_MAIN + PADDING, PADDING);
 
     // create scene
@@ -137,9 +137,14 @@ void Mainwindow::addPoints()
     ui->points_lcd->display(points_);
 }
 
-QPushButton* Mainwindow::getStartButton()
+QPushButton *Mainwindow::getStartButton()
 {
     return ui->startButton;
+}
+
+QAction *Mainwindow::getStartAction()
+{
+    return startAct;
 }
 
 
@@ -151,14 +156,20 @@ void Mainwindow::normalGameSettings(QString name, int gameTime)
     ui->nameLabel->setText(playerName_);
     timelimit = gameTime;
     seconds = timelimit;
+    points_ = 0;
+    ui->points_lcd->display(points_);
     update_time_lcd();
     isInfiniteTime = false;
 }
 
 
-void Mainwindow::infiniteGameSettings()
+void Mainwindow::infiniteGameSettings(QString name)
 {
+    playerName_ = name;
     ui->nameLabel->setText(playerName_);
+    seconds = 0;
+    points_ = 0;
+    ui->points_lcd->display(points_);
     update_time_lcd();
     isInfiniteTime = true;
 }
@@ -173,6 +184,7 @@ void Mainwindow::updateTimelimit()
         } else {
             timer_.stop();
             ui->startButton->setEnabled(true);
+            startAct->setEnabled(true);
             secondsRunning = false;
         }
     } else {
@@ -188,11 +200,19 @@ void Mainwindow::startGame()
     timer_.start(SECOND);
     secondsRunning = true;
     ui->startButton->setEnabled(false);
+    startAct->setEnabled(false);
+    points_ = 0;
 }
 
 void Mainwindow::restartGame()
 {
 
+}
+
+void Mainwindow::changeSettings()
+{
+    // TODO stop the game logic
+    myDialog->exec();
 }
 
 void Mainwindow::showTopScores()
@@ -238,12 +258,13 @@ void Mainwindow::setUiWidgets()
     ui->gameView->setFixedSize(WIDTH_MAIN, HEIGHT_MAIN);
     ui->centralwidget->setFixedSize(WIDTH_MAIN + ui->startButton->width() + PADDING, HEIGHT_MAIN + PADDING);
     ui->startButton->move(WIDTH_MAIN + PADDING, PADDING);
-    ui->playernameLabel->move(WIDTH_MAIN + PADDING, PADDING + (5*30));
-    ui->nameLabel->move(WIDTH_MAIN + PADDING, PADDING + (6*30));
-    ui->timeLabel->move(WIDTH_MAIN + PADDING, PADDING + (3*30));
-    ui->time_lcd_min->move(WIDTH_MAIN- PADDING, PADDING + (4*30));
-    ui->time_lcd_sec->move(WIDTH_MAIN+ PADDING*4, PADDING + (4*30));
-    ui->points_lcd->move(WIDTH_MAIN + PADDING, PADDING + (7*30));
+    ui->playernameLabel->move(WIDTH_MAIN + PADDING, PADDING + (2*30));
+    ui->nameLabel->move(WIDTH_MAIN + PADDING, PADDING + (3*30));
+    ui->timeLabel->move(WIDTH_MAIN + PADDING/2, PADDING + (5*30));
+    ui->time_lcd_min->move(WIDTH_MAIN, PADDING + (6*30));
+    ui->time_lcd_sec->move(WIDTH_MAIN + PADDING * 5, PADDING + (6*30));
+    ui->pointsLabel->move(WIDTH_MAIN + PADDING, PADDING + (8*30));
+    ui->points_lcd->move(WIDTH_MAIN + PADDING, PADDING + (9*30));
 
 }
 
@@ -258,6 +279,10 @@ void Mainwindow::createActions()
     restartAct->setShortcut(tr("Ctrl+R"));
     restartAct->setStatusTip(tr("Restarts game"));
     connect(restartAct, &QAction::triggered, this, &Mainwindow::restartGame);
+
+    changeSettingsAct = new QAction(tr("&Change settings"));
+    changeSettingsAct->setStatusTip(tr("Launches dialog for settings"));
+    connect(changeSettingsAct, &QAction::triggered, this, &Mainwindow::changeSettings);
 
     showScores = new QAction(tr("&Top scores"));
     showScores->setStatusTip(tr("Show top scores"));
@@ -282,6 +307,7 @@ void Mainwindow::createMenus()
     gameMenu = menuBar()->addMenu(tr("&Game"));
     gameMenu->addAction(startAct);
     gameMenu->addAction(restartAct);
+    gameMenu->addAction(changeSettingsAct);
     gameMenu->addSeparator();
     gameMenu->addAction(showScores);
     gameMenu->addAction(quitAct);
@@ -289,6 +315,25 @@ void Mainwindow::createMenus()
     aboutMenu = menuBar()->addMenu(tr("&About"));
     aboutMenu->addAction(rulesAct);
     aboutMenu->addAction(aboutUsAct);
+}
+
+void Mainwindow::readFileToMessage(QString fileName)
+{
+    QString text = "";
+    QFile inputFile(fileName);
+    if (inputFile.open(QIODevice::ReadOnly))
+    {
+       QTextStream in(&inputFile);
+       while (!in.atEnd())
+       {
+          QString line = in.readLine();
+          text.append(line);
+       }
+       inputFile.close();
+    }
+    QMessageBox msgBox;
+    msgBox.setText(text);
+    msgBox.exec();
 }
 
 } //namespace

@@ -17,7 +17,9 @@ GameEngine::GameEngine() :
     gameWindow();
     connect(&timer, &QTimer::timeout, this, &GameEngine::advance);
     connect(ui->getStartButton(), &QPushButton::clicked, this, &GameEngine::initLogic);
+    connect(ui->getStartAction(), &QAction::triggered, this, &GameEngine::initLogic);
 }
+
 
 
 void GameEngine::advance()
@@ -62,9 +64,6 @@ void GameEngine::gameWindow()
     QPixmap map;
     map.load(bigMap);
     ui->setBackground(map);
-    //start game logic
-    //initLogic();
-
 }
 
 } //namespace

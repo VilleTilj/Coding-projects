@@ -2,21 +2,23 @@
 #define MAINWINDOW_HH
 
 #include "dialoggamesettings.hh"
+#include "interfaces/ipassenger.hh"
+#include "interfaces/ivehicle.hh"
+#include "interfaces/istop.hh"
+#include "playeractor.hh"
+#include "interfaces/iactor.hh"
+#include "actoritem.hh"
+#include "actor.hh"
+
 #include <QMainWindow>
 #include <QGraphicsScene>
-#include "interfaces/iactor.hh"
 #include <QTimer>
 #include <iostream>
 #include <memory>
 #include <QVector>
 #include <QPixmap>
 #include <QMap>
-#include "actoritem.hh"
-#include "actor.hh"
-#include "interfaces/ipassenger.hh"
-#include "interfaces/ivehicle.hh"
-#include "interfaces/istop.hh"
-#include "playeractor.hh"
+#include <QMessageBox>
 #include <QMenu>
 
 const int PLAYER = 3;
@@ -113,6 +115,8 @@ public:
      */
     QPushButton* getStartButton();
 
+    QAction* getStartAction();
+
 private slots:
 
     /*!
@@ -125,7 +129,7 @@ private slots:
     /*!
      * \brief infiniteGameSettings adjusts game to be infinite time
      */
-    void infiniteGameSettings();
+    void infiniteGameSettings(QString name);
 
     /*!
      * \brief updateTimelimit updates time to lcds in mainwindow and stops timer when needed
@@ -141,6 +145,11 @@ private slots:
      * \brief restartGame restarts game with chosen settings
      */
     void restartGame();
+
+    /*!
+     * \brief changeSettings launches dialoggamesettings dialog to change settings
+     */
+    void changeSettings();
 
     /*!
      * \brief showTopScores shows top ten scores of 1min and 2 min games
@@ -186,6 +195,7 @@ private:
     QMenu *aboutMenu;
     QAction *startAct;
     QAction *restartAct;
+    QAction *changeSettingsAct;
     QAction *showScores;
     QAction *quitAct;
     QAction *rulesAct;
@@ -216,7 +226,7 @@ private:
      */
     void createMenus();
 
-
+    void readFileToMessage(QString fileName);
 
 };
 } //namespace

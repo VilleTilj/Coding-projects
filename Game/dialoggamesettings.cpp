@@ -33,7 +33,7 @@ void DialogGameSettings::normal()
 
 void DialogGameSettings::infinite()
 {
-    emit infiniteSettings();
+    emit infiniteSettings(ui->lineEdit->text());
 }
 
 void DialogGameSettings::setState1min()

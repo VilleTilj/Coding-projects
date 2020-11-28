@@ -78,12 +78,12 @@
      <rect>
       <x>280</x>
       <y>120</y>
-      <width>63</width>
+      <width>111</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Time</string>
+     <string>Time (min/sec)</string>
     </property>
    </widget>
    <widget class="QLCDNumber" name="time_lcd_min">
@@ -104,6 +104,19 @@
       <width>51</width>
       <height>23</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="pointsLabel">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>200</y>
+      <width>63</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Points</string>
     </property>
    </widget>
   </widget>
