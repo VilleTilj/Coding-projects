@@ -22,7 +22,7 @@ const int PLAYER = 3;
 const int SECOND = 1000;
 const int WIDTH_MAIN = 1095;
 const int HEIGHT_MAIN = 592;
-
+const int POINTS = 100;
 
 
 namespace Ui {
@@ -101,6 +101,16 @@ public:
      */
     StudentSide::playerActor *returnPlayer();
 
+    /*!
+     * \brief addPoints adds points to points_lcd
+     */
+    void addPoints();
+
+    /*!
+     * \brief getStartButton gives startButton
+     * \return starButton of userinterface
+     */
+    QPushButton* getStartButton();
 
 private slots:
 
@@ -142,8 +152,8 @@ private:
     int timelimit = 0;          //!< timelimit for game
     int seconds = 0;            //!< seconds to count and show in lcds
     bool isInfiniteTime = true; //!< boolean value to check gametype
-    bool secondsRunning = false; //!< Check if seconds are runnign in lcds
-
+    bool secondsRunning = false;//!< Check if seconds are runnign in lcds
+    int points_ = 0;            //!< Game points
     /*!
      * \brief update_time_lcd updates time to min and sec lcd
      */

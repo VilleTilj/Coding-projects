@@ -1,8 +1,10 @@
 ﻿#include "gameengine.hh"
+#include "ui_mainwindow.h"
 #include <memory>
 #include <QImage>
 #include <QDebug>
 #include <QObject>
+#include <QPushButton>
 
 
 namespace StudentSide {
@@ -14,6 +16,7 @@ GameEngine::GameEngine() :
 {
     gameWindow();
     connect(&timer, &QTimer::timeout, this, &GameEngine::advance);
+    connect(ui->getStartButton(), &QPushButton::clicked, this, &GameEngine::initLogic);
 }
 
 
@@ -26,6 +29,7 @@ void GameEngine::advance()
     //qDebug() << actor.size();
     for(unsigned long int i = 0; i < actor.size(); i++){
         cityPtr_->removeActor(actor.at(i));
+        ui->addPoints(); // TODO needs improving
     }
 }
 
@@ -60,7 +64,7 @@ void GameEngine::gameWindow()
     map.load(bigMap);
     ui->setBackground(map);
     //start game logic
-    initLogic();
+    //initLogic();
 
 }
 
