@@ -142,6 +142,21 @@ private slots:
      */
     void restartGame();
 
+    /*!
+     * \brief showTopScores shows top ten scores of 1min and 2 min games
+     */
+    void showTopScores();
+
+    /*!
+     * \brief showRules shows the game rules in popup
+     */
+    void showRules();
+
+    /*!
+     * \brief showAboutInfo show the aboutUs information in popup
+     */
+    void showAboutInfo();
+
 
 protected:
 #ifndef QT_NO_CONTEXTMENU
@@ -168,8 +183,13 @@ private:
     int points_ = 0;            //!< Game points
 
     QMenu *gameMenu;
+    QMenu *aboutMenu;
     QAction *startAct;
     QAction *restartAct;
+    QAction *showScores;
+    QAction *quitAct;
+    QAction *rulesAct;
+    QAction *aboutUsAct;
 
     /*!
      * \brief update_time_lcd updates time to min and sec lcd

@@ -50,32 +50,6 @@
      <string>nameLabel</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="scoresButton">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>50</y>
-      <width>81</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Topscores</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="quitButton">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>90</y>
-      <width>84</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Quit</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="playernameLabel">
     <property name="geometry">
      <rect>

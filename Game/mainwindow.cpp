@@ -36,7 +36,6 @@ Mainwindow::Mainwindow(QWidget *parent) :
     timer = new QTimer;
     timer->start(1500);
     myDialog->exec();
-
 }
 
 
@@ -196,10 +195,26 @@ void Mainwindow::restartGame()
 
 }
 
+void Mainwindow::showTopScores()
+{
+
+}
+
+void Mainwindow::showRules()
+{
+
+}
+
+void Mainwindow::showAboutInfo()
+{
+
+}
+
 void Mainwindow::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu menu(this);
     menu.addAction(startAct);
+    menu.addAction(restartAct);
     menu.exec(event->globalPos());
 }
 
@@ -213,7 +228,6 @@ void Mainwindow::connectSignals()
 {
     connect(myDialog, &DialogGameSettings::normalSettings, this, &Mainwindow::normalGameSettings);
     connect(myDialog, &DialogGameSettings::infiniteSettings, this, &Mainwindow::infiniteGameSettings);
-    connect(ui->quitButton, &QPushButton::clicked, this, &Mainwindow::close);
     connect(ui->startButton, &QPushButton::clicked, this, &Mainwindow::startGame);
     connect(&timer_, &QTimer::timeout, this, &Mainwindow::updateTimelimit);
     //connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
@@ -224,8 +238,6 @@ void Mainwindow::setUiWidgets()
     ui->gameView->setFixedSize(WIDTH_MAIN, HEIGHT_MAIN);
     ui->centralwidget->setFixedSize(WIDTH_MAIN + ui->startButton->width() + PADDING, HEIGHT_MAIN + PADDING);
     ui->startButton->move(WIDTH_MAIN + PADDING, PADDING);
-    ui->scoresButton->move(WIDTH_MAIN + PADDING, PADDING + 30);
-    ui->quitButton->move(WIDTH_MAIN + PADDING, PADDING + (2 * 30));
     ui->playernameLabel->move(WIDTH_MAIN + PADDING, PADDING + (5*30));
     ui->nameLabel->move(WIDTH_MAIN + PADDING, PADDING + (6*30));
     ui->timeLabel->move(WIDTH_MAIN + PADDING, PADDING + (3*30));
@@ -239,13 +251,30 @@ void Mainwindow::createActions()
 {
     startAct = new QAction(tr("&Start"),this);
     startAct->setShortcut(tr("Ctrl+S"));
-    startAct->setStatusTip(tr("Start game!"));
+    startAct->setStatusTip(tr("Starts game!"));
     connect(startAct, &QAction::triggered, this, &Mainwindow::startGame);
 
     restartAct = new QAction(tr("&Restart"),this);
     restartAct->setShortcut(tr("Ctrl+R"));
-    restartAct->setStatusTip(tr("Restart game"));
+    restartAct->setStatusTip(tr("Restarts game"));
     connect(restartAct, &QAction::triggered, this, &Mainwindow::restartGame);
+
+    showScores = new QAction(tr("&Top scores"));
+    showScores->setStatusTip(tr("Show top scores"));
+    connect(showScores, &QAction::triggered, this, &Mainwindow::showTopScores);
+
+    quitAct = new QAction(tr("&Quit"));
+    quitAct->setShortcut(tr("Esc"));
+    quitAct->setStatusTip(tr("Quit game"));
+    connect(quitAct, &QAction::triggered, this, &Mainwindow::close);
+
+    rulesAct = new QAction(tr("&Game rules"));
+    rulesAct->setStatusTip(tr("Popup window containing rules"));
+    connect(rulesAct, &QAction::triggered, this, &Mainwindow::showRules);
+
+    aboutUsAct = new QAction(tr("&About us"));
+    aboutUsAct->setStatusTip(tr("Popup window containing information about us"));
+    connect(aboutUsAct, &QAction::triggered, this, &Mainwindow::showAboutInfo);
 }
 
 void Mainwindow::createMenus()
@@ -253,6 +282,13 @@ void Mainwindow::createMenus()
     gameMenu = menuBar()->addMenu(tr("&Game"));
     gameMenu->addAction(startAct);
     gameMenu->addAction(restartAct);
+    gameMenu->addSeparator();
+    gameMenu->addAction(showScores);
+    gameMenu->addAction(quitAct);
+
+    aboutMenu = menuBar()->addMenu(tr("&About"));
+    aboutMenu->addAction(rulesAct);
+    aboutMenu->addAction(aboutUsAct);
 }
 
 } //namespace
