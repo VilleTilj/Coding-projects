@@ -122,6 +122,7 @@ public:
      */
     void makePlayer();
 
+    void DestroyTimo(std::shared_ptr<Interface::IActor> actor);
     /*!
      * \brief giveMovedActors returns vector containing moved actors.
      * \return vector containing pointer to actors.

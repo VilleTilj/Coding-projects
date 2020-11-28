@@ -9,10 +9,10 @@ const QString TIMO = "://../pics/pics/timoTaxi.png";
 const int TIMO_WIDTH = 70;
 const int TIMO_HEIGHT = 50;
 
-const int MOVE_RIGHT = 10;
-const int MOVE_LEFT = 10;
-const int MOVE_UP = 10;
-const int MOVE_DOWN = 10;
+const int MOVE_RIGHT = 3;
+const int MOVE_LEFT = 3;
+const int MOVE_UP = 3;
+const int MOVE_DOWN = 3;
 
 const int UP_BORDER = 0;
 const int DOWN_BORDER = 590;

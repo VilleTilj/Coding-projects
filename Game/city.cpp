@@ -61,15 +61,9 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-    if(std::find(actors_.begin(), actors_.end(), actor) != actors_.end()) {
-        if(std::shared_ptr<Interface::IPassenger> passenger = std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
-            if(passenger->isInVehicle() == true) {
-                actor->remove();
-                actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
-                ui_->removeActor(actor);
-            }
-        }
-    }
+        actor->remove();
+        actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
+        ui_->removeActor(actor);
 
 }
 
@@ -149,6 +143,19 @@ void City::makePlayer()
     ui_->addPlayer(player_);
 
 
+}
+
+void City::DestroyTimo(std::shared_ptr<Interface::IActor> actor)
+{
+    if(std::find(actors_.begin(), actors_.end(), actor) != actors_.end()) {
+        if(std::shared_ptr<Interface::IPassenger> passenger = std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
+            if(passenger->isInVehicle() == true) {
+                actor->remove();
+                actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
+                ui_->removeActor(actor);
+            }
+        }
+    }
 }
 
 
