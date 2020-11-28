@@ -8,7 +8,7 @@
 #include "actor.hh"
 #include "vehicle.hh"
 #include "actor.hh"
-#include "interfaces/istatistics.hh"
+#include "statistics.hh"
 
 /*!
  * \file city.hh
@@ -131,6 +131,8 @@ public:
     std::vector<std::shared_ptr<Interface::IActor>> giveMovedActors();
 
     std::vector<std::shared_ptr<Interface::IActor>> giveNewPassengers();
+
+    void takeStats(std::shared_ptr<StudentSide::Statistics> stats);
 private:
     QImage small_;  //!< Small map image
     QImage big_;    //!<  Big map image
@@ -142,6 +144,7 @@ private:
     QTime time_;         //!< Time for game and actors
     std::shared_ptr<StudentSide::Actor> player_ ;   //!< Pointer to player.
 
+    std::shared_ptr<StudentSide::Statistics> stats_;
 };
 } //namespace
 

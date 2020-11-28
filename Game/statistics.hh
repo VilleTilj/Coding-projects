@@ -3,6 +3,8 @@
 
 #include "interfaces/istatistics.hh"
 
+namespace StudentSide {
+
 class Statistics : public Interface::IStatistics
 {
 public:
@@ -20,4 +22,5 @@ public:
     void nysseLeft();
 };
 
+} //namespace
 #endif // STATISTICS_HH

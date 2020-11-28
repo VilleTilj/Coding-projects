@@ -61,6 +61,7 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
             else {
                 //adding new busses traight away to ui
                 ui_->addActor(newactor);
+                stats_->newNysse();
             }
         }
     }
@@ -72,7 +73,7 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
         actor->remove();
         actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
         ui_->removeActor(actor);
-
+        stats_->nysseLeft();
 }
 
 
@@ -179,5 +180,10 @@ std::vector<std::shared_ptr<Interface::IActor> > City::giveNewPassengers()
     std::vector<std::shared_ptr<Interface::IActor>> actors = new_passengers;
     new_passengers.clear();
     return actors;
+}
+
+void City::takeStats(std::shared_ptr<Statistics> stats)
+{
+    stats_ = stats;
 }
 } // namespace

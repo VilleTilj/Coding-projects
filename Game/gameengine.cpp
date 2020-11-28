@@ -12,7 +12,8 @@ namespace StudentSide {
 GameEngine::GameEngine() :
     ui(new StudentSide::Mainwindow),
     logic_(new CourseSide::Logic),
-    iCityPtr(nullptr)
+    iCityPtr(nullptr),
+    stats (new StudentSide::Statistics)
 {
     gameWindow();
     connect(&timer, &QTimer::timeout, this, &GameEngine::advance);
@@ -46,19 +47,21 @@ void GameEngine::updateScreen()
     for(unsigned long int i = 0; i < passengers.size(); i++) {
         ui->addActor(passengers.at(i));
     }
+    stats->morePassengers(passengers.size());
 }
 
 
 void GameEngine::initLogic()
 {
     cityPtr_->addUi(ui);
+    cityPtr_->takeStats(stats);
     logic_->takeCity(cityPtr_);
     logic_->fileConfig();
-    logic_->setTime(8, 00);
+    logic_->setTime(19, 00);
     cityPtr_->makePlayer();
     graphicPlayer_ = ui->returnPlayer();
     logic_->finalizeGameStart();
-    timer.start(150);
+    timer.start(350);
 }
 
 
@@ -66,6 +69,7 @@ void GameEngine::gameWindow()
 {
     //draw ui for user
     ui->show();
+
     std::shared_ptr<Interface::ICity> iCityPtr = Interface::createGame();
     //get graphics for the map and the to city
     QImage big;
