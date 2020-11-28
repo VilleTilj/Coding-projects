@@ -1,6 +1,7 @@
-#include "city.hh"
+﻿#include "city.hh"
 #include <QDebug>
 #include <vector>
+
 
 namespace StudentSide
 {
@@ -53,7 +54,14 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
         Interface::Location location = newactor->giveLocation();
         if(location.giveX() > 0 && location.giveX() < 1100 && location.giveY() > 0 && location.giveY() < 600) {
             actors_.push_back(newactor);
-            ui_->addActor(newactor);
+            if (std::shared_ptr<Interface::IPassenger> passenger = std::dynamic_pointer_cast<Interface::IPassenger>(newactor)) {
+                new_passengers.push_back(newactor);
+
+            }
+            else {
+                //adding new busses traight away to ui
+                ui_->addActor(newactor);
+            }
         }
     }
 }
@@ -105,9 +113,9 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
-    //moved_actor.push_back(actor);
-    Interface::Location location = actor->giveLocation();
-    ui_->moveActor(actor, location.giveX(), location.giveY());
+    moved_actor.push_back(actor);
+    //Interface::Location location = actor->giveLocation();
+    //ui_->moveActor(actor, location.giveX(), location.giveY());
 
 }
 
@@ -163,6 +171,13 @@ std::vector<std::shared_ptr<Interface::IActor> > City::giveMovedActors()
 {
     std::vector<std::shared_ptr<Interface::IActor>> actors = moved_actor;
     moved_actor.clear();
+    return actors;
+}
+
+std::vector<std::shared_ptr<Interface::IActor> > City::giveNewPassengers()
+{
+    std::vector<std::shared_ptr<Interface::IActor>> actors = new_passengers;
+    new_passengers.clear();
     return actors;
 }
 } // namespace

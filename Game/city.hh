@@ -8,6 +8,7 @@
 #include "actor.hh"
 #include "vehicle.hh"
 #include "actor.hh"
+#include "interfaces/istatistics.hh"
 
 /*!
  * \file city.hh
@@ -128,15 +129,19 @@ public:
      * \return vector containing pointer to actors.
      */
     std::vector<std::shared_ptr<Interface::IActor>> giveMovedActors();
+
+    std::vector<std::shared_ptr<Interface::IActor>> giveNewPassengers();
 private:
     QImage small_;  //!< Small map image
     QImage big_;    //!<  Big map image
     std::vector<std::shared_ptr<Interface::IActor>> actors_;     //!< Vector containing actors in game
     std::vector<std::shared_ptr<Interface::IActor>> moved_actor; //!< Vector containing moved actors
-    std::vector<std::shared_ptr<Interface::IStop>> stops_;       //!< Vector containing acotrs
+    std::vector<std::shared_ptr<Interface::IActor>> new_passengers;  //!< Vector containing busses to be added in game
+    std::vector<std::shared_ptr<Interface::IStop>> stops_;       //!< Vector containing stops in game
     std::shared_ptr<StudentSide::Mainwindow> ui_;   //!< Pointer to userinterface
     QTime time_;         //!< Time for game and actors
     std::shared_ptr<StudentSide::Actor> player_ ;   //!< Pointer to player.
+
 };
 } //namespace
 

@@ -17,7 +17,7 @@ const int MOVE_DOWN = 3;
 const int UP_BORDER = 0;
 const int DOWN_BORDER = 590;
 const int LEFT_BORDER = 0;
-const int RIGHT_BORDER = 1000;
+const int RIGHT_BORDER = 1100;
 
 const int X_COMPP = 355;
 const int Y_COMPP = 547;

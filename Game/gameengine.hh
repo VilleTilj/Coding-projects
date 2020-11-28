@@ -8,7 +8,7 @@
 #include <QImage>
 #include "playeractor.hh"
 #include "QTime"
-
+#include "core/location.hh"
 
 const QString bigMap = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
 const QString smallMap = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
@@ -35,6 +35,8 @@ private slots:
      * \brief advance moves player and removes passengers who carry buss that are close to player.
      */
     void advance();
+
+    void updateScreen();
 
     /*!
      * \brief initLogic initializes game logic and finalizes game starting state.
