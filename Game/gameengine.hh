@@ -21,6 +21,7 @@ namespace StudentSide {
  */
 class GameEngine : public QObject
 {
+    Q_OBJECT
 public:
 
     /*!

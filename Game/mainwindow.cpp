@@ -128,6 +128,17 @@ playerActor *Mainwindow::returnPlayer()
     return graphicPlayer_;
 }
 
+void Mainwindow::addPoints()
+{
+    points_ = points_ + POINTS;
+    ui->points_lcd->display(points_);
+}
+
+QPushButton* Mainwindow::getStartButton()
+{
+    return ui->startButton;
+}
+
 
 void Mainwindow::normalGameSettings(QString name, int gameTime)
 {
@@ -189,7 +200,7 @@ void Mainwindow::connectSignals()
     connect(ui->quitButton, &QPushButton::clicked, this, &Mainwindow::close);
     connect(ui->startButton, &QPushButton::clicked, this, &Mainwindow::startGame);
     connect(&timer_, &QTimer::timeout, this, &Mainwindow::updateTimelimit);
-    connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+    //connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
 }
 
 void Mainwindow::setUiWidgets()
@@ -205,6 +216,7 @@ void Mainwindow::setUiWidgets()
     ui->time_lcd_min->move(WIDTH_MAIN- PADDING, PADDING + (4*30));
     ui->time_lcd_sec->move(WIDTH_MAIN+ PADDING*4, PADDING + (4*30));
     ui->points_lcd->move(WIDTH_MAIN + PADDING, PADDING + (7*30));
+
 }
 
 } //namespace
