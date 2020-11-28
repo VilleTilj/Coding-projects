@@ -58,7 +58,7 @@ void Mainwindow::setBackground(QPixmap &image)
 void Mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
 {
     Interface::Location location = actor->giveLocation();
-    if(std::shared_ptr<Interface::IVehicle> nActor = std::dynamic_pointer_cast<Interface::IVehicle>(actor)) {
+    if(std::shared_ptr<CourseSide::Nysse> nActor = std::dynamic_pointer_cast<CourseSide::Nysse>(actor)) {
         type = NYSSE;
 
     }
@@ -80,14 +80,14 @@ void Mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
     StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(X_COMP + location.giveX(), Y_COMP - location.giveY(), BUSS_STOP);
     stops_[stop] = graphicActor;
     map->addItem(graphicActor);
-    last_ = graphicActor;
+
 }
 
 
 void Mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int y)
 {
     //find corresponding gpraphic actor.
-    std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
+    std::map<std::shared_ptr<Interface::IActor>, StudentSide::ActorItem*>::iterator it;
 
     for (it = actors_.begin(); it != actors_.end(); ++it){
         if(it->first == actor){
@@ -102,6 +102,7 @@ void Mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
     std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
     for (it = actors_.begin(); it != actors_.end(); ++it){
         if(it->first == actor){
+            stats_->Addpoints(actor);
             addPoints();
             map->removeItem(it->second);
             delete it->second;
@@ -133,8 +134,12 @@ playerActor *Mainwindow::returnPlayer()
 
 void Mainwindow::addPoints()
 {
-    points_ = points_ + POINTS;
-    ui->points_lcd->display(points_);
+    ui->points_lcd->display(stats_->giveCurrentPoints());
+}
+
+void Mainwindow::takeStats(std::shared_ptr<Statistics> stats)
+{
+    stats_ = stats;
 }
 
 QPushButton *Mainwindow::getStartButton()

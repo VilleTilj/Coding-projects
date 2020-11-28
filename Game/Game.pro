@@ -15,6 +15,7 @@ SOURCES += \
     main.cc \
     mainwindow.cpp \
     playeractor.cpp \
+    statistics.cpp \
     vehicle.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
@@ -54,6 +55,7 @@ HEADERS += \
     gameengine.hh \
     mainwindow.hh \
     playeractor.hh \
+    statistics.hh \
     vehicle.hh
 
 RESOURCES += \

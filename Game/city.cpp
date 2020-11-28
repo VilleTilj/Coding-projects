@@ -1,6 +1,7 @@
-#include "city.hh"
+﻿#include "city.hh"
 #include <QDebug>
 #include <vector>
+
 
 namespace StudentSide
 {
@@ -43,7 +44,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 
 void City::startGame()
 {
-    return;
+    gamestarted = true;
 }
 
 
@@ -51,26 +52,29 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     if(std::find(actors_.begin(), actors_.end(), newactor) == actors_.end()){
         Interface::Location location = newactor->giveLocation();
-        if(location.giveX() > 0 && location.giveX() < 1100 && location.giveY() > 0 && location.giveY() < 600) {
+        if(std::shared_ptr<Interface::IPassenger> passenger = std::dynamic_pointer_cast<Interface::IPassenger>(newactor)) {
+            actors_.push_back(newactor);
+            if (location.giveX() > 0 && location.giveX() < 1100 && location.giveY() > 0 && location.giveY() < 600) {
+                new_passengers.push_back(newactor);
+            }
+        }
+        else {
+            //adding new busses traight away to ui
             actors_.push_back(newactor);
             ui_->addActor(newactor);
+            stats_->newNysse();
         }
+
     }
 }
 
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-    if(std::find(actors_.begin(), actors_.end(), actor) != actors_.end()) {
-        if(std::shared_ptr<Interface::IPassenger> passenger = std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
-            if(passenger->isInVehicle() == true) {
-                actor->remove();
-                actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
-                ui_->removeActor(actor);
-            }
-        }
-    }
-
+        actor->remove();
+        actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
+        ui_->removeActor(actor);
+        stats_->nysseLeft();
 }
 
 
@@ -111,9 +115,9 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
-    //moved_actor.push_back(actor);
-    Interface::Location location = actor->giveLocation();
-    ui_->moveActor(actor, location.giveX(), location.giveY());
+    moved_actor.push_back(actor);
+    //Interface::Location location = actor->giveLocation();
+    //ui_->moveActor(actor, location.giveX(), location.giveY());
 
 }
 
@@ -151,11 +155,36 @@ void City::makePlayer()
 
 }
 
+void City::DestroyTimo(std::shared_ptr<Interface::IActor> actor)
+{
+    if(std::find(actors_.begin(), actors_.end(), actor) != actors_.end()) {
+        if(std::shared_ptr<Interface::IPassenger> passenger = std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
+            if(passenger->isInVehicle() == true) {
+                actor->remove();
+                actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
+                ui_->removeActor(actor);
+            }
+        }
+    }
+}
+
 
 std::vector<std::shared_ptr<Interface::IActor> > City::giveMovedActors()
 {
     std::vector<std::shared_ptr<Interface::IActor>> actors = moved_actor;
     moved_actor.clear();
     return actors;
+}
+
+std::vector<std::shared_ptr<Interface::IActor> > City::giveNewPassengers()
+{
+    std::vector<std::shared_ptr<Interface::IActor>> actors = new_passengers;
+    new_passengers.clear();
+    return actors;
+}
+
+void City::takeStats(std::shared_ptr<Statistics> stats)
+{
+    stats_ = stats;
 }
 } // namespace

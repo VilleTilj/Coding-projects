@@ -9,6 +9,8 @@
 #include "interfaces/iactor.hh"
 #include "actoritem.hh"
 #include "actor.hh"
+#include "statistics.hh"
+#include "actors/nysse.hh"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -115,6 +117,8 @@ public:
      */
     void addPoints();
 
+    void takeStats(std::shared_ptr<StudentSide::Statistics> stats);
+
     /*!
      * \brief getStartButton gives startButton
      * \return starButton of userinterface
@@ -189,6 +193,7 @@ private:
     std::shared_ptr<Actor> player_;     //!< Pointer to player
     StudentSide::playerActor* graphicPlayer_; //!< Graphics for player
     QTimer* timer = nullptr;    //!< timer for advance actors
+    std::shared_ptr<StudentSide::Statistics> stats_; //:< stats class
     int type = 0;               //!< type of actor
     QTimer timer_;              //!< timer for countdown timelimit
     int timelimit = 0;          //!< timelimit for game

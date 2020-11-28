@@ -8,7 +8,8 @@
 #include <QImage>
 #include "playeractor.hh"
 #include "QTime"
-
+#include "core/location.hh"
+#include "statistics.hh"
 
 const QString bigMap = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
 const QString smallMap = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
@@ -36,6 +37,8 @@ private slots:
      */
     void advance();
 
+    void updateScreen();
+
     /*!
      * \brief initLogic initializes game logic and finalizes game starting state.
      */
@@ -44,10 +47,12 @@ private slots:
 private:
     std::shared_ptr<StudentSide::Mainwindow> ui;    //!< Mainwindows userinterface
     std::shared_ptr<CourseSide::Logic> logic_;      //!< Pointer to game logic
+    std::shared_ptr<StudentSide::Statistics> stats; //!< pointer to statistics
     std::shared_ptr<Interface::ICity> iCityPtr;     //!< Pointer to city interface
     std::shared_ptr<StudentSide::City> cityPtr_;    //!< Pointer to city
     StudentSide::playerActor* graphicPlayer_;       //!< Player
     QTimer timer;   //!< Timer
+
 
     /*!
      * \brief gameWindow draws game window and sets map to it.

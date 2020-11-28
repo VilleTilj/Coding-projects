@@ -12,7 +12,8 @@ namespace StudentSide {
 GameEngine::GameEngine() :
     ui(new StudentSide::Mainwindow),
     logic_(new CourseSide::Logic),
-    iCityPtr(nullptr)
+    iCityPtr(nullptr),
+    stats (new StudentSide::Statistics)
 {
     gameWindow();
     connect(&timer, &QTimer::timeout, this, &GameEngine::advance);
@@ -26,25 +27,43 @@ void GameEngine::advance()
 {
     graphicPlayer_->setFlag(QGraphicsPixmapItem::ItemIsFocusable);
     graphicPlayer_->setFocus();
+    updateScreen();
     graphicPlayer_->giveLocation();
     std::vector<std::shared_ptr<Interface::IActor>> actor = cityPtr_->getNearbyActors(graphicPlayer_->giveLocation());
     //qDebug() << actor.size();
     for(unsigned long int i = 0; i < actor.size(); i++){
-        cityPtr_->removeActor(actor.at(i));
+        cityPtr_->DestroyTimo(actor.at(i));
     }
+}
+
+void GameEngine::updateScreen()
+{
+    std::vector<std::shared_ptr<Interface::IActor>> actors = cityPtr_->giveMovedActors();
+    std::vector<std::shared_ptr<Interface::IActor>> passengers = cityPtr_->giveNewPassengers();
+    for(unsigned long int i = 0; i < actors.size(); i++) {
+        Interface::Location location = actors.at(i)->giveLocation();
+        ui->moveActor(actors.at(i), location.giveX(), location.giveY());
+    }
+    for(unsigned long int i = 0; i < passengers.size(); i++) {
+        ui->addActor(passengers.at(i));
+    }
+    stats->morePassengers(passengers.size());
 }
 
 
 void GameEngine::initLogic()
 {
     cityPtr_->addUi(ui);
+    cityPtr_->takeStats(stats);
+    ui->takeStats(stats);
+    cityPtr_->startGame();
     logic_->takeCity(cityPtr_);
     logic_->fileConfig();
-    logic_->setTime(8, 00);
+    logic_->setTime(19, 00);
     cityPtr_->makePlayer();
     graphicPlayer_ = ui->returnPlayer();
     logic_->finalizeGameStart();
-    timer.start(150);
+    timer.start(1);
 }
 
 
@@ -52,6 +71,7 @@ void GameEngine::gameWindow()
 {
     //draw ui for user
     ui->show();
+
     std::shared_ptr<Interface::ICity> iCityPtr = Interface::createGame();
     //get graphics for the map and the to city
     QImage big;
