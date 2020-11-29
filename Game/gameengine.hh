@@ -14,6 +14,7 @@
 
 const QString bigMap = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
 const QString smallMap = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
+const QString FALLOUT = "://../pics/pics/fallout.png";
 
 namespace StudentSide {
 

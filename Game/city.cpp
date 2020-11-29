@@ -224,5 +224,10 @@ void City::nukeCity()
     }
 }
 
+void City::GameOver()
+{
+    gameOver = false;
+}
+
 
 } // namespace

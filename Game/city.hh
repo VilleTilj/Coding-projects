@@ -140,6 +140,8 @@ public:
     void addNuke();
 
     void nukeCity();
+
+    void GameOver();
 private:
     QImage small_;  //!< Small map image
     QImage big_;    //!<  Big map image
@@ -155,6 +157,7 @@ private:
     std::shared_ptr<StudentSide::Statistics> stats_;
 
     bool gamestarted = false;
+    bool gameOver = false;
 };
 } //namespace
 

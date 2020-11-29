@@ -33,8 +33,7 @@ Mainwindow::Mainwindow(QWidget *parent) :
     createMenus();
 
     // Create timer to move actors
-    timer = new QTimer;
-    timer->start(1500);
+
     myDialog->exec();
 }
 
@@ -49,9 +48,6 @@ void Mainwindow::setBackground(QPixmap &image)
 {
 
     QPixmap myImage = image;
-    //QTransform myTransform;
-    //myTransform.rotate(180);
-    //myImage = myImage.transformed(myTransform);
     map->addPixmap(image);
 }
 
@@ -105,9 +101,11 @@ void Mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
         if(it->first == actor){
             stats_->Addpoints(actor);
             addPoints();
-            map->removeItem(it->second);
-            delete it->second;
-            actors_.erase(actor);
+            if(it->second->isActive() == true) {
+                map->removeItem(it->second);
+                delete it->second;
+                actors_.erase(actor);
+            }
         }
     }
     if (actor == nuke_) {
@@ -268,6 +266,7 @@ bool Mainwindow::isNuked()
     return graphicPlayer_->isNuked();
 }
 
+
 void Mainwindow::addNuke(std::shared_ptr<Actor> nuke)
 {
     nuke_ = nuke;
@@ -406,7 +405,8 @@ void Mainwindow::readFileToMessage(QString fileName, QString title)
                     text.append(splittedline.at(i) + " ");
                 }
                 text.append("\n");
-          }else {
+          }
+          else {
                 text.append(line + "\n");
           }
        }

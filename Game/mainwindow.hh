@@ -155,6 +155,7 @@ public:
 
      bool isNuked();
 
+
 private slots:
 
     /*!

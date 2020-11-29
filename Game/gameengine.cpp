@@ -32,6 +32,13 @@ void GameEngine::advance()
 
     else if (ui->isNuked() == true) {
         cityPtr_->nukeCity();
+        cityPtr_->GameOver();
+        QPixmap image;
+        assert(image.load(FALLOUT));
+        image = image.scaled(1095 ,592);
+        ui->setBackground(image);
+        timer.stop();
+        ui->destroyPlayer();
 
     }
 
