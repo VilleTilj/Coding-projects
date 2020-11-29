@@ -25,7 +25,7 @@
 
 const QString RULES = "://../datafiles/datafiles/rules.txt";
 const QString ABOUT = "://../datafiles/datafiles/about.txt";
-const QString SCORES = "://../datafiles/datafiles/scores.csv";
+const QString SCORES = "://../scores.csv";
 
 const int PLAYER = 3;
 const int SECOND = 1000;
@@ -117,15 +117,34 @@ public:
      */
     void addPoints();
 
+    /*!
+     * \brief takeStats
+     * \param stats
+     */
     void takeStats(std::shared_ptr<StudentSide::Statistics> stats);
 
     /*!
      * \brief getStartButton gives startButton
      * \return starButton of userinterface
      */
-    QPushButton* getStartButton();
+    QPushButton *getStartButton();
 
-    QAction* getStartAction();
+    /*!
+     * \brief getStartAction return startaction to start the game from menubar
+     * \return starAction
+     */
+    QAction *getStartAction();
+
+    /*!
+     * \brief gameEnded return boolean if game is ended or not
+     * \return true when gane has ended, false otherwise
+     */
+    bool gameEnded();
+
+    /*!
+     * \brief destroyPlayer destroys the player
+     */
+    void destroyPlayer();
 
 private slots:
 
@@ -175,6 +194,7 @@ private slots:
      * \brief showAboutInfo show the aboutUs information in popup
      */
     void showAboutInfo();
+
 
 
 protected:

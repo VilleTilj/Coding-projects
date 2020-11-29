@@ -25,6 +25,10 @@ GameEngine::GameEngine() :
 
 void GameEngine::advance()
 {
+    if(ui->gameEnded()){
+        timer.stop();
+        ui->destroyPlayer();
+    }
     graphicPlayer_->setFlag(QGraphicsPixmapItem::ItemIsFocusable);
     graphicPlayer_->setFocus();
     updateScreen();

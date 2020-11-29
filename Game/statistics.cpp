@@ -19,9 +19,9 @@ Statistics::~Statistics()
 
 void Statistics::morePassengers(int num)
 {
-    if(num > 0) {
+    Q_ASSERT(num > 0);
     qDebug() << num << " passengers";
-    }
+
 }
 
 void Statistics::nysseRemoved()

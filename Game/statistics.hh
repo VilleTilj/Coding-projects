@@ -4,9 +4,11 @@
 #include "interfaces/istatistics.hh"
 #include "interfaces/iactor.hh"
 #include "interfaces/ipassenger.hh"
-#include <memory>
 
-const int POINTS_FROM_PASSENGER = 100;
+#include <memory>
+#include <QMetaType>
+
+const int POINTS_FROM_PASSENGER = 10;
 
 namespace StudentSide {
 
@@ -29,6 +31,7 @@ public:
     void Addpoints(std::shared_ptr<Interface::IActor> actor);
 
     int giveCurrentPoints();
+
 
 private:
 

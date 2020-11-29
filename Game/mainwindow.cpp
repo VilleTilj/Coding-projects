@@ -137,6 +137,7 @@ void Mainwindow::addPoints()
     ui->points_lcd->display(stats_->giveCurrentPoints());
 }
 
+
 void Mainwindow::takeStats(std::shared_ptr<Statistics> stats)
 {
     stats_ = stats;
@@ -150,6 +151,15 @@ QPushButton *Mainwindow::getStartButton()
 QAction *Mainwindow::getStartAction()
 {
     return startAct;
+}
+
+bool Mainwindow::gameEnded()
+{
+    if(secondsRunning){
+        return false;
+    } else {
+        return true;
+    }
 }
 
 
@@ -197,6 +207,7 @@ void Mainwindow::updateTimelimit()
             ui->startButton->setEnabled(true);
             startAct->setEnabled(true);
             secondsRunning = false;
+            timer->stop();
         }
     } else {
         seconds++;
@@ -244,6 +255,12 @@ void Mainwindow::showAboutInfo()
     readFileToMessage(ABOUT, title);
 }
 
+void Mainwindow::destroyPlayer()
+{
+    player_ = nullptr;
+    graphicPlayer_ = nullptr;
+}
+
 void Mainwindow::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu menu(this);
@@ -278,7 +295,6 @@ void Mainwindow::connectSignals()
     connect(myDialog, &DialogGameSettings::infiniteSettings, this, &Mainwindow::infiniteGameSettings);
     connect(ui->startButton, &QPushButton::clicked, this, &Mainwindow::startGame);
     connect(&timer_, &QTimer::timeout, this, &Mainwindow::updateTimelimit);
-    //connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
 }
 
 void Mainwindow::setUiWidgets()
