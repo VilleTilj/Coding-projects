@@ -4,7 +4,6 @@
 #include <../Game/actor.hh>
 
 
-
 // add necessary includes here
 
 class tst_statistics : public QObject
@@ -22,7 +21,6 @@ private slots:
 
     void test_givePoints();
 
-    void test_givePoints_data();
 };
 
 tst_statistics::tst_statistics()
@@ -53,19 +51,13 @@ void tst_statistics::test_num_of_passengers_data()
 
 void tst_statistics::test_givePoints()
 {
-    QFETCH(int, points);
+    int zeroPoints = 0;
+    int passengerPoints = 10;
     StudentSide::Statistics stats;
-    QVERIFY2(stats.giveCurrentPoints() == points, "Points are zero at start");
-
-    QVERIFY2(stats.giveCurrentPoints() + POINTS_FROM_PASSENGER == points, "Points are zero at start");
+    QVERIFY2(stats.giveCurrentPoints() == zeroPoints, "Points not zero");
+    QVERIFY2(stats.giveCurrentPoints() + POINTS_FROM_PASSENGER  == passengerPoints, "Points after eating one Timo");
 }
 
-void tst_statistics::test_givePoints_data()
-{
-    QTest::addColumn<int>("points");
-    QTest::newRow("zero") << 0;
-    QTest::newRow("after_passenger") << 10;
-}
 
 QTEST_MAIN(tst_statistics)
 
