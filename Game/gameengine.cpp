@@ -51,7 +51,9 @@ void GameEngine::updateScreen()
     for(unsigned long int i = 0; i < passengers.size(); i++) {
         ui->addActor(passengers.at(i));
     }
-    stats->morePassengers(passengers.size());
+    if(passengers.size() > 0) {
+        stats->morePassengers(passengers.size());
+    }
 }
 
 

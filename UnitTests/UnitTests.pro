@@ -1,15 +1,19 @@
 QT += testlib
-QT -= gui
+QT += gui
+QT += widgets
+
 CONFIG += qt warn_on depend_includepath testcase
 CONFIG -= app_bundle
 
 TEMPLATE = app
 
 SOURCES +=  tst_tst_statistics.cpp \
-    ../Game/statistics.cpp
+    ../Game/statistics.cpp \
+    tst_actoritem.cpp \
+    ../Game/actoritem.cpp
 
-HEADERS += \
-    ../Game/statistics.hh
+HEADERS += ../Game/statistics.hh \
+    ..Game/actoritem.hh
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 

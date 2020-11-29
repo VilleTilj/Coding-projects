@@ -34,10 +34,8 @@ tst_statistics::~tst_statistics()
 }
 
 
-
 void tst_statistics::test_num_of_passengers()
 {
-    //QFETCH(int, number);
     QFETCH(int, num);
     StudentSide::Statistics stats;
     QVERIFY2(0 < num, "Number of passenger not zero or negative");

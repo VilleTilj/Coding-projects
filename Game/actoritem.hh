@@ -36,6 +36,7 @@ public:
      * \param x x-coordinate
      * \param y y-coordinate
      * \param type actor type
+     * \pre
      */
     ActorItem(int x, int y, int type = 0);
 
