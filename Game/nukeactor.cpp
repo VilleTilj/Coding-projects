@@ -3,8 +3,8 @@
 namespace StudentSide {
 
 NukeActor::NukeActor(Interface::Location location):
-    x_(location.giveX() + 900),
-    y_(location.giveY() + 500),
+    x_(location.giveX()),
+    y_(location.giveY()),
     location_(location)
 {
 

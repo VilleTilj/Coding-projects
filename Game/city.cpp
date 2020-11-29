@@ -115,10 +115,9 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
         customLocation.setXY(X_COMP + location.giveX(), Y_COMP - location.giveY());
         //qDebug() << location.giveX(), location.giveY();
         //qDebug() << loc.giveX();
-        //qDebug() << loc.giveY();
+
         if(customLocation.isClose(loc, 30) == true){
             actorsToBedeleted.push_back(actors_[i]);
-
         }
     }
     return actorsToBedeleted;
@@ -176,6 +175,10 @@ void City::DestroyTimo(std::shared_ptr<Interface::IActor> actor)
                 ui_->removeActor(actor);
             }
         }
+        else if(actor == nuke_) {
+             actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
+             ui_->removeActor(nuke_);
+        }
     }
 }
 
@@ -203,9 +206,9 @@ void City::addNuke()
 {
     Interface::Location* location =  new Interface::Location;
     nuke_ = std::make_shared<StudentSide::Actor>(StudentSide::Actor());
-    location->setXY(500,500);
+    location->setXY(600, 200);
     nuke_->addLocation(location);
-
+    actors_.push_back(nuke_);
     ui_->addNuke(nuke_);
 }
 

@@ -108,7 +108,6 @@ void Mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
     if (actor == nuke_) {
         map->removeItem(graphicNuke_);
         graphicPlayer_->addNuke();
-
     }
 }
 

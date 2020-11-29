@@ -57,12 +57,22 @@ void playerActor::keyPressEvent(QKeyEvent *event)
         changePosition(x_, y_ );
     }
 
+    else if(event->key() == Qt::Key_E && nuke == true && nuke_activated == false) {
+        qDebug() << "timo nuked";
+        nuke_activated = true;
+    }
+
 
 }
 
 Interface::Location playerActor::giveLocation()
 {
     return location_;
+}
+
+void playerActor::addNuke()
+{
+    nuke = true;
 }
 
 } // namespace
