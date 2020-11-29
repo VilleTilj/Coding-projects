@@ -8,8 +8,8 @@
 namespace StudentSide {
 
 /*!
- * \file actor.hh
- * \brief The Actor class
+ * @file actor.hh
+ * @brief The Actor class
  */
 
 class Actor : public Interface::IActor
@@ -36,7 +36,6 @@ public:
     /*!
      * \brief move the actor
      * \param loc, location of the actor
-     * \pre loc >= 0
      */
     void move(Interface::Location loc) override;
 

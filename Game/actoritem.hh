@@ -1,4 +1,4 @@
-#ifndef ACTORITEM_HH
+﻿#ifndef ACTORITEM_HH
 #define ACTORITEM_HH
 
 #include <QGraphicsItem>
@@ -26,7 +26,6 @@ namespace StudentSide {
  * \file actoritem.hh
  * \brief The ActorItem class
  */
-
 class ActorItem : public QGraphicsPixmapItem
 {
 public:
@@ -36,7 +35,6 @@ public:
      * \param x x-coordinate
      * \param y y-coordinate
      * \param type actor type
-     * \pre
      */
     ActorItem(int x, int y, int type = 0);
 

@@ -19,9 +19,9 @@ Interface::Location Actor::giveLocation() const
         throw Interface::GameError("actor wasn't given a location");
     }
     else {
-        return * location_;
+        return *location_;
     }
-    return * location_;
+    return *location_;
 }
 
 void Actor::move(Interface::Location loc)
@@ -43,9 +43,9 @@ void Actor::remove()
     removed = true;
 }
 
-void Actor::addLocation(Interface::Location* location)
+void Actor::addLocation(Interface::Location *location)
 {
     location_ = location;
 }
 
-}
+} // namespace
