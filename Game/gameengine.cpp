@@ -55,6 +55,7 @@ void GameEngine::updateScreen()
     }
     if(passengers.size() > 0) {
     stats->morePassengers(passengers.size());
+        stats->morePassengers(passengers.size());
     }
 }
 
@@ -74,6 +75,7 @@ void GameEngine::initLogic()
     cityPtr_->addNuke();
     timer.start(100);
 }
+
 
 
 

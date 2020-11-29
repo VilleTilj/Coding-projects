@@ -51,6 +51,4 @@ int Statistics::giveCurrentPoints()
     return points;
 }
 
-
-
-}
+} // namespace

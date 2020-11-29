@@ -65,6 +65,7 @@ private:
     int x_;     //!< x-coordinate of player
     int y_;     //!< y-coordinate of player
     bool nuke = false;
+    bool nuke_activated = false;
 
     QPixmap image;  //!< Image of player
 
