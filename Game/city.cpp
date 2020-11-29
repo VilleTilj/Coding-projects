@@ -210,6 +210,18 @@ void City::addNuke()
     nuke_->addLocation(location);
     actors_.push_back(nuke_);
     ui_->addNuke(nuke_);
+
+}
+
+void City::nukeCity()
+{
+    for(unsigned long int i = 0; i < actors_.size(); i++) {
+        if(actors_.at(i)->isRemoved() == false) {
+            actors_.at(i)->remove();
+            ui_->removeActor(actors_.at(i));
+            actors_.erase(std::remove(actors_.begin(), actors_.end(), actors_.at(i)), actors_.end());
+        }
+    }
 }
 
 

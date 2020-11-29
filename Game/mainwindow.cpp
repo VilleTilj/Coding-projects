@@ -263,6 +263,11 @@ void Mainwindow::showAboutInfo()
     readFileToMessage(ABOUT, title);
 }
 
+bool Mainwindow::isNuked()
+{
+    return graphicPlayer_->isNuked();
+}
+
 void Mainwindow::addNuke(std::shared_ptr<Actor> nuke)
 {
     nuke_ = nuke;

@@ -30,6 +30,11 @@ void GameEngine::advance()
         ui->destroyPlayer();
     }
 
+    else if (ui->isNuked() == true) {
+        cityPtr_->nukeCity();
+
+    }
+
 
     graphicPlayer_->setFlag(QGraphicsPixmapItem::ItemIsFocusable);
     graphicPlayer_->setFocus();

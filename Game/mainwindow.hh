@@ -153,6 +153,8 @@ public:
      */
      void addNuke(std::shared_ptr<StudentSide::Actor> nuke);
 
+     bool isNuked();
+
 private slots:
 
     /*!
@@ -201,6 +203,7 @@ private slots:
      * \brief showAboutInfo show the aboutUs information in popup
      */
     void showAboutInfo();
+
 
 
 

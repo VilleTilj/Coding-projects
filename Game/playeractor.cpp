@@ -75,4 +75,9 @@ void playerActor::addNuke()
     nuke = true;
 }
 
+bool playerActor::isNuked()
+{
+    return nuke_activated;
+}
+
 } // namespace

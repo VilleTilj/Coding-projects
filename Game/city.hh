@@ -138,6 +138,8 @@ public:
     void takeStats(std::shared_ptr<StudentSide::Statistics> stats);
 
     void addNuke();
+
+    void nukeCity();
 private:
     QImage small_;  //!< Small map image
     QImage big_;    //!<  Big map image

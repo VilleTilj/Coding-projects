@@ -60,6 +60,8 @@ public:
 
     void addNuke();
 
+    bool isNuked();
+
 
 private:
     int x_;     //!< x-coordinate of player
