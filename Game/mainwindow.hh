@@ -11,6 +11,7 @@
 #include "actor.hh"
 #include "statistics.hh"
 #include "actors/nysse.hh"
+#include "nukeactor.hh"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -146,6 +147,12 @@ public:
      */
     void destroyPlayer();
 
+    /*!
+     * \brief add nuke to game
+     * \param actor for nuke
+     */
+     void addNuke(std::shared_ptr<StudentSide::Actor> nuke);
+
 private slots:
 
     /*!
@@ -197,6 +204,8 @@ private slots:
 
 
 
+
+
 protected:
 #ifndef QT_NO_CONTEXTMENU
     void contextMenuEvent(QContextMenuEvent *event) override;
@@ -211,7 +220,9 @@ private:
     std::map<std::shared_ptr<Interface::IActor>, StudentSide::ActorItem *> actors_;     //!< Map containing information about actors
     QMap<std::shared_ptr<Interface::IStop>, StudentSide::ActorItem *>stops_;    //!< map containing bus stops
     std::shared_ptr<Actor> player_;     //!< Pointer to player
+    std::shared_ptr<Actor> nuke_;     //!< Pointer to nuke
     StudentSide::playerActor* graphicPlayer_; //!< Graphics for player
+    StudentSide::NukeActor* graphicNuke_; //!< Graphics for nuke
     QTimer* timer = nullptr;    //!< timer for advance actors
     std::shared_ptr<StudentSide::Statistics> stats_; //:< stats class
     int type = 0;               //!< type of actor

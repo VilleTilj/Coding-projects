@@ -10,6 +10,7 @@
 #include "QTime"
 #include "core/location.hh"
 #include "statistics.hh"
+#include "errors/initerror.hh"
 
 const QString bigMap = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
 const QString smallMap = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
@@ -43,6 +44,7 @@ private slots:
      * \brief initLogic initializes game logic and finalizes game starting state.
      */
     void initLogic();
+
 
 private:
     std::shared_ptr<StudentSide::Mainwindow> ui;    //!< Mainwindows userinterface

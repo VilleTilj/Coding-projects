@@ -2,6 +2,8 @@
 #define ACTOR_HH
 #include "interfaces/iactor.hh"
 #include "core/location.hh"
+#include "errors/gameerror.hh"
+#include <memory>
 
 namespace StudentSide {
 
@@ -53,11 +55,12 @@ public:
      * \brief addLocation to actor
      * \param location of a actor
      */
-    void addLocation(Interface::Location location);
+    void addLocation(Interface::Location* location);
 
 private:
-    Interface::Location location_; //!< location of actor
+    Interface::Location* location_ = nullptr; //!< location of actor
     bool removed = false; //!< boolean value of if actor exists.
+
 };
 
 } //namespace

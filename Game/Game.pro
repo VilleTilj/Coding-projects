@@ -14,6 +14,7 @@ SOURCES += \
     gameengine.cpp \
     main.cc \
     mainwindow.cpp \
+    nukeactor.cpp \
     playeractor.cpp \
     statistics.cpp \
     vehicle.cpp
@@ -54,6 +55,7 @@ HEADERS += \
     dialoggamesettings.hh \
     gameengine.hh \
     mainwindow.hh \
+    nukeactor.hh \
     playeractor.hh \
     statistics.hh \
     vehicle.hh

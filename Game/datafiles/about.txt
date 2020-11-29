@@ -10,6 +10,7 @@ Used sources for pictures:
 [2] Sticman:
 [3] BussStop:
 [4] Buss:
+[5] Nuke: https://www.pngitem.com/middle/iJxihhi_nuke-clipart-nosferatu-png-nuke-transparent-png/
 
 The program is created by:
 Teemu Mökkönen, teemu.mokkonen@tuni.fi,

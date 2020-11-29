@@ -47,11 +47,7 @@ Mainwindow::~Mainwindow()
 
 void Mainwindow::setBackground(QPixmap &image)
 {
-    QPixmap myImage = image;
-    //QTransform myTransform;
-    //myTransform.rotate(180);
-    //myImage = myImage.transformed(myTransform);
-   map->addPixmap(image);
+    map->addPixmap(image);
 }
 
 
@@ -255,10 +251,24 @@ void Mainwindow::showAboutInfo()
     readFileToMessage(ABOUT, title);
 }
 
+void Mainwindow::addNuke(std::shared_ptr<Actor> nuke)
+{
+    nuke_ = nuke;
+    Interface::Location location = player_->giveLocation();
+    graphicNuke_ = new StudentSide::NukeActor(location);
+    map->addItem(graphicNuke_);
+}
+
 void Mainwindow::destroyPlayer()
 {
-    player_ = nullptr;
-    graphicPlayer_ = nullptr;
+    //player_.reset();
+    map->removeItem(graphicPlayer_);
+    std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
+    for (it = actors_.begin(); it != actors_.end(); ++it){
+        map->removeItem(it->second);
+    }
+
+    //graphicPlayer_ = nullptr;
 }
 
 void Mainwindow::contextMenuEvent(QContextMenuEvent *event)

@@ -29,6 +29,8 @@ void GameEngine::advance()
         timer.stop();
         ui->destroyPlayer();
     }
+
+
     graphicPlayer_->setFlag(QGraphicsPixmapItem::ItemIsFocusable);
     graphicPlayer_->setFocus();
     updateScreen();
@@ -51,7 +53,9 @@ void GameEngine::updateScreen()
     for(unsigned long int i = 0; i < passengers.size(); i++) {
         ui->addActor(passengers.at(i));
     }
+    if(passengers.size() > 0) {
     stats->morePassengers(passengers.size());
+    }
 }
 
 
@@ -67,8 +71,10 @@ void GameEngine::initLogic()
     cityPtr_->makePlayer();
     graphicPlayer_ = ui->returnPlayer();
     logic_->finalizeGameStart();
-    timer.start(1);
+    cityPtr_->addNuke();
+    timer.start(100);
 }
+
 
 
 void GameEngine::gameWindow()
@@ -79,14 +85,18 @@ void GameEngine::gameWindow()
     std::shared_ptr<Interface::ICity> iCityPtr = Interface::createGame();
     //get graphics for the map and the to city
     QImage big;
-    big.load(bigMap);
     QImage small;
-    small.load(smallMap);
-    cityPtr_ = std::dynamic_pointer_cast<StudentSide::City>(iCityPtr);
-    cityPtr_->setBackground(small, big);
-
     QPixmap map;
+    if(!big.load(bigMap) or !small.load(smallMap) or !map.load(bigMap)){
+        throw Interface::InitError("Setting the picture was unsuccesful or the picture was invalid.");
+    }
+    big.load(bigMap);
+    small.load(smallMap);
     map.load(bigMap);
+    cityPtr_ = std::dynamic_pointer_cast<StudentSide::City>(iCityPtr);
+    //this part is just for removing error messages
+    cityPtr_->setBackground(small, big);
+    //set ui background as pixmap
     ui->setBackground(map);
 }
 
