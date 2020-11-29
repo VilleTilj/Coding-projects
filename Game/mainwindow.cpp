@@ -51,7 +51,7 @@ void Mainwindow::setBackground(QPixmap &image)
     //QTransform myTransform;
     //myTransform.rotate(180);
     //myImage = myImage.transformed(myTransform);
-   map->addPixmap(image);
+    map->addPixmap(image);
 }
 
 
@@ -135,6 +135,7 @@ playerActor *Mainwindow::returnPlayer()
 void Mainwindow::addPoints()
 {
     ui->points_lcd->display(stats_->giveCurrentPoints());
+    ui->peopleLcd->display(stats_->giveCurrentPoints() / 10);
 }
 
 
@@ -178,6 +179,7 @@ void Mainwindow::normalGameSettings(QString name, int gameTime)
     seconds = timelimit;
     points_ = 0;
     ui->points_lcd->display(points_);
+    ui->peopleLcd->display(points_ % POINTS_FROM_PASSENGER);
     update_time_lcd();
     isInfiniteTime = false;
 }
@@ -309,7 +311,8 @@ void Mainwindow::setUiWidgets()
     ui->time_lcd_sec->move(WIDTH_MAIN + PADDING * 5, PADDING + (6*30));
     ui->pointsLabel->move(WIDTH_MAIN + PADDING, PADDING + (8*30));
     ui->points_lcd->move(WIDTH_MAIN + PADDING, PADDING + (9*30));
-
+    ui->peopleLabel->move(WIDTH_MAIN + PADDING, PADDING + (11*30));
+    ui->peopleLcd->move(WIDTH_MAIN + PADDING, PADDING + (12*30));
 }
 
 void Mainwindow::createActions()
