@@ -135,7 +135,7 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 
 bool City::isGameOver() const
 {
-    return false;
+    return gameOver;
 }
 
 
