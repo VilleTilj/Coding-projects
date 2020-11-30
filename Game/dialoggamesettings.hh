@@ -92,6 +92,7 @@ private:
      */
     void setTimelimit();
 
+
     /*!
      * \brief changeButtonsStates change buttons state enabled or disabled
      * depending on checkbox states.
