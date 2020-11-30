@@ -11,7 +11,7 @@
 const QString NYSSE_STOP = ":/../pics/pics/NysseStop.png"; //!< Pic of stopsign
 const QString BUSSI = "://../pics/pics/bussi.png"; //!< pic of buss
 const QString HUMAN = "://../pics/pics/huma.png"; //!< pic of passenger
-const int DIM_STOP = 50;
+const int DIM_STOP = 20;
 const int DIM_BUSS = 15;
 const int DIM_PASSENGER = 30;
 const int BUSS_STOP = 0;
