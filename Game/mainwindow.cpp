@@ -20,7 +20,7 @@ Mainwindow::Mainwindow(QWidget *parent) :
     setUiWidgets();
 
     ui->gameView->setFixedSize(WIDTH_MAIN, HEIGHT_MAIN);
-    ui->centralwidget->setFixedSize(WIDTH_MAIN + ui->startButton->width() + PADDING*2, HEIGHT_MAIN + PADDING);
+    ui->centralwidget->setFixedSize(WIDTH_MAIN + ui->startButton->width() + PADDING*5, HEIGHT_MAIN + PADDING);
     ui->startButton->move(WIDTH_MAIN + PADDING, PADDING);
 
     // create scene
@@ -109,16 +109,13 @@ void Mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor, bool poin
                  delete it->second;
                  actors_.erase(actor);
              }
-
          }
          if(actor == nuke_) {
              if(graphicNuke_->isActive() == true) {
              map->removeItem(graphicNuke_);
              graphicPlayer_->addNuke();
              }
-
          }
-
      }
 }
 
@@ -146,6 +143,7 @@ void Mainwindow::addPoints()
 {
     ui->points_lcd->display(stats_->giveCurrentPoints());
     ui->peopleLcd->display(stats_->givePassengers());
+    ui->busLcd->display(stats_->giveNysses());
 }
 
 
@@ -163,6 +161,17 @@ QAction *Mainwindow::getStartAction()
 {
     return startAct;
 }
+
+void Mainwindow::stopGameTimer()
+{
+    timer_.stop();
+}
+
+QLabel *Mainwindow::getPeopleLabel()
+{
+    return ui->peopleLabel;
+}
+
 
 bool Mainwindow::gameEnded()
 {
@@ -239,12 +248,11 @@ void Mainwindow::startGame()
 
 void Mainwindow::restartGame()
 {
-
+    // TODO this method does nothing due to us being out of time
 }
 
 void Mainwindow::changeSettings()
 {
-    // TODO stop the game logic
     myDialog->exec();
 }
 
@@ -343,6 +351,8 @@ void Mainwindow::setUiWidgets()
     ui->points_lcd->move(WIDTH_MAIN + PADDING, PADDING + (9*30));
     ui->peopleLabel->move(WIDTH_MAIN + PADDING, PADDING + (11*30));
     ui->peopleLcd->move(WIDTH_MAIN + PADDING, PADDING + (12*30));
+    ui->busLabel->move(WIDTH_MAIN + PADDING, PADDING + (14*30));
+    ui->busLcd->move(WIDTH_MAIN + PADDING, PADDING + (15*30));
 }
 
 void Mainwindow::createActions()

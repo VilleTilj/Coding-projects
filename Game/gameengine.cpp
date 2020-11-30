@@ -33,6 +33,8 @@ void GameEngine::advance()
 
 
     else if (ui->isNuked() == true) {
+        ui->stopGameTimer();
+        ui->getPeopleLabel()->setText("People killed:");
         cityPtr_->nukeCity();
         cityPtr_->GameOver();
         QPixmap image;

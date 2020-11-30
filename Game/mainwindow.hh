@@ -136,6 +136,10 @@ public:
      */
     QAction *getStartAction();
 
+    void stopGameTimer();
+
+    QLabel *getPeopleLabel();
+
     /*!
      * \brief gameEnded return boolean if game is ended or not
      * \return true when gane has ended, false otherwise
@@ -209,7 +213,6 @@ private slots:
 
 
 
-
 protected:
 #ifndef QT_NO_CONTEXTMENU
     void contextMenuEvent(QContextMenuEvent *event) override;
@@ -235,6 +238,7 @@ private:
     bool isInfiniteTime = true; //!< boolean value to check gametype
     bool secondsRunning = false;//!< Check if seconds are runnign in lcds
     int points_ = 0;            //!< Game points
+
     QString gamemode = "";
 
     QMenu *gameMenu;
