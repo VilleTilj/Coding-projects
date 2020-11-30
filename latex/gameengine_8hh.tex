@@ -1,0 +1,69 @@
+\hypertarget{gameengine_8hh}{\section{Game/gameengine.hh File Reference}
+\label{gameengine_8hh}\index{Game/gameengine.\-hh@{Game/gameengine.\-hh}}
+}
+{\ttfamily \#include \char`\"{}dialoggamesettings.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}creategame.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}city.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../\-Course/\-Course\-Lib/core/logic.\-hh\char`\"{}}\\*
+{\ttfamily \#include $<$Q\-Image$>$}\\*
+{\ttfamily \#include \char`\"{}playeractor.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Q\-Time\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}core/location.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}statistics.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}errors/initerror.\-hh\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_student_side_1_1_game_engine}{Student\-Side\-::\-Game\-Engine}
+\begin{DoxyCompactList}\small\item\em The Init\-Game\-Engine class is for setting the game up. It launches dialog window for settings and initializes gamewindow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespace_student_side}{Student\-Side}
+\begin{DoxyCompactList}\small\item\em namespace Studen\-Side, Students own imlplementations to project \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const Q\-String \hyperlink{gameengine_8hh_ad6494001dd20d6bedc7543fec6c695ba}{big\-Map} = \char`\"{}\-:/offlinedata/offlinedata/kartta\-\_\-iso\-\_\-1095x592.\-png\char`\"{}
+\item 
+const Q\-String \hyperlink{gameengine_8hh_af60fadacdd8d88e839ee0eae05d28518}{small\-Map} = \char`\"{}\-:/offlinedata/offlinedata/kartta\-\_\-pieni\-\_\-500x500.\-png\char`\"{}
+\item 
+const Q\-String \hyperlink{gameengine_8hh_aa00341459be5e91d4cfc88f9c6e60e1b}{F\-A\-L\-L\-O\-U\-T} = \char`\"{}\-://../pics/pics/fallout.\-png\char`\"{}
+\item 
+const int \hyperlink{gameengine_8hh_a3482785bd2a4c8b307f9e0b6f54e2c36}{S\-C\-R\-E\-E\-N\-\_\-\-W\-I\-D\-T\-H} = 1095
+\item 
+const int \hyperlink{gameengine_8hh_ab454541ae58bcf6555e8d723b1eb95e7}{S\-C\-R\-E\-E\-N\-\_\-\-H\-E\-I\-G\-H\-T} = 592
+\item 
+const int \hyperlink{gameengine_8hh_a8d5e08c7b38927d44080edc754c38548}{E\-M\-P\-T\-Y\-\_\-\-V\-E\-C\-T\-O\-R} = 0
+\item 
+const int \hyperlink{gameengine_8hh_ab6b394d83c83a373aef9084d78deb314}{T\-I\-C\-K} = 100
+\item 
+const int \hyperlink{gameengine_8hh_a0b1f44cc2ab8edc40a025d70653b110f}{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-F\-O\-R\-\_\-\-N\-U\-K\-E} = 2000
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{gameengine_8hh_ad6494001dd20d6bedc7543fec6c695ba}{\index{gameengine.\-hh@{gameengine.\-hh}!big\-Map@{big\-Map}}
+\index{big\-Map@{big\-Map}!gameengine.hh@{gameengine.\-hh}}
+\subsubsection[{big\-Map}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-String big\-Map = \char`\"{}\-:/offlinedata/offlinedata/kartta\-\_\-iso\-\_\-1095x592.\-png\char`\"{}}}\label{gameengine_8hh_ad6494001dd20d6bedc7543fec6c695ba}
+\hypertarget{gameengine_8hh_a8d5e08c7b38927d44080edc754c38548}{\index{gameengine.\-hh@{gameengine.\-hh}!E\-M\-P\-T\-Y\-\_\-\-V\-E\-C\-T\-O\-R@{E\-M\-P\-T\-Y\-\_\-\-V\-E\-C\-T\-O\-R}}
+\index{E\-M\-P\-T\-Y\-\_\-\-V\-E\-C\-T\-O\-R@{E\-M\-P\-T\-Y\-\_\-\-V\-E\-C\-T\-O\-R}!gameengine.hh@{gameengine.\-hh}}
+\subsubsection[{E\-M\-P\-T\-Y\-\_\-\-V\-E\-C\-T\-O\-R}]{\setlength{\rightskip}{0pt plus 5cm}const int E\-M\-P\-T\-Y\-\_\-\-V\-E\-C\-T\-O\-R = 0}}\label{gameengine_8hh_a8d5e08c7b38927d44080edc754c38548}
+\hypertarget{gameengine_8hh_aa00341459be5e91d4cfc88f9c6e60e1b}{\index{gameengine.\-hh@{gameengine.\-hh}!F\-A\-L\-L\-O\-U\-T@{F\-A\-L\-L\-O\-U\-T}}
+\index{F\-A\-L\-L\-O\-U\-T@{F\-A\-L\-L\-O\-U\-T}!gameengine.hh@{gameengine.\-hh}}
+\subsubsection[{F\-A\-L\-L\-O\-U\-T}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-String F\-A\-L\-L\-O\-U\-T = \char`\"{}\-://../pics/pics/fallout.\-png\char`\"{}}}\label{gameengine_8hh_aa00341459be5e91d4cfc88f9c6e60e1b}
+\hypertarget{gameengine_8hh_ab454541ae58bcf6555e8d723b1eb95e7}{\index{gameengine.\-hh@{gameengine.\-hh}!S\-C\-R\-E\-E\-N\-\_\-\-H\-E\-I\-G\-H\-T@{S\-C\-R\-E\-E\-N\-\_\-\-H\-E\-I\-G\-H\-T}}
+\index{S\-C\-R\-E\-E\-N\-\_\-\-H\-E\-I\-G\-H\-T@{S\-C\-R\-E\-E\-N\-\_\-\-H\-E\-I\-G\-H\-T}!gameengine.hh@{gameengine.\-hh}}
+\subsubsection[{S\-C\-R\-E\-E\-N\-\_\-\-H\-E\-I\-G\-H\-T}]{\setlength{\rightskip}{0pt plus 5cm}const int S\-C\-R\-E\-E\-N\-\_\-\-H\-E\-I\-G\-H\-T = 592}}\label{gameengine_8hh_ab454541ae58bcf6555e8d723b1eb95e7}
+\hypertarget{gameengine_8hh_a3482785bd2a4c8b307f9e0b6f54e2c36}{\index{gameengine.\-hh@{gameengine.\-hh}!S\-C\-R\-E\-E\-N\-\_\-\-W\-I\-D\-T\-H@{S\-C\-R\-E\-E\-N\-\_\-\-W\-I\-D\-T\-H}}
+\index{S\-C\-R\-E\-E\-N\-\_\-\-W\-I\-D\-T\-H@{S\-C\-R\-E\-E\-N\-\_\-\-W\-I\-D\-T\-H}!gameengine.hh@{gameengine.\-hh}}
+\subsubsection[{S\-C\-R\-E\-E\-N\-\_\-\-W\-I\-D\-T\-H}]{\setlength{\rightskip}{0pt plus 5cm}const int S\-C\-R\-E\-E\-N\-\_\-\-W\-I\-D\-T\-H = 1095}}\label{gameengine_8hh_a3482785bd2a4c8b307f9e0b6f54e2c36}
+\hypertarget{gameengine_8hh_af60fadacdd8d88e839ee0eae05d28518}{\index{gameengine.\-hh@{gameengine.\-hh}!small\-Map@{small\-Map}}
+\index{small\-Map@{small\-Map}!gameengine.hh@{gameengine.\-hh}}
+\subsubsection[{small\-Map}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-String small\-Map = \char`\"{}\-:/offlinedata/offlinedata/kartta\-\_\-pieni\-\_\-500x500.\-png\char`\"{}}}\label{gameengine_8hh_af60fadacdd8d88e839ee0eae05d28518}
+\hypertarget{gameengine_8hh_a0b1f44cc2ab8edc40a025d70653b110f}{\index{gameengine.\-hh@{gameengine.\-hh}!T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-F\-O\-R\-\_\-\-N\-U\-K\-E@{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-F\-O\-R\-\_\-\-N\-U\-K\-E}}
+\index{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-F\-O\-R\-\_\-\-N\-U\-K\-E@{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-F\-O\-R\-\_\-\-N\-U\-K\-E}!gameengine.hh@{gameengine.\-hh}}
+\subsubsection[{T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-F\-O\-R\-\_\-\-N\-U\-K\-E}]{\setlength{\rightskip}{0pt plus 5cm}const int T\-H\-R\-E\-S\-H\-O\-L\-D\-\_\-\-F\-O\-R\-\_\-\-N\-U\-K\-E = 2000}}\label{gameengine_8hh_a0b1f44cc2ab8edc40a025d70653b110f}
+\hypertarget{gameengine_8hh_ab6b394d83c83a373aef9084d78deb314}{\index{gameengine.\-hh@{gameengine.\-hh}!T\-I\-C\-K@{T\-I\-C\-K}}
+\index{T\-I\-C\-K@{T\-I\-C\-K}!gameengine.hh@{gameengine.\-hh}}
+\subsubsection[{T\-I\-C\-K}]{\setlength{\rightskip}{0pt plus 5cm}const int T\-I\-C\-K = 100}}\label{gameengine_8hh_ab6b394d83c83a373aef9084d78deb314}
