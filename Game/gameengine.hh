@@ -35,9 +35,13 @@ public:
 private slots:
 
     /*!
-     * \brief advance moves player and removes passengers who carry buss that are close to player.
+     * \brief advance moves actors and removes passengers who carry buss that are close to player.
      */
     void advance();
+
+    /*!
+     * \brief advances actors to next spot and adds new passengers if needed
+     */
 
     void updateScreen();
 
@@ -54,7 +58,7 @@ private:
     std::shared_ptr<StudentSide::City> cityPtr_;    //!< Pointer to city
     std::shared_ptr<StudentSide::Statistics> stats; //!< pointer to statistics
     StudentSide::playerActor* graphicPlayer_;       //!< Player
-    QTimer timer;   //!< Timer
+    QTimer timer;   //!< Timer for the game tics
 
 
     /*!

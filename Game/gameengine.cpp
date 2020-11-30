@@ -66,9 +66,11 @@ void GameEngine::updateScreen()
         Interface::Location location = actors.at(i)->giveLocation();
         ui->moveActor(actors.at(i), location.giveX(), location.giveY());
     }
+
     for(unsigned long int i = 0; i < passengers.size(); i++) {
         ui->addActor(passengers.at(i));
     }
+
     if(passengers.size() > 0) {
     stats->morePassengers(passengers.size());
         stats->morePassengers(passengers.size());
