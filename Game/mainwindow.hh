@@ -157,6 +157,10 @@ public:
      */
      void addNuke(std::shared_ptr<StudentSide::Actor> nuke);
 
+     /*!
+      * \brief get information if nuke has been launched by the player
+      */
+
      bool isNuked();
 
 

@@ -58,7 +58,7 @@ void playerActor::keyPressEvent(QKeyEvent *event)
     }
 
     else if(event->key() == Qt::Key_E && nuke == true && nuke_activated == false) {
-        qDebug() << "timo nuked";
+        qDebug() << "Nuke has been launched";
         nuke_activated = true;
     }
 
@@ -72,6 +72,7 @@ Interface::Location playerActor::giveLocation()
 
 void playerActor::addNuke()
 {
+    qDebug() << "Nuke has been acquired. Launch nuke by pressing E";
     nuke = true;
 }
 

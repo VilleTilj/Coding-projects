@@ -58,7 +58,15 @@ public:
      */
     Interface::Location giveLocation();
 
+    /*!
+     * \brief Marks the nuke to be usable the player
+     */
     void addNuke();
+
+    /*!
+     * \brief tells if the nuke is used by the player
+     * \return the boolean value of the status of the nuke
+     */
 
     bool isNuked();
 
@@ -66,8 +74,8 @@ public:
 private:
     int x_;     //!< x-coordinate of player
     int y_;     //!< y-coordinate of player
-    bool nuke = false;
-    bool nuke_activated = false;
+    bool nuke = false; //!< checks if nuke is usable by the player
+    bool nuke_activated = false; //!< tells if nuke has been used
 
     QPixmap image;  //!< Image of player
 
