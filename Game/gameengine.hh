@@ -83,7 +83,7 @@ private:
     bool nukeAdded = false; //!< boolean for if nuke has been added already
 
 
-    /*!//!<
+    /*!
      * \brief gameWindow draws game window and sets map to it.
      * \pre -
      * \post Exception guaranteed: nothrow

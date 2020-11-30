@@ -65,6 +65,6 @@ RESOURCES += \
     dataFiles.qrc \
     scores.csv
 
-DISTFILES += \
-    scores.csv
+#DISTFILES += \
+ #   scores.csv
 

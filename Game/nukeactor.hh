@@ -7,6 +7,7 @@ const QString NUKE = "://../pics/pics/nuke.png";
 const int NUKE_WIDTH = 30;
 const int NUKE_HEIGHT = 20;
 
+
 namespace StudentSide {
 
 class NukeActor : public QGraphicsPixmapItem
