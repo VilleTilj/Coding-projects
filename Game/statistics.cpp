@@ -41,6 +41,7 @@ void Statistics::nysseLeft()
 
 void Statistics::Addpoints(std::shared_ptr<Interface::IActor> actor)
 {
+    Q_ASSERT(actor != nullptr);
      if(std::shared_ptr<Interface::IPassenger> passenger = std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
          points += POINTS_FROM_PASSENGER;
          passengers += 1;

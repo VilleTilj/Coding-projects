@@ -29,7 +29,6 @@ void playerActor::changePosition(int x, int y)
 void playerActor::keyPressEvent(QKeyEvent *event)
 {
 
-    //qDebug() << y_;
     if( event->key() == Qt::Key_W && y_ > UP_BORDER)
     {
         y_ = y_ - MOVE_UP;

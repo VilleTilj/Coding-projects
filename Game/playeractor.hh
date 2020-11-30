@@ -22,13 +22,16 @@ const int RIGHT_BORDER = 1100;
 const int X_COMPP = 355;
 const int Y_COMPP = 547;
 
+
+/*!
+ * \brief namespace StudenSide, Students own imlplementations to project
+ */
 namespace StudentSide {
 
 /*!
  * \file playeractor.hh
  * \brief The playerActor class
  */
-
 class playerActor : public QGraphicsPixmapItem
 {
 public:
@@ -36,6 +39,7 @@ public:
     /*!
      * \brief playerActor constructor to set player to map
      * \param location Location to set player
+     * \pre Location must be inside map coordinates
      */
     playerActor(Interface::Location location);
 
@@ -43,6 +47,7 @@ public:
      * \brief changePosition changes players position
      * \param x x-coordinate
      * \param y y-coordinate
+     * \pre Coordinates must be inside map coordinates
      */
     void changePosition(int x, int y);
 
@@ -67,7 +72,6 @@ public:
      * \brief tells if the nuke is used by the player
      * \return the boolean value of the status of the nuke
      */
-
     bool isNuked();
 
 
