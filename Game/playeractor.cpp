@@ -74,6 +74,7 @@ void playerActor::addNuke()
 {
     qDebug() << "Nuke has been acquired. Launch nuke by pressing E";
     nuke = true;
+
 }
 
 bool playerActor::isNuked()

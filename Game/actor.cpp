@@ -26,7 +26,7 @@ Interface::Location Actor::giveLocation() const
 
 void Actor::move(Interface::Location loc)
 {
-    if(loc.giveX() > 0 && loc.giveX() < 1100 && loc.giveY() > 0 && loc.giveY() < 590) {
+    if(loc.giveX() > POLE && loc.giveX() < MAX_X && loc.giveY() > POLE && loc.giveY() < MAX_Y) {
         throw Interface::GameError("Location is not possible.");
     }
     location_->setXY(loc.giveX(), loc.giveY());

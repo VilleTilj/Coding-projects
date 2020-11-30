@@ -17,6 +17,14 @@
 /*!
  * \brief namespace StudenSide, Students own imlplementations to project
  */
+
+
+
+const int RENDER_DISTANCE = 2000;
+const int PASSENGER_RENDER_MIN = -500;
+const int PASSENGER_RENDER_MAX = 1050;
+const int DISTANCE_TO_INTERACT = 25;
+
 namespace StudentSide
 {
 
@@ -209,6 +217,7 @@ public:
      * \post Exception guaranteed: nothrow
      */
     void GameOver();
+
 
 private:
     QImage small_;  //!< Small map image

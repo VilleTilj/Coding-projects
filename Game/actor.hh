@@ -5,9 +5,16 @@
 #include "errors/gameerror.hh"
 #include <memory>
 
+
 /*!
  * \brief namespace StudenSide, Students own imlplementations to project
  */
+
+const int MAX_X = 1100;
+const int MAX_Y = 590;
+const int POLE = 0;
+
+
 namespace StudentSide {
 
 /*!

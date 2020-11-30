@@ -3,7 +3,7 @@
 
 #include <QDialog>
 
-const int ONE_MINUTE = 6;
+const int ONE_MINUTE = 60;
 const int TWO_MINUTE = 120;
 
 

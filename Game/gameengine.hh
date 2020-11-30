@@ -16,9 +16,20 @@ const QString bigMap = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
 const QString smallMap = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
 const QString FALLOUT = "://../pics/pics/fallout.png";
 
+
+
+
+const int SCREEN_WIDTH = 1095;
+const int SCREEN_HEIGHT= 592;
+const int EMPTY_VECTOR = 0;
+const int TICK = 100;
+const int THRESHOLD_FOR_NUKE = 2000;
+
+
 /*!
  * \brief namespace StudenSide, Students own imlplementations to project
  */
+
 namespace StudentSide {
 
 /*!
@@ -69,9 +80,10 @@ private:
     std::shared_ptr<StudentSide::Statistics> stats; //!< pointer to statistics
     StudentSide::playerActor* graphicPlayer_;       //!< Player
     QTimer timer;   //!< Timer for the game tics
+    bool nukeAdded = false; //!< boolean for if nuke has been added already
 
 
-    /*!
+    /*!//!<
      * \brief gameWindow draws game window and sets map to it.
      * \pre -
      * \post Exception guaranteed: nothrow

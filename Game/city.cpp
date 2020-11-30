@@ -36,7 +36,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     Q_ASSERT(stop != nullptr);
     Interface::Location location = stop->getLocation();
-    if(location.giveX() > 2000 && location.giveX() < 2000 && location.giveY() > 2000 && location.giveY() < 2000) {
+    if(location.giveX() > RENDER_DISTANCE && location.giveX() < RENDER_DISTANCE && location.giveY() > RENDER_DISTANCE && location.giveY() < RENDER_DISTANCE) {
         throw Interface::InitError("Stops position is not valid.");
     }
     if(std::find(stops_.begin(), stops_.end(), stop) == stops_.end()){
@@ -58,7 +58,7 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
         Interface::Location location = newactor->giveLocation();
         if(std::shared_ptr<Interface::IPassenger> passenger = std::dynamic_pointer_cast<Interface::IPassenger>(newactor)) {
             actors_.push_back(newactor);
-            if (location.giveX() > 0 && location.giveX() < 1100 && location.giveY() > 0 && location.giveY() < 600) {
+            if (location.giveX() > PASSENGER_RENDER_MIN && location.giveX() < PASSENGER_RENDER_MAX && location.giveY() > PASSENGER_RENDER_MIN && location.giveY() < PASSENGER_RENDER_MAX) {
                 new_passengers.push_back(newactor);
             }
         }
@@ -113,7 +113,7 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
         Interface::Location customLocation = loc;
         customLocation.setXY(X_COMP + location.giveX(), Y_COMP - location.giveY());
 
-        if(customLocation.isClose(loc, 30) == true){
+        if(customLocation.isClose(loc, DISTANCE_TO_INTERACT) == true){
             actorsToBedeleted.push_back(actors_[i]);
         }
     }
@@ -220,6 +220,9 @@ void City::nukeCity()
         if(actors_.at(i)->isRemoved() == false) {
             actors_.at(i)->remove();
             ui_->removeActor(actors_.at(i), true);
+            if(std::shared_ptr<Interface::IVehicle> NYSSE = std::dynamic_pointer_cast<Interface::IVehicle>(actors_.at(i))) {
+                stats_->nysseRemoved();
+            }
             actors_.erase(std::remove(actors_.begin(), actors_.end(), actors_.at(i)), actors_.end());
         }
     }
@@ -228,7 +231,7 @@ void City::nukeCity()
 
 void City::GameOver()
 {
-    gameOver = false;
+    gameOver = true;
 }
 
 } // namespace

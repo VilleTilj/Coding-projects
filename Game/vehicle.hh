@@ -3,6 +3,7 @@
 #include "interfaces/ivehicle.hh"
 #include "interfaces/ipassenger.hh"
 #include "QDebug"
+#include "errors/gameerror.hh"
 
 namespace StudentSide {
 
@@ -48,7 +49,14 @@ public:
      * \param passenger
      */
     void removePassenger(std::shared_ptr<Interface::IPassenger> passenger) override;
+
+private:
+
+    std::vector<std::shared_ptr<Interface::IPassenger> > passengers; //!< vector containing all the passenger in vehicle
+    std::string name = ""; //!< name of the vehicle
 };
+
+
 
 } //namespace
 

@@ -4,8 +4,8 @@
 #include "core/location.hh"
 
 const QString NUKE = "://../pics/pics/nuke.png";
-const int NUKE_WIDTH = 50;
-const int NUKE_HEIGHT = 40;
+const int NUKE_WIDTH = 30;
+const int NUKE_HEIGHT = 20;
 
 namespace StudentSide {
 
