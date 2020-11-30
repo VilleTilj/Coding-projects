@@ -33,6 +33,8 @@ Mainwindow::Mainwindow(QWidget *parent) :
     createMenus();
 
     // Create timer to move actors
+    QTimer timer;
+    timer.start(1500);
 
     myDialog->exec();
 }
@@ -70,7 +72,6 @@ void Mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
     last_ = graphicActor;
 }
 
-
 void Mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     Interface::Location location = stop->getLocation();
@@ -94,27 +95,32 @@ void Mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int 
 }
 
 
-void Mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor)
+void Mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor, bool points)
 {
-    std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
-    for (it = actors_.begin(); it != actors_.end(); ++it){
-        if(it->first == actor){
-            stats_->Addpoints(actor);
-            addPoints();
-            if(it->second->isActive() == true) {
-                map->removeItem(it->second);
-                delete it->second;
-                actors_.erase(actor);
-            }
-        }
-    }
-    if (actor == nuke_) {
-        map->removeItem(graphicNuke_);
-        graphicPlayer_->addNuke();
+     std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
+     for (it = actors_.begin(); it != actors_.end(); ++it){
+         if(it->first == actor) {
+             if(points == true) {
+                 stats_->Addpoints(actor);
+                 addPoints();
+             }
+             if(it->second->isActive() == true) {
+                 map->removeItem(it->second);
+                 delete it->second;
+                 actors_.erase(actor);
+             }
 
-    }
+         }
+         if(actor == nuke_) {
+             if(graphicNuke_->isActive() == true) {
+             map->removeItem(graphicNuke_);
+             graphicPlayer_->addNuke();
+             }
+
+         }
+
+     }
 }
-
 
 void Mainwindow::addPlayer(std::shared_ptr<Actor> player)
 {
@@ -139,7 +145,7 @@ playerActor *Mainwindow::returnPlayer()
 void Mainwindow::addPoints()
 {
     ui->points_lcd->display(stats_->giveCurrentPoints());
-    ui->peopleLcd->display(stats_->giveCurrentPoints() / 10);
+    ui->peopleLcd->display(stats_->givePassengers());
 }
 
 
@@ -213,7 +219,6 @@ void Mainwindow::updateTimelimit()
             ui->startButton->setEnabled(true);
             startAct->setEnabled(true);
             secondsRunning = false;
-            timer->stop();
         }
     } else {
         seconds++;
@@ -278,7 +283,7 @@ void Mainwindow::addNuke(std::shared_ptr<Actor> nuke)
 
 void Mainwindow::destroyPlayer()
 {
-    //player_.reset();
+    player_.reset();
     map->removeItem(graphicPlayer_);
     std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
     for (it = actors_.begin(); it != actors_.end(); ++it){

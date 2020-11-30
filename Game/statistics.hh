@@ -4,11 +4,15 @@
 #include "interfaces/istatistics.hh"
 #include "interfaces/iactor.hh"
 #include "interfaces/ipassenger.hh"
+#include "interfaces/ivehicle.hh"
 
 #include <memory>
 #include <QMetaType>
 
 const int POINTS_FROM_PASSENGER = 10;
+const int POINTS_FROM_NYSSE = 20;
+
+
 
 namespace StudentSide {
 
@@ -32,10 +36,16 @@ public:
 
     int giveCurrentPoints();
 
+    int givePassengers();
+
+    int giveNysses();
+
 
 private:
 
     int points = 0;
+    int passengers = 0;
+    int nysses = 0;
 };
 
 } //namespace

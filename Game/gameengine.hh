@@ -50,9 +50,9 @@ private slots:
 private:
     std::shared_ptr<StudentSide::Mainwindow> ui;    //!< Mainwindows userinterface
     std::shared_ptr<CourseSide::Logic> logic_;      //!< Pointer to game logic
-    std::shared_ptr<StudentSide::Statistics> stats; //!< pointer to statistics
     std::shared_ptr<Interface::ICity> iCityPtr;     //!< Pointer to city interface
     std::shared_ptr<StudentSide::City> cityPtr_;    //!< Pointer to city
+    std::shared_ptr<StudentSide::Statistics> stats; //!< pointer to statistics
     StudentSide::playerActor* graphicPlayer_;       //!< Player
     QTimer timer;   //!< Timer
 

@@ -28,7 +28,10 @@ void GameEngine::advance()
     if(ui->gameEnded()){
         timer.stop();
         ui->destroyPlayer();
+        cityPtr_->clearAll();
+
     }
+
 
     else if (ui->isNuked() == true) {
         cityPtr_->nukeCity();
@@ -41,6 +44,7 @@ void GameEngine::advance()
         ui->destroyPlayer();
 
     }
+
 
 
     graphicPlayer_->setFlag(QGraphicsPixmapItem::ItemIsFocusable);

@@ -81,7 +81,7 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
     if(std::find(actors_.begin(), actors_.end(), actor) != actors_.end()){
         actor->remove();
         actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
-        ui_->removeActor(actor);
+        ui_->removeActor(actor, false);
         stats_->nysseLeft();
     }
     else {
@@ -172,12 +172,12 @@ void City::DestroyTimo(std::shared_ptr<Interface::IActor> actor)
             if(passenger->isInVehicle() == true) {
                 actor->remove();
                 actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
-                ui_->removeActor(actor);
+                ui_->removeActor(actor, true);
             }
         }
         else if(actor == nuke_) {
              actors_.erase(std::remove(actors_.begin(), actors_.end(), actor), actors_.end());
-             ui_->removeActor(nuke_);
+             ui_->removeActor(nuke_, false);
         }
     }
 }
@@ -218,7 +218,7 @@ void City::nukeCity()
     for(unsigned long int i = 0; i < actors_.size(); i++) {
         if(actors_.at(i)->isRemoved() == false) {
             actors_.at(i)->remove();
-            ui_->removeActor(actors_.at(i));
+            ui_->removeActor(actors_.at(i), true);
             actors_.erase(std::remove(actors_.begin(), actors_.end(), actors_.at(i)), actors_.end());
         }
     }
@@ -227,6 +227,15 @@ void City::nukeCity()
 void City::GameOver()
 {
     gameOver = false;
+}
+
+void City::clearAll()
+{
+    actors_.clear();
+    moved_actor.clear();
+    new_passengers.clear();
+    stops_.clear();
+
 }
 
 
