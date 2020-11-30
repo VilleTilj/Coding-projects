@@ -14,16 +14,15 @@
 #include <algorithm>
 
 
-/*!
- * \brief namespace StudenSide, Students own imlplementations to project
- */
-
-
-
 const int RENDER_DISTANCE = 2000;
 const int PASSENGER_RENDER_MIN = -500;
 const int PASSENGER_RENDER_MAX = 1050;
 const int DISTANCE_TO_INTERACT = 25;
+
+/*!
+ * \brief namespace StudenSide, Students own imlplementations to project
+ */
+
 
 namespace StudentSide
 {
