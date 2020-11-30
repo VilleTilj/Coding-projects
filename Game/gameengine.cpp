@@ -28,7 +28,6 @@ void GameEngine::advance()
     if(ui->gameEnded()){
         timer.stop();
         ui->destroyPlayer();
-        cityPtr_->clearAll();
 
     }
 
@@ -54,7 +53,7 @@ void GameEngine::advance()
     std::vector<std::shared_ptr<Interface::IActor>> actor = cityPtr_->getNearbyActors(graphicPlayer_->giveLocation());
     //qDebug() << actor.size();
     for(unsigned long int i = 0; i < actor.size(); i++){
-        cityPtr_->DestroyTimo(actor.at(i));
+        cityPtr_->removeActorsNearby(actor.at(i));
     }
 }
 

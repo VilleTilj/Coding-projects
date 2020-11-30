@@ -6,10 +6,17 @@
 const int ONE_MINUTE = 6;
 const int TWO_MINUTE = 120;
 
+
+/*!
+ * \brief namespace Ui for dialog window class
+ */
 namespace Ui {
 class DialogGameSettings;
 }
 
+/*!
+ * \brief namespace StudenSide, Students own imlplementations to project
+ */
 namespace StudentSide {
 
 /*!
@@ -29,6 +36,7 @@ public:
 
     /*!
      * \brief Destructor
+     * \pre -
      */
     ~DialogGameSettings();
 
@@ -60,11 +68,16 @@ signals:
      * \brief normalSettings to set normal game settings
      * \param name Name of the player
      * \param timelimit Sets the timelimit for game
+     * \pre name must be QString and timelimit int
+     * \post Exception guaranteed: nothrow
      */
     void normalSettings(QString name, int timelimit);
 
     /*!
      * \brief infiniteSettings to set infinite time game.
+     * \param name Player name
+     * \pre -
+     * \post Exception guaranteed: nothrow
      */
     void infiniteSettings(QString name);
 
@@ -74,12 +87,16 @@ private:
 
     /*!
      * \brief setTimelimit sets game timelimit depending on user choise.
+     * \pre -
+     * \post Exception guaranteed: nothrow
      */
     void setTimelimit();
 
     /*!
      * \brief changeButtonsStates change buttons state enabled or disabled
      * depending on checkbox states.
+     * \pre -
+     * \post Exception guaranteed: nothrow
      */
     void changeButtonsStates();
 };
