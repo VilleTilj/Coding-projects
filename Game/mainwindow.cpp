@@ -306,9 +306,6 @@ void Mainwindow::showAboutInfo()
 }
 
 
-
-
-
 void Mainwindow::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu menu(this);

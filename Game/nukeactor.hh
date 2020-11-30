@@ -7,13 +7,29 @@ const QString NUKE = "://../pics/pics/nuke.png";
 const int NUKE_WIDTH = 30;
 const int NUKE_HEIGHT = 20;
 
-
+/*!
+ * \brief namespace StudenSide, Students own imlplementations to project
+ */
 namespace StudentSide {
 
+
+/*!
+ * \brief The NukeActor class
+ */
 class NukeActor : public QGraphicsPixmapItem
 {
 public:
+    /*!
+     * \brief NukeActor gets nukeactor to the map
+     * \param location Location to draw the nuke actor
+     * \pre Location must be inside map coordinates
+     * \post Exception guaranteed: nothrow
+     */
     NukeActor(Interface::Location location);
+
+    /*!
+     * \brief Destructor
+     */
     ~NukeActor();
 
 

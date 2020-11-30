@@ -27,11 +27,7 @@ void GameEngine::advance()
         timer.stop();
         ui->destroyPlayer();
         cityPtr_->GameOver();
-
     }
-
-
-
 
     else if (ui->isNuked() == true) {
         ui->stopGameTimer();
@@ -58,7 +54,6 @@ void GameEngine::advance()
     updateScreen();
     graphicPlayer_->giveLocation();
     std::vector<std::shared_ptr<Interface::IActor>> actor = cityPtr_->getNearbyActors(graphicPlayer_->giveLocation());
-    //qDebug() << actor.size();
     for(unsigned long int i = 0; i < actor.size(); i++){
         cityPtr_->removeActorsNearby(actor.at(i));
     }
