@@ -256,8 +256,8 @@ void Mainwindow::updateTimelimit()
         } else {
             timer_.stop();
             gameEnding();
-            ui->startButton->setEnabled(true);
-            startAct->setEnabled(true);
+            ui->startButton->setEnabled(false);
+            startAct->setEnabled(false);
             secondsRunning = false;
         }
     } else {
