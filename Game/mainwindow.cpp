@@ -56,12 +56,11 @@ void Mainwindow::setBackground(QPixmap &image)
 
 void Mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
 {
+    Q_ASSERT(actor != nullptr);
     Interface::Location location = actor->giveLocation();
     if(std::shared_ptr<CourseSide::Nysse> nActor = std::dynamic_pointer_cast<CourseSide::Nysse>(actor)) {
         type = NYSSE;
-
     }
-
     else if(std::shared_ptr<Interface::IPassenger> nActor = std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
         type = PASSENGER;
     }
@@ -72,8 +71,10 @@ void Mainwindow::addActor(std::shared_ptr<Interface::IActor> actor)
     last_ = graphicActor;
 }
 
+
 void Mainwindow::addStop(std::shared_ptr<Interface::IStop> stop)
 {
+    Q_ASSERT(stop != nullptr);
     Interface::Location location = stop->getLocation();
     StudentSide::ActorItem* graphicActor = new StudentSide::ActorItem(X_COMP + location.giveX(), Y_COMP - location.giveY(), BUSS_STOP);
     stops_[stop] = graphicActor;
@@ -86,7 +87,6 @@ void Mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int 
 {
     //find corresponding gpraphic actor.
     std::map<std::shared_ptr<Interface::IActor>, StudentSide::ActorItem*>::iterator it;
-
     for (it = actors_.begin(); it != actors_.end(); ++it){
         if(it->first == actor){
             it->second->setCoord(X_COMP + x, Y_COMP - y);
@@ -97,6 +97,7 @@ void Mainwindow::moveActor(std::shared_ptr<Interface::IActor> actor, int x, int 
 
 void Mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor, bool points)
 {
+    Q_ASSERT(actor != nullptr);
      std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
      for (it = actors_.begin(); it != actors_.end(); ++it){
          if(it->first == actor) {
@@ -121,6 +122,7 @@ void Mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor, bool poin
 
 void Mainwindow::addPlayer(std::shared_ptr<Actor> player)
 {
+    Q_ASSERT(player != nullptr);
     player_ = player;
     Interface::Location location = player_->giveLocation();
     graphicPlayer_ = new StudentSide::playerActor(location);
@@ -149,6 +151,7 @@ void Mainwindow::addPoints()
 
 void Mainwindow::takeStats(std::shared_ptr<Statistics> stats)
 {
+    Q_ASSERT(stats != nullptr);
     stats_ = stats;
 }
 
@@ -180,6 +183,34 @@ bool Mainwindow::gameEnded()
     } else {
         return true;
     }
+}
+
+
+void Mainwindow::destroyPlayer()
+{
+    player_.reset();
+    map->removeItem(graphicPlayer_);
+    std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
+    for (it = actors_.begin(); it != actors_.end(); ++it){
+        map->removeItem(it->second);
+    }
+}
+
+
+void Mainwindow::addNuke(std::shared_ptr<Actor> nuke)
+{
+    Q_ASSERT(nuke != nullptr);
+    nuke_ = nuke;
+    Interface::Location location = nuke_->giveLocation();
+    location.setXY(location.giveX() + X_COMP,Y_COMP -  location.giveY() );
+    graphicNuke_ = new StudentSide::NukeActor(location);
+    map->addItem(graphicNuke_);
+}
+
+
+bool Mainwindow::isNuked()
+{
+    return graphicPlayer_->isNuked();
 }
 
 
@@ -274,32 +305,9 @@ void Mainwindow::showAboutInfo()
     readFileToMessage(ABOUT, title);
 }
 
-bool Mainwindow::isNuked()
-{
-    return graphicPlayer_->isNuked();
-}
 
 
-void Mainwindow::addNuke(std::shared_ptr<Actor> nuke)
-{
-    nuke_ = nuke;
-    Interface::Location location = nuke_->giveLocation();
-    location.setXY(location.giveX() + X_COMP,Y_COMP -  location.giveY() );
-    graphicNuke_ = new StudentSide::NukeActor(location);
-    map->addItem(graphicNuke_);
-}
 
-void Mainwindow::destroyPlayer()
-{
-    player_.reset();
-    map->removeItem(graphicPlayer_);
-    std::map<std::shared_ptr<Interface::IActor>,  StudentSide::ActorItem*>::iterator it;
-    for (it = actors_.begin(); it != actors_.end(); ++it){
-        map->removeItem(it->second);
-    }
-
-    //graphicPlayer_ = nullptr;
-}
 
 void Mainwindow::contextMenuEvent(QContextMenuEvent *event)
 {
@@ -311,6 +319,7 @@ void Mainwindow::contextMenuEvent(QContextMenuEvent *event)
 
 void Mainwindow::gameEnding()
 {
+    // TODO we did not get this to work due to timelimit
     if(!isInfiniteTime) {
         QFile data(SCORES);
         if(data.open(QFile::WriteOnly |QFile::Truncate)){
@@ -322,12 +331,12 @@ void Mainwindow::gameEnding()
 }
 
 
-
 void Mainwindow::update_time_lcd()
 {
     ui->time_lcd_min->display(seconds / 60);
     ui->time_lcd_sec->display(seconds % 60);
 }
+
 
 void Mainwindow::connectSignals()
 {
@@ -336,6 +345,7 @@ void Mainwindow::connectSignals()
     connect(ui->startButton, &QPushButton::clicked, this, &Mainwindow::startGame);
     connect(&timer_, &QTimer::timeout, this, &Mainwindow::updateTimelimit);
 }
+
 
 void Mainwindow::setUiWidgets()
 {
@@ -355,6 +365,7 @@ void Mainwindow::setUiWidgets()
     ui->busLcd->move(WIDTH_MAIN + PADDING, PADDING + (15*30));
 }
 
+
 void Mainwindow::createActions()
 {
     startAct = new QAction(tr("&Start"),this);
@@ -362,7 +373,7 @@ void Mainwindow::createActions()
     startAct->setStatusTip(tr("Starts game!"));
     connect(startAct, &QAction::triggered, this, &Mainwindow::startGame);
 
-    restartAct = new QAction(tr("&Restart"),this);
+    restartAct = new QAction(tr("&Restart (work in progress)"),this);
     restartAct->setShortcut(tr("Ctrl+R"));
     restartAct->setStatusTip(tr("Restarts game"));
     connect(restartAct, &QAction::triggered, this, &Mainwindow::restartGame);

@@ -22,16 +22,12 @@ GameEngine::GameEngine() :
 }
 
 
-
 void GameEngine::advance()
 {
     if(ui->gameEnded()){
         timer.stop();
         ui->destroyPlayer();
-
     }
-
-
     else if (ui->isNuked() == true) {
         ui->stopGameTimer();
         ui->getPeopleLabel()->setText("People killed:");
@@ -45,9 +41,6 @@ void GameEngine::advance()
         ui->destroyPlayer();
 
     }
-
-
-
     graphicPlayer_->setFlag(QGraphicsPixmapItem::ItemIsFocusable);
     graphicPlayer_->setFocus();
     updateScreen();
@@ -94,8 +87,6 @@ void GameEngine::initLogic()
     cityPtr_->addNuke();
     timer.start(100);
 }
-
-
 
 
 void GameEngine::gameWindow()
