@@ -113,8 +113,8 @@ void Mainwindow::removeActor(std::shared_ptr<Interface::IActor> actor, bool poin
          }
          if(actor == nuke_) {
              if(graphicNuke_->isActive() == true) {
-             map->removeItem(graphicNuke_);
-             graphicPlayer_->addNuke();
+                map->removeItem(graphicNuke_);
+                graphicPlayer_->addNuke();
              }
 
          }

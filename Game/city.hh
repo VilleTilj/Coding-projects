@@ -18,7 +18,10 @@
  * \brief Defines city operations for game that has been inherited from iCity
  */
 
-
+const int RENDER_DISTANCE = 2000;
+const int PASSENGER_RENDER_MIN = -500;
+const int PASSENGER_RENDER_MAX = 1100;
+const int DISTANCE_TO_INTERACT = 20;
 namespace StudentSide
 {
 
@@ -143,7 +146,7 @@ public:
 
     void GameOver();
 
-    void clearAll();
+
 private:
     QImage small_;  //!< Small map image
     QImage big_;    //!<  Big map image

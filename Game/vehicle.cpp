@@ -18,29 +18,30 @@ StudentSide::Vehicle::~Vehicle()
 
 std::string Vehicle::getName() const
 {
-    std::string name = "Vehicle";
     return name;
 }
 
 
 std::vector<std::shared_ptr<Interface::IPassenger> > Vehicle::getPassengers() const
 {
-    std::vector<std::shared_ptr<Interface::IPassenger>> Vehicle;
-    return  Vehicle;
+    return passengers;
 }
 
 
 void Vehicle::addPassenger(std::shared_ptr<Interface::IPassenger> passenger)
 {
-    qDebug() << passenger->isInVehicle();
-    return;
+    passengers.push_back(passenger);
 }
 
 
 void Vehicle::removePassenger(std::shared_ptr<Interface::IPassenger> passenger)
 {
-    qDebug() << passenger->isRemoved();
-    return;
+    if(std::find(passengers.begin(), passengers.end(), passenger) != passengers.end()) {
+        throw Interface::GameError("Passenger is not in the vehicle.");
+    }
+    else {
+        passengers.erase(std::remove(passengers.begin(), passengers.end(), passenger), passengers.end());
+    }
 }
 
 } // namespace

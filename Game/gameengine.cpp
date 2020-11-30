@@ -21,16 +21,15 @@ GameEngine::GameEngine() :
     connect(ui->getStartAction(), &QAction::triggered, this, &GameEngine::initLogic);
 }
 
-
-
 void GameEngine::advance()
 {
     if(ui->gameEnded()){
         timer.stop();
         ui->destroyPlayer();
-        cityPtr_->clearAll();
+        cityPtr_->GameOver();
 
     }
+
 
 
     else if (ui->isNuked() == true) {
@@ -38,7 +37,7 @@ void GameEngine::advance()
         cityPtr_->GameOver();
         QPixmap image;
         assert(image.load(FALLOUT));
-        image = image.scaled(1095 ,592);
+        image = image.scaled(SCREEN_WIDTH , SCREEN_HEIGHT);
         ui->setBackground(image);
         timer.stop();
         ui->destroyPlayer();
@@ -46,7 +45,10 @@ void GameEngine::advance()
     }
 
 
-
+    if (stats->giveCurrentPoints() > THRESHOLD_FOR_NUKE && nukeAdded == false) {
+        cityPtr_->addNuke();
+        nukeAdded = true;
+    }
     graphicPlayer_->setFlag(QGraphicsPixmapItem::ItemIsFocusable);
     graphicPlayer_->setFocus();
     updateScreen();
@@ -71,7 +73,7 @@ void GameEngine::updateScreen()
         ui->addActor(passengers.at(i));
     }
 
-    if(passengers.size() > 0) {
+    if(passengers.size() > EMPTY_VECTOR) {
     stats->morePassengers(passengers.size());
         stats->morePassengers(passengers.size());
     }
@@ -90,8 +92,7 @@ void GameEngine::initLogic()
     cityPtr_->makePlayer();
     graphicPlayer_ = ui->returnPlayer();
     logic_->finalizeGameStart();
-    cityPtr_->addNuke();
-    timer.start(100);
+    timer.start(TICK);
 }
 
 
