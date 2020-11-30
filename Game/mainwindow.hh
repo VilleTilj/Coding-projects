@@ -93,7 +93,7 @@ public:
      * \brief removeActor removes wanted actor from mainwindow
      * \param actor Actor to be removed
      */
-    void removeActor(std::shared_ptr<Interface::IActor> actor);
+    void removeActor(std::shared_ptr<Interface::IActor> actor, bool points);
 
     /*!
      * \brief addPlayer adds player to mainwindow
@@ -227,7 +227,6 @@ private:
     std::shared_ptr<Actor> nuke_;     //!< Pointer to nuke
     StudentSide::playerActor* graphicPlayer_; //!< Graphics for player
     StudentSide::NukeActor* graphicNuke_; //!< Graphics for nuke
-    QTimer* timer = nullptr;    //!< timer for advance actors
     std::shared_ptr<StudentSide::Statistics> stats_; //:< stats class
     int type = 0;               //!< type of actor
     QTimer timer_;              //!< timer for countdown timelimit

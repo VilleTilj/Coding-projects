@@ -142,6 +142,8 @@ public:
     void nukeCity();
 
     void GameOver();
+
+    void clearAll();
 private:
     QImage small_;  //!< Small map image
     QImage big_;    //!<  Big map image
