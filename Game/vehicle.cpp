@@ -30,12 +30,14 @@ std::vector<std::shared_ptr<Interface::IPassenger> > Vehicle::getPassengers() co
 
 void Vehicle::addPassenger(std::shared_ptr<Interface::IPassenger> passenger)
 {
+    Q_ASSERT(passenger != nullptr);
     passengers.push_back(passenger);
 }
 
 
 void Vehicle::removePassenger(std::shared_ptr<Interface::IPassenger> passenger)
 {
+    Q_ASSERT(passenger != nullptr);
     if(std::find(passengers.begin(), passengers.end(), passenger) != passengers.end()) {
         throw Interface::GameError("Passenger is not in the vehicle.");
     }
