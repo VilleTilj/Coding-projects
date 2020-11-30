@@ -149,26 +149,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_student_side_1_1_city.html#a8daa819e3acf9ce4c7a51e2dd6d53895">addNuke</a>();</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_student_side_1_1_city.html#af81fc684dc3cdc743d8a267e0de37f7b">nukeCity</a>();</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    QImage small_;  </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    QImage big_;    </div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    std::vector&lt;std::shared_ptr&lt;Interface::IActor&gt;&gt; actors_;     </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    std::vector&lt;std::shared_ptr&lt;Interface::IActor&gt;&gt; moved_actor; </div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    std::vector&lt;std::shared_ptr&lt;Interface::IActor&gt;&gt; new_passengers;  </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    std::vector&lt;std::shared_ptr&lt;Interface::IStop&gt;&gt; stops_;       </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    std::shared_ptr&lt;StudentSide::Mainwindow&gt; ui_;   </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    QTime time_;         </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    std::shared_ptr&lt;StudentSide::Actor&gt; player_ ;   </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    std::shared_ptr&lt;StudentSide::Actor&gt; nuke_ ; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    std::shared_ptr&lt;StudentSide::Statistics&gt; stats_;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_student_side_1_1_city.html#affc68915ee82bb32ab94e202d05402ca">GameOver</a>();</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    QImage small_;  </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    QImage big_;    </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    std::vector&lt;std::shared_ptr&lt;Interface::IActor&gt;&gt; actors_;     </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    std::vector&lt;std::shared_ptr&lt;Interface::IActor&gt;&gt; moved_actor; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    std::vector&lt;std::shared_ptr&lt;Interface::IActor&gt;&gt; new_passengers;  </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    std::vector&lt;std::shared_ptr&lt;Interface::IStop&gt;&gt; stops_;       </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    std::shared_ptr&lt;StudentSide::Mainwindow&gt; ui_;   </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    QTime time_;         </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    std::shared_ptr&lt;StudentSide::Actor&gt; player_ ;   </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    std::shared_ptr&lt;StudentSide::Actor&gt; nuke_ ; </div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordtype">bool</span> gamestarted = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;};</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;} <span class="comment">//namespace</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="preprocessor">#endif // CITY_HH</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    std::shared_ptr&lt;StudentSide::Statistics&gt; stats_;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordtype">bool</span> gamestarted = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordtype">bool</span> gameOver = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;};</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;} <span class="comment">//namespace</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">#endif // CITY_HH</span></div>
 <div class="ttc" id="class_student_side_1_1_city_html_aa4b2cda0950f77412551403669cafd00"><div class="ttname"><a href="class_student_side_1_1_city.html#aa4b2cda0950f77412551403669cafd00">StudentSide::City::actorRemoved</a></div><div class="ttdeci">void actorRemoved(std::shared_ptr&lt; Interface::IActor &gt; actor) override</div><div class="ttdoc">actorRemoved tells the city that actor is removed. </div><div class="ttdef"><b>Definition:</b> city.cpp:93</div></div>
 <div class="ttc" id="class_student_side_1_1_city_html_ae74783e6701ceb40dd9efbd3faf3e1c3"><div class="ttname"><a href="class_student_side_1_1_city.html#ae74783e6701ceb40dd9efbd3faf3e1c3">StudentSide::City::actorMoved</a></div><div class="ttdeci">void actorMoved(std::shared_ptr&lt; Interface::IActor &gt; actor) override</div><div class="ttdoc">actorMoved tells if actor is being moved </div><div class="ttdef"><b>Definition:</b> city.cpp:127</div></div>
 <div class="ttc" id="vehicle_8hh_html"><div class="ttname"><a href="vehicle_8hh.html">vehicle.hh</a></div><div class="ttdoc">The Vehicle class. </div></div>
@@ -187,6 +190,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="actor_8hh_html"><div class="ttname"><a href="actor_8hh.html">actor.hh</a></div><div class="ttdoc">The Actor class. </div></div>
 <div class="ttc" id="class_student_side_1_1_city_html_a2285ee28fb606dd774b8e60979d6e820"><div class="ttname"><a href="class_student_side_1_1_city.html#a2285ee28fb606dd774b8e60979d6e820">StudentSide::City::getNearbyActors</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; Interface::IActor &gt; &gt; getNearbyActors(Interface::Location loc) const override</div><div class="ttdoc">getNearbyActors returns vector containing actors that are close to given position. </div><div class="ttdef"><b>Definition:</b> city.cpp:109</div></div>
 <div class="ttc" id="class_student_side_1_1_city_html_a9e98110785506a88ac9847755459988d"><div class="ttname"><a href="class_student_side_1_1_city.html#a9e98110785506a88ac9847755459988d">StudentSide::City::~City</a></div><div class="ttdeci">~City()</div><div class="ttdoc">Destructor. </div><div class="ttdef"><b>Definition:</b> city.cpp:15</div></div>
+<div class="ttc" id="class_student_side_1_1_city_html_affc68915ee82bb32ab94e202d05402ca"><div class="ttname"><a href="class_student_side_1_1_city.html#affc68915ee82bb32ab94e202d05402ca">StudentSide::City::GameOver</a></div><div class="ttdeci">void GameOver()</div><div class="ttdef"><b>Definition:</b> city.cpp:227</div></div>
 <div class="ttc" id="class_student_side_1_1_city_html_a04accbc4ff8e507bc9b8cedae2444183"><div class="ttname"><a href="class_student_side_1_1_city.html#a04accbc4ff8e507bc9b8cedae2444183">StudentSide::City::setBackground</a></div><div class="ttdeci">void setBackground(QImage &amp;basicbackground, QImage &amp;bigbackground) override</div><div class="ttdoc">setBackground sets the map picture to game board. </div><div class="ttdef"><b>Definition:</b> city.cpp:21</div></div>
 <div class="ttc" id="class_student_side_1_1_city_html_af81fc684dc3cdc743d8a267e0de37f7b"><div class="ttname"><a href="class_student_side_1_1_city.html#af81fc684dc3cdc743d8a267e0de37f7b">StudentSide::City::nukeCity</a></div><div class="ttdeci">void nukeCity()</div><div class="ttdef"><b>Definition:</b> city.cpp:216</div></div>
 <div class="ttc" id="class_student_side_1_1_city_html_a9e77dd00ce37d3467bb078d0fb7b3cca"><div class="ttname"><a href="class_student_side_1_1_city.html#a9e77dd00ce37d3467bb078d0fb7b3cca">StudentSide::City::makePlayer</a></div><div class="ttdeci">void makePlayer()</div><div class="ttdoc">makePlayer creates player and adds it to userinterface. </div><div class="ttdef"><b>Definition:</b> city.cpp:159</div></div>
@@ -199,7 +203,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 30 2020 00:23:51 for NysseMeni by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 30 2020 00:34:20 for NysseMeni by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

@@ -18,11 +18,10 @@ City::~City()
 }
 
 
-void City::setBackground(QImage &basicbackground, QImage &bigbackground) {
+void City::setBackground(QImage &basicbackground, QImage &bigbackground)
+{
     small_ = basicbackground;
     big_ = bigbackground;
-
-
 }
 
 
@@ -35,6 +34,7 @@ void City::setClock(QTime clock)
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
+    Q_ASSERT(stop != nullptr);
     Interface::Location location = stop->getLocation();
     if(location.giveX() > 2000 && location.giveX() < 2000 && location.giveY() > 2000 && location.giveY() < 2000) {
         throw Interface::InitError("Stops position is not valid.");
@@ -69,7 +69,6 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
             stats_->newNysse();
         }
     }
-
     else {
         throw Interface::GameError("Actor is already in the city.");
     }
@@ -92,13 +91,13 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
+    Q_ASSERT(actor != nullptr);
     qDebug() << actor->isRemoved();
 }
 
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
-
     if(std::find(actors_.begin(), actors_.end(), actor) != actors_.end()){
         return true;
     }
@@ -113,8 +112,6 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
         Interface::Location location = actors_.at(i)->giveLocation();
         Interface::Location customLocation = loc;
         customLocation.setXY(X_COMP + location.giveX(), Y_COMP - location.giveY());
-        //qDebug() << location.giveX(), location.giveY();
-        //qDebug() << loc.giveX();
 
         if(customLocation.isClose(loc, 30) == true){
             actorsToBedeleted.push_back(actors_[i]);
@@ -126,10 +123,8 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
+    Q_ASSERT(actor != nullptr);
     moved_actor.push_back(actor);
-    //Interface::Location location = actor->giveLocation();
-    //ui_->moveActor(actor, location.giveX(), location.giveY());
-
 }
 
 
@@ -152,6 +147,7 @@ QImage City::getImage(std::string image_size)
 
 void City::addUi(std::shared_ptr<StudentSide::Mainwindow> ui)
 {
+    Q_ASSERT(ui != nullptr);
     ui_ = ui;
 }
 
@@ -162,11 +158,12 @@ void City::makePlayer()
     player_ = std::make_shared<StudentSide::Actor>(StudentSide::Actor());
     player_->addLocation(location);
     ui_->addPlayer(player_);
-
 }
 
-void City::DestroyTimo(std::shared_ptr<Interface::IActor> actor)
+
+void City::removeActorsNearby(std::shared_ptr<Interface::IActor> actor)
 {
+    Q_ASSERT(actor != nullptr);
     if(std::find(actors_.begin(), actors_.end(), actor) != actors_.end()) {
         if(std::shared_ptr<Interface::IPassenger> passenger = std::dynamic_pointer_cast<Interface::IPassenger>(actor)) {
             if(passenger->isInVehicle() == true) {
@@ -190,6 +187,7 @@ std::vector<std::shared_ptr<Interface::IActor> > City::giveMovedActors()
     return actors;
 }
 
+
 std::vector<std::shared_ptr<Interface::IActor> > City::giveNewPassengers()
 {
     std::vector<std::shared_ptr<Interface::IActor>> actors = new_passengers;
@@ -197,10 +195,12 @@ std::vector<std::shared_ptr<Interface::IActor> > City::giveNewPassengers()
     return actors;
 }
 
+
 void City::takeStats(std::shared_ptr<Statistics> stats)
 {
     stats_ = stats;
 }
+
 
 void City::addNuke()
 {
@@ -213,6 +213,7 @@ void City::addNuke()
 
 }
 
+
 void City::nukeCity()
 {
     for(unsigned long int i = 0; i < actors_.size(); i++) {
@@ -224,19 +225,10 @@ void City::nukeCity()
     }
 }
 
+
 void City::GameOver()
 {
     gameOver = false;
 }
-
-void City::clearAll()
-{
-    actors_.clear();
-    moved_actor.clear();
-    new_passengers.clear();
-    stops_.clear();
-
-}
-
 
 } // namespace

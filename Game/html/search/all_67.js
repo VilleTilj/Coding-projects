@@ -5,6 +5,7 @@ var searchData=
   ['gameengine',['GameEngine',['../class_student_side_1_1_game_engine.html#a97ed7a110060bf799d7cc72f1444f160',1,'StudentSide::GameEngine']]],
   ['gameengine_2ecpp',['gameengine.cpp',['../gameengine_8cpp.html',1,'']]],
   ['gameengine_2ehh',['gameengine.hh',['../gameengine_8hh.html',1,'']]],
+  ['gameover',['GameOver',['../class_student_side_1_1_city.html#affc68915ee82bb32ab94e202d05402ca',1,'StudentSide::City']]],
   ['getimage',['getImage',['../class_student_side_1_1_city.html#ab3ac8687f8213b2a26484214a7925dc2',1,'StudentSide::City']]],
   ['getname',['getName',['../class_student_side_1_1_vehicle.html#afc51d4f1db2c7846f471eba5b03c1d19',1,'StudentSide::Vehicle']]],
   ['getnearbyactors',['getNearbyActors',['../class_student_side_1_1_city.html#a2285ee28fb606dd774b8e60979d6e820',1,'StudentSide::City']]],

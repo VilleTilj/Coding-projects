@@ -1,6 +1,7 @@
 ﻿#ifndef ACTORITEM_HH
 #define ACTORITEM_HH
 
+
 #include <QGraphicsItem>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
@@ -18,13 +19,17 @@ const int NYSSE = 1;
 const int PASSENGER = 2;
 const int WIDTH = 9;
 const int HEIGHT = 9;
+const int WIDTHMAP = 1100;
+const int HEIGHTMAP = 590;
 
-
+/*!
+ * \brief namespace StudenSide, Students own imlplementations to project
+ */
 namespace StudentSide {
 
 /*!
  * \file actoritem.hh
- * \brief The ActorItem class
+ * \brief The ActorItem class sets actor images for buss, stop and passenger
  */
 class ActorItem : public QGraphicsPixmapItem
 {
@@ -35,11 +40,14 @@ public:
      * \param x x-coordinate
      * \param y y-coordinate
      * \param type actor type
+     * \pre coordinates must be in range of map coordinates.
+     * \post Exception guaranteed: nothrow
      */
     ActorItem(int x, int y, int type = 0);
 
     /*!
      * \brief Destructor
+     * \post Exception guaranteed: nothrow
      */
     ~ActorItem();
 
@@ -47,6 +55,8 @@ public:
      * \brief setCoord sets the actorItems position to the gameboard
      * \param x x-coordination
      * \param y y-coordination
+     * \pre -
+     * \post Exception guaranteed: minimum
      */
     void setCoord(int x, int y);
 
@@ -54,7 +64,8 @@ private:
     int x_;     //!< x-coordinate for the actor
     int y_;     //!< y-coordinate for the actor
     int type_;  //!< type for the actor
-    QPixmap image;          //!<
+    QPixmap image;          //!< image for actor
 };
-}
+
+} // namespace
 #endif // ACTORITEM_HH
