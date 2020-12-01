@@ -87,7 +87,6 @@ void GameEngine::initLogic()
     cityPtr_->startGame();
     logic_->takeCity(cityPtr_);
     logic_->fileConfig();
-    logic_->setTime(19, 00);
     cityPtr_->makePlayer();
     graphicPlayer_ = ui->returnPlayer();
     logic_->finalizeGameStart();
