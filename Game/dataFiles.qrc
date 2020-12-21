@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/../datafiles">
-        <file>datafiles/rules.txt</file>
-        <file>datafiles/about.txt</file>
-        <file>datafiles/scores.csv</file>
-    </qresource>
-</RCC>
