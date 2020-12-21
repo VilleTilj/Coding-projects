@@ -1,6 +1,14 @@
 # **Coding portfolio**
 This repositio contains my coding projects from university courses to my free time projects. It also contains some signal prosessing assingments such as small codes within other exercises.
 
+## Nysse
+
+This project was an assingment in course Programming 3, techniques. It was a pair project and our commit history is added to this repository to see what parts of the project was created by me. The project is a bigger project created with c++ in Qt Creator and the game idea is to play in Tampere and drive taxi around the city. More info in the project folder.
+
+### What I learned
+- Expand knowledge about working with a big project and multiple submodules and classes.
+- To test own code with selfmade unit test, CLI and asserts during development
+- To make documentation with doxygen and understand about Desing by contract
 
 ## Hanoi
 
