@@ -1,0 +1,57 @@
+\hypertarget{city_8hh}{\section{Game/city.hh File Reference}
+\label{city_8hh}\index{Game/city.\-hh@{Game/city.\-hh}}
+}
+
+
+The City class that defines city operations.  
+
+
+{\ttfamily \#include \char`\"{}interfaces/icity.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}mainwindow.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}actor.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}vehicle.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}statistics.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}errors/gameerror.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}errors/initerror.\-hh\char`\"{}}\\*
+{\ttfamily \#include $<$Q\-Time$>$}\\*
+{\ttfamily \#include $<$Q\-Pixmap$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_student_side_1_1_city}{Student\-Side\-::\-City}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespace_student_side}{Student\-Side}
+\begin{DoxyCompactList}\small\item\em namespace Studen\-Side, Students own imlplementations to project \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \hyperlink{city_8hh_ae64f34fc2d5f71f07cd3b6d6b9518215}{R\-E\-N\-D\-E\-R\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E} = 2000
+\item 
+const int \hyperlink{city_8hh_ae9a58fdb539145f04f47e77582514552}{P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-I\-N} = -\/500
+\item 
+const int \hyperlink{city_8hh_a96b3f3c6628cf7255e17e1b12f001e70}{P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-A\-X} = 1050
+\item 
+const int \hyperlink{city_8hh_aedc95de80b52c2e078fac78e2c7a8df8}{D\-I\-S\-T\-A\-N\-C\-E\-\_\-\-T\-O\-\_\-\-I\-N\-T\-E\-R\-A\-C\-T} = 25
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The City class that defines city operations. 
+
+\subsection{Variable Documentation}
+\hypertarget{city_8hh_aedc95de80b52c2e078fac78e2c7a8df8}{\index{city.\-hh@{city.\-hh}!D\-I\-S\-T\-A\-N\-C\-E\-\_\-\-T\-O\-\_\-\-I\-N\-T\-E\-R\-A\-C\-T@{D\-I\-S\-T\-A\-N\-C\-E\-\_\-\-T\-O\-\_\-\-I\-N\-T\-E\-R\-A\-C\-T}}
+\index{D\-I\-S\-T\-A\-N\-C\-E\-\_\-\-T\-O\-\_\-\-I\-N\-T\-E\-R\-A\-C\-T@{D\-I\-S\-T\-A\-N\-C\-E\-\_\-\-T\-O\-\_\-\-I\-N\-T\-E\-R\-A\-C\-T}!city.hh@{city.\-hh}}
+\subsubsection[{D\-I\-S\-T\-A\-N\-C\-E\-\_\-\-T\-O\-\_\-\-I\-N\-T\-E\-R\-A\-C\-T}]{\setlength{\rightskip}{0pt plus 5cm}const int D\-I\-S\-T\-A\-N\-C\-E\-\_\-\-T\-O\-\_\-\-I\-N\-T\-E\-R\-A\-C\-T = 25}}\label{city_8hh_aedc95de80b52c2e078fac78e2c7a8df8}
+\hypertarget{city_8hh_a96b3f3c6628cf7255e17e1b12f001e70}{\index{city.\-hh@{city.\-hh}!P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-A\-X@{P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-A\-X}}
+\index{P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-A\-X@{P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-A\-X}!city.hh@{city.\-hh}}
+\subsubsection[{P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-A\-X}]{\setlength{\rightskip}{0pt plus 5cm}const int P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-A\-X = 1050}}\label{city_8hh_a96b3f3c6628cf7255e17e1b12f001e70}
+\hypertarget{city_8hh_ae9a58fdb539145f04f47e77582514552}{\index{city.\-hh@{city.\-hh}!P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-I\-N@{P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-I\-N}}
+\index{P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-I\-N@{P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-I\-N}!city.hh@{city.\-hh}}
+\subsubsection[{P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-I\-N}]{\setlength{\rightskip}{0pt plus 5cm}const int P\-A\-S\-S\-E\-N\-G\-E\-R\-\_\-\-R\-E\-N\-D\-E\-R\-\_\-\-M\-I\-N = -\/500}}\label{city_8hh_ae9a58fdb539145f04f47e77582514552}
+\hypertarget{city_8hh_ae64f34fc2d5f71f07cd3b6d6b9518215}{\index{city.\-hh@{city.\-hh}!R\-E\-N\-D\-E\-R\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E@{R\-E\-N\-D\-E\-R\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E}}
+\index{R\-E\-N\-D\-E\-R\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E@{R\-E\-N\-D\-E\-R\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E}!city.hh@{city.\-hh}}
+\subsubsection[{R\-E\-N\-D\-E\-R\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E}]{\setlength{\rightskip}{0pt plus 5cm}const int R\-E\-N\-D\-E\-R\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E = 2000}}\label{city_8hh_ae64f34fc2d5f71f07cd3b6d6b9518215}

@@ -1,0 +1,147 @@
+\hypertarget{class_student_side_1_1_vehicle}{\section{Student\-Side\-:\-:Vehicle Class Reference}
+\label{class_student_side_1_1_vehicle}\index{Student\-Side\-::\-Vehicle@{Student\-Side\-::\-Vehicle}}
+}
+
+
+{\ttfamily \#include $<$vehicle.\-hh$>$}
+
+Inheritance diagram for Student\-Side\-:\-:Vehicle\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_student_side_1_1_vehicle}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_student_side_1_1_vehicle_a0c1ae4b0988ff51bb4ac8f3064e9eb4c}{Vehicle} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_student_side_1_1_vehicle}{Vehicle} contructor. \end{DoxyCompactList}\item 
+\hyperlink{class_student_side_1_1_vehicle_a3f7640989e79392692aa0cedaa0e4328}{$\sim$\-Vehicle} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+std\-::string \hyperlink{class_student_side_1_1_vehicle_afc51d4f1db2c7846f471eba5b03c1d19}{get\-Name} () const override
+\begin{DoxyCompactList}\small\item\em get\-Name returns the name of the vehicle \end{DoxyCompactList}\item 
+std\-::vector$<$ std\-::shared\-\_\-ptr\\*
+$<$ Interface\-::\-I\-Passenger $>$ $>$ \hyperlink{class_student_side_1_1_vehicle_a24c2cece6d5d46979fe9a842d72b06ed}{get\-Passengers} () const override
+\begin{DoxyCompactList}\small\item\em get\-Passengers returns vector containing passengers \end{DoxyCompactList}\item 
+void \hyperlink{class_student_side_1_1_vehicle_adb754d632a1cfd913adb2fb5862bf376}{add\-Passenger} (std\-::shared\-\_\-ptr$<$ Interface\-::\-I\-Passenger $>$ passenger) override
+\begin{DoxyCompactList}\small\item\em add\-Passenger adds passenger to vehicle \end{DoxyCompactList}\item 
+void \hyperlink{class_student_side_1_1_vehicle_a6373888a6965dbdb880d8513f9706d60}{remove\-Passenger} (std\-::shared\-\_\-ptr$<$ Interface\-::\-I\-Passenger $>$ passenger) override
+\begin{DoxyCompactList}\small\item\em remove\-Passenger removes passenger form vehicle \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_student_side_1_1_vehicle_a0c1ae4b0988ff51bb4ac8f3064e9eb4c}{\index{Student\-Side\-::\-Vehicle@{Student\-Side\-::\-Vehicle}!Vehicle@{Vehicle}}
+\index{Vehicle@{Vehicle}!StudentSide::Vehicle@{Student\-Side\-::\-Vehicle}}
+\subsubsection[{Vehicle}]{\setlength{\rightskip}{0pt plus 5cm}Student\-Side\-::\-Vehicle\-::\-Vehicle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_student_side_1_1_vehicle_a0c1ae4b0988ff51bb4ac8f3064e9eb4c}
+
+
+\hyperlink{class_student_side_1_1_vehicle}{Vehicle} contructor. 
+
+\hypertarget{class_student_side_1_1_vehicle_a3f7640989e79392692aa0cedaa0e4328}{\index{Student\-Side\-::\-Vehicle@{Student\-Side\-::\-Vehicle}!$\sim$\-Vehicle@{$\sim$\-Vehicle}}
+\index{$\sim$\-Vehicle@{$\sim$\-Vehicle}!StudentSide::Vehicle@{Student\-Side\-::\-Vehicle}}
+\subsubsection[{$\sim$\-Vehicle}]{\setlength{\rightskip}{0pt plus 5cm}Student\-Side\-::\-Vehicle\-::$\sim$\-Vehicle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_student_side_1_1_vehicle_a3f7640989e79392692aa0cedaa0e4328}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_student_side_1_1_vehicle_adb754d632a1cfd913adb2fb5862bf376}{\index{Student\-Side\-::\-Vehicle@{Student\-Side\-::\-Vehicle}!add\-Passenger@{add\-Passenger}}
+\index{add\-Passenger@{add\-Passenger}!StudentSide::Vehicle@{Student\-Side\-::\-Vehicle}}
+\subsubsection[{add\-Passenger}]{\setlength{\rightskip}{0pt plus 5cm}void Student\-Side\-::\-Vehicle\-::add\-Passenger (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ Interface\-::\-I\-Passenger $>$}]{passenger}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}}\label{class_student_side_1_1_vehicle_adb754d632a1cfd913adb2fb5862bf376}
+
+
+add\-Passenger adds passenger to vehicle 
+
+
+\begin{DoxyParams}{Parameters}
+{\em passenger} & Passenger actor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+Passenger to be added cannot be null 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Exception guaranteed\-: minimum 
+\end{DoxyPostcond}
+\hypertarget{class_student_side_1_1_vehicle_afc51d4f1db2c7846f471eba5b03c1d19}{\index{Student\-Side\-::\-Vehicle@{Student\-Side\-::\-Vehicle}!get\-Name@{get\-Name}}
+\index{get\-Name@{get\-Name}!StudentSide::Vehicle@{Student\-Side\-::\-Vehicle}}
+\subsubsection[{get\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Student\-Side\-::\-Vehicle\-::get\-Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}}\label{class_student_side_1_1_vehicle_afc51d4f1db2c7846f471eba5b03c1d19}
+
+
+get\-Name returns the name of the vehicle 
+
+\begin{DoxyReturn}{Returns}
+the name of vehicle 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+-\/ 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Exception guaranteed\-: basic 
+\end{DoxyPostcond}
+\hypertarget{class_student_side_1_1_vehicle_a24c2cece6d5d46979fe9a842d72b06ed}{\index{Student\-Side\-::\-Vehicle@{Student\-Side\-::\-Vehicle}!get\-Passengers@{get\-Passengers}}
+\index{get\-Passengers@{get\-Passengers}!StudentSide::Vehicle@{Student\-Side\-::\-Vehicle}}
+\subsubsection[{get\-Passengers}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ std\-::shared\-\_\-ptr$<$ Interface\-::\-I\-Passenger $>$ $>$ Student\-Side\-::\-Vehicle\-::get\-Passengers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}}}\label{class_student_side_1_1_vehicle_a24c2cece6d5d46979fe9a842d72b06ed}
+
+
+get\-Passengers returns vector containing passengers 
+
+\begin{DoxyReturn}{Returns}
+vector containing passengers 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+-\/ 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Exception guaranteed\-: basic 
+\end{DoxyPostcond}
+\hypertarget{class_student_side_1_1_vehicle_a6373888a6965dbdb880d8513f9706d60}{\index{Student\-Side\-::\-Vehicle@{Student\-Side\-::\-Vehicle}!remove\-Passenger@{remove\-Passenger}}
+\index{remove\-Passenger@{remove\-Passenger}!StudentSide::Vehicle@{Student\-Side\-::\-Vehicle}}
+\subsubsection[{remove\-Passenger}]{\setlength{\rightskip}{0pt plus 5cm}void Student\-Side\-::\-Vehicle\-::remove\-Passenger (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ Interface\-::\-I\-Passenger $>$}]{passenger}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}}\label{class_student_side_1_1_vehicle_a6373888a6965dbdb880d8513f9706d60}
+
+
+remove\-Passenger removes passenger form vehicle 
+
+
+\begin{DoxyParams}{Parameters}
+{\em passenger} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+Passenger to be added cannot be null 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Exception guaranteed\-: Strong 
+\end{DoxyPostcond}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Game/\hyperlink{vehicle_8hh}{vehicle.\-hh}\item 
+Game/\hyperlink{vehicle_8cpp}{vehicle.\-cpp}\end{DoxyCompactItemize}

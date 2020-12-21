@@ -1,0 +1,92 @@
+\hypertarget{mainwindow_8hh}{\section{Game/mainwindow.hh File Reference}
+\label{mainwindow_8hh}\index{Game/mainwindow.\-hh@{Game/mainwindow.\-hh}}
+}
+{\ttfamily \#include \char`\"{}dialoggamesettings.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interfaces/ipassenger.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interfaces/ivehicle.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interfaces/istop.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}playeractor.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interfaces/iactor.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}actoritem.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}actor.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}statistics.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}actors/nysse.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}nukeactor.\-hh\char`\"{}}\\*
+{\ttfamily \#include $<$Q\-Main\-Window$>$}\\*
+{\ttfamily \#include $<$Q\-Graphics\-Scene$>$}\\*
+{\ttfamily \#include $<$Q\-Timer$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$memory$>$}\\*
+{\ttfamily \#include $<$Q\-Vector$>$}\\*
+{\ttfamily \#include $<$Q\-Pixmap$>$}\\*
+{\ttfamily \#include $<$Q\-Map$>$}\\*
+{\ttfamily \#include $<$Q\-Message\-Box$>$}\\*
+{\ttfamily \#include $<$Q\-Menu$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_student_side_1_1_mainwindow}{Student\-Side\-::\-Mainwindow}
+\begin{DoxyCompactList}\small\item\em The mainwindow class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespace_ui}{Ui}
+\begin{DoxyCompactList}\small\item\em namespace \hyperlink{namespace_ui}{Ui} for dialog window class \end{DoxyCompactList}\item 
+\hyperlink{namespace_student_side}{Student\-Side}
+\begin{DoxyCompactList}\small\item\em namespace Studen\-Side, Students own imlplementations to project \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const Q\-String \hyperlink{mainwindow_8hh_afad7eb5ce267412e261321798f276542}{R\-U\-L\-E\-S} = \char`\"{}\-://../datafiles/datafiles/rules.\-txt\char`\"{}
+\item 
+const Q\-String \hyperlink{mainwindow_8hh_add086dddfd1041a943afc24d4fc5217e}{A\-B\-O\-U\-T} = \char`\"{}\-://../datafiles/datafiles/about.\-txt\char`\"{}
+\item 
+const Q\-String \hyperlink{mainwindow_8hh_a0012746528a3f7abc7de472e05a9e30c}{S\-C\-O\-R\-E\-S} = \char`\"{}\-://../datafiles/datafiles/scores.\-csv\char`\"{}
+\item 
+const int \hyperlink{mainwindow_8hh_ad18a55885568d3324c55bdefa31112ba}{P\-L\-A\-Y\-E\-R} = 3
+\item 
+const int \hyperlink{mainwindow_8hh_a50077804d4a057181d4f05a294a15ca1}{S\-E\-C\-O\-N\-D} = 1000
+\item 
+const int \hyperlink{mainwindow_8hh_a119c8f137ad0941c9930319665d01abb}{W\-I\-D\-T\-H\-\_\-\-M\-A\-I\-N} = 1095
+\item 
+const int \hyperlink{mainwindow_8hh_a8a9a3d327e245d16d8af8d57ac0428fc}{H\-E\-I\-G\-H\-T\-\_\-\-M\-A\-I\-N} = 592
+\item 
+const int \hyperlink{mainwindow_8hh_adf877364b47d0f0beade7967f248355c}{P\-O\-I\-N\-T\-S} = 10
+\item 
+const int \hyperlink{mainwindow_8hh_a01bc9f3900a2569418be75ff477c6462}{X\-\_\-\-C\-O\-M\-P} = 355
+\item 
+const int \hyperlink{mainwindow_8hh_a33040b291915efa0c17ff1a72a00a119}{Y\-\_\-\-C\-O\-M\-P} = 547
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{mainwindow_8hh_add086dddfd1041a943afc24d4fc5217e}{\index{mainwindow.\-hh@{mainwindow.\-hh}!A\-B\-O\-U\-T@{A\-B\-O\-U\-T}}
+\index{A\-B\-O\-U\-T@{A\-B\-O\-U\-T}!mainwindow.hh@{mainwindow.\-hh}}
+\subsubsection[{A\-B\-O\-U\-T}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-String A\-B\-O\-U\-T = \char`\"{}\-://../datafiles/datafiles/about.\-txt\char`\"{}}}\label{mainwindow_8hh_add086dddfd1041a943afc24d4fc5217e}
+\hypertarget{mainwindow_8hh_a8a9a3d327e245d16d8af8d57ac0428fc}{\index{mainwindow.\-hh@{mainwindow.\-hh}!H\-E\-I\-G\-H\-T\-\_\-\-M\-A\-I\-N@{H\-E\-I\-G\-H\-T\-\_\-\-M\-A\-I\-N}}
+\index{H\-E\-I\-G\-H\-T\-\_\-\-M\-A\-I\-N@{H\-E\-I\-G\-H\-T\-\_\-\-M\-A\-I\-N}!mainwindow.hh@{mainwindow.\-hh}}
+\subsubsection[{H\-E\-I\-G\-H\-T\-\_\-\-M\-A\-I\-N}]{\setlength{\rightskip}{0pt plus 5cm}const int H\-E\-I\-G\-H\-T\-\_\-\-M\-A\-I\-N = 592}}\label{mainwindow_8hh_a8a9a3d327e245d16d8af8d57ac0428fc}
+\hypertarget{mainwindow_8hh_ad18a55885568d3324c55bdefa31112ba}{\index{mainwindow.\-hh@{mainwindow.\-hh}!P\-L\-A\-Y\-E\-R@{P\-L\-A\-Y\-E\-R}}
+\index{P\-L\-A\-Y\-E\-R@{P\-L\-A\-Y\-E\-R}!mainwindow.hh@{mainwindow.\-hh}}
+\subsubsection[{P\-L\-A\-Y\-E\-R}]{\setlength{\rightskip}{0pt plus 5cm}const int P\-L\-A\-Y\-E\-R = 3}}\label{mainwindow_8hh_ad18a55885568d3324c55bdefa31112ba}
+\hypertarget{mainwindow_8hh_adf877364b47d0f0beade7967f248355c}{\index{mainwindow.\-hh@{mainwindow.\-hh}!P\-O\-I\-N\-T\-S@{P\-O\-I\-N\-T\-S}}
+\index{P\-O\-I\-N\-T\-S@{P\-O\-I\-N\-T\-S}!mainwindow.hh@{mainwindow.\-hh}}
+\subsubsection[{P\-O\-I\-N\-T\-S}]{\setlength{\rightskip}{0pt plus 5cm}const int P\-O\-I\-N\-T\-S = 10}}\label{mainwindow_8hh_adf877364b47d0f0beade7967f248355c}
+\hypertarget{mainwindow_8hh_afad7eb5ce267412e261321798f276542}{\index{mainwindow.\-hh@{mainwindow.\-hh}!R\-U\-L\-E\-S@{R\-U\-L\-E\-S}}
+\index{R\-U\-L\-E\-S@{R\-U\-L\-E\-S}!mainwindow.hh@{mainwindow.\-hh}}
+\subsubsection[{R\-U\-L\-E\-S}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-String R\-U\-L\-E\-S = \char`\"{}\-://../datafiles/datafiles/rules.\-txt\char`\"{}}}\label{mainwindow_8hh_afad7eb5ce267412e261321798f276542}
+\hypertarget{mainwindow_8hh_a0012746528a3f7abc7de472e05a9e30c}{\index{mainwindow.\-hh@{mainwindow.\-hh}!S\-C\-O\-R\-E\-S@{S\-C\-O\-R\-E\-S}}
+\index{S\-C\-O\-R\-E\-S@{S\-C\-O\-R\-E\-S}!mainwindow.hh@{mainwindow.\-hh}}
+\subsubsection[{S\-C\-O\-R\-E\-S}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-String S\-C\-O\-R\-E\-S = \char`\"{}\-://../datafiles/datafiles/scores.\-csv\char`\"{}}}\label{mainwindow_8hh_a0012746528a3f7abc7de472e05a9e30c}
+\hypertarget{mainwindow_8hh_a50077804d4a057181d4f05a294a15ca1}{\index{mainwindow.\-hh@{mainwindow.\-hh}!S\-E\-C\-O\-N\-D@{S\-E\-C\-O\-N\-D}}
+\index{S\-E\-C\-O\-N\-D@{S\-E\-C\-O\-N\-D}!mainwindow.hh@{mainwindow.\-hh}}
+\subsubsection[{S\-E\-C\-O\-N\-D}]{\setlength{\rightskip}{0pt plus 5cm}const int S\-E\-C\-O\-N\-D = 1000}}\label{mainwindow_8hh_a50077804d4a057181d4f05a294a15ca1}
+\hypertarget{mainwindow_8hh_a119c8f137ad0941c9930319665d01abb}{\index{mainwindow.\-hh@{mainwindow.\-hh}!W\-I\-D\-T\-H\-\_\-\-M\-A\-I\-N@{W\-I\-D\-T\-H\-\_\-\-M\-A\-I\-N}}
+\index{W\-I\-D\-T\-H\-\_\-\-M\-A\-I\-N@{W\-I\-D\-T\-H\-\_\-\-M\-A\-I\-N}!mainwindow.hh@{mainwindow.\-hh}}
+\subsubsection[{W\-I\-D\-T\-H\-\_\-\-M\-A\-I\-N}]{\setlength{\rightskip}{0pt plus 5cm}const int W\-I\-D\-T\-H\-\_\-\-M\-A\-I\-N = 1095}}\label{mainwindow_8hh_a119c8f137ad0941c9930319665d01abb}
+\hypertarget{mainwindow_8hh_a01bc9f3900a2569418be75ff477c6462}{\index{mainwindow.\-hh@{mainwindow.\-hh}!X\-\_\-\-C\-O\-M\-P@{X\-\_\-\-C\-O\-M\-P}}
+\index{X\-\_\-\-C\-O\-M\-P@{X\-\_\-\-C\-O\-M\-P}!mainwindow.hh@{mainwindow.\-hh}}
+\subsubsection[{X\-\_\-\-C\-O\-M\-P}]{\setlength{\rightskip}{0pt plus 5cm}const int X\-\_\-\-C\-O\-M\-P = 355}}\label{mainwindow_8hh_a01bc9f3900a2569418be75ff477c6462}
+\hypertarget{mainwindow_8hh_a33040b291915efa0c17ff1a72a00a119}{\index{mainwindow.\-hh@{mainwindow.\-hh}!Y\-\_\-\-C\-O\-M\-P@{Y\-\_\-\-C\-O\-M\-P}}
+\index{Y\-\_\-\-C\-O\-M\-P@{Y\-\_\-\-C\-O\-M\-P}!mainwindow.hh@{mainwindow.\-hh}}
+\subsubsection[{Y\-\_\-\-C\-O\-M\-P}]{\setlength{\rightskip}{0pt plus 5cm}const int Y\-\_\-\-C\-O\-M\-P = 547}}\label{mainwindow_8hh_a33040b291915efa0c17ff1a72a00a119}
